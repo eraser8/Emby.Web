@@ -62,32 +62,31 @@ define(['actionsheet', 'datetime', 'playbackManager'], function (actionsheet, da
         }
 
         actionsheet.show({
-            items: menuItems,
-            callback: function (id) {
+            items: menuItems
+        }).then(function (id) {
+            switch (id) {
 
-                switch (id) {
-
-                    case 'play':
-                        playbackManager.play(itemId);
-                        break;
-                    case 'resume':
-                        playbackManager.play({
-                            ids: [itemId],
-                            startPositionTicks: resumePositionTicks
-                        });
-                        break;
-                    case 'queue':
-                        playbackManager.queue(itemId);
-                        break;
-                    case 'instantmix':
-                        playbackManager.instantMix(itemId);
-                        break;
-                    case 'shuffle':
-                        playbackManager.shuffle(itemId);
-                        break;
-                    default:
-                        break;
-                }
+                case 'play':
+                    playbackManager.play(itemId);
+                    break;
+                case 'resume':
+                    playbackManager.play({
+                        ids: [itemId],
+                        startPositionTicks: resumePositionTicks,
+                        serverId: item.ServerId
+                    });
+                    break;
+                case 'queue':
+                    playbackManager.queue(itemId);
+                    break;
+                case 'instantmix':
+                    playbackManager.instantMix(itemId);
+                    break;
+                case 'shuffle':
+                    playbackManager.shuffle(itemId);
+                    break;
+                default:
+                    break;
             }
         });
     }

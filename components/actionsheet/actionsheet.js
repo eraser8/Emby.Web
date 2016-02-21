@@ -63,6 +63,8 @@
 
         // Seeing an issue in some non-chrome browsers where this is requiring a double click
         var eventName = 'click';//$.browser.chrome ? 'click' : 'mousedown';
+        var selectedId;
+        var submitted = false;
 
         dlg.addEventListener(eventName, function (e) {
 
@@ -70,23 +72,22 @@
 
             if (actionSheetMenuItem) {
 
-                var selectedId = actionSheetMenuItem.getAttribute('data-id');
+                submitted = true;
+                selectedId = actionSheetMenuItem.getAttribute('data-id');
 
                 paperdialoghelper.close(dlg);
-
-                // Add a delay here to allow the click animation to finish, for nice effect
-                setTimeout(function () {
-
-                    if (options.callback) {
-                        options.callback(selectedId);
-                    }
-
-                }, 100);
             }
 
         });
 
-        paperdialoghelper.open(dlg);
+        return paperdialoghelper.open(dlg).then(function () {
+
+            if (submitted) {
+                return selectedId;
+            } else {
+                return Promise.reject();
+            }
+        });
     }
 
     return {

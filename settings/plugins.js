@@ -85,16 +85,14 @@ define(['loading', 'packageManager', 'imageLoader', 'focusManager', 'slyScroller
 
                 actionsheet.show({
                     items: menuItems,
-                    title: card.querySelector('.cardText').innerHTML,
-                    callback: function (id) {
-
-                        switch (id) {
-                            case 'uninstall':
-                                uninstallPackage(name);
-                                break;
-                            default:
-                                break;
-                        }
+                    title: card.querySelector('.cardText').innerHTML
+                }).then(function(id) {
+                    switch (id) {
+                        case 'uninstall':
+                            uninstallPackage(name);
+                            break;
+                        default:
+                            break;
                     }
                 });
 

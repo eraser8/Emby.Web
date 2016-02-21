@@ -499,16 +499,13 @@ define(['playbackManager', 'inputmanager', 'datetime', 'itemHelper', 'mediaInfo'
 
                 actionsheet.show({
                     items: menuItems,
-                    title: Globalize.translate('Audio'),
-                    callback: function (id) {
-
-                        var index = parseInt(id);
-                        if (index != currentIndex) {
-                            playbackManager.setAudioStreamIndex(index);
-                        }
+                    title: Globalize.translate('Audio')
+                }).then(function (id) {
+                    var index = parseInt(id);
+                    if (index != currentIndex) {
+                        playbackManager.setAudioStreamIndex(index);
                     }
                 });
-
             });
         }
 
@@ -567,12 +564,11 @@ define(['playbackManager', 'inputmanager', 'datetime', 'itemHelper', 'mediaInfo'
 
                 actionsheet.show({
                     title: Globalize.translate('Subtitles'),
-                    items: menuItems,
-                    callback: function (id) {
-                        var index = parseInt(id);
-                        if (index != currentIndex) {
-                            playbackManager.setSubtitleStreamIndex(index);
-                        }
+                    items: menuItems
+                }).then(function (id) {
+                    var index = parseInt(id);
+                    if (index != currentIndex) {
+                        playbackManager.setSubtitleStreamIndex(index);
                     }
                 });
 

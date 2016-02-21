@@ -371,15 +371,15 @@ respectively.
                 
                 actionsheet.show({
                     items: menuItems,
-                    title: title,
-                    callback: function (id) {
+                    title: title
+                }).then(function (id) {
 
-                        self._setSelectedItem(menuItems.filter(function(m) {
-                            
-                            return m.id == id;
+                    self._setSelectedItem(menuItems.filter(function (m) {
 
-                        })[0].node);
-                    }
+                        return m.id == id;
+
+                    })[0].node);
+
                 });
             });
         },
