@@ -1,10 +1,10 @@
 {
-    "GenericErrorMessage": "There was an error processing the request. Please try again later.",
-    "InstallFromUrl": "Install from url",
-    "InstallationError": "Installation Failure",
-    "InstallFromCatalog": "Install from catalog",
+    "GenericErrorMessage": "Er is een fout opgetreden. Probeer het later opnieuw.",
+    "InstallFromUrl": "Installeren van url",
+    "InstallationError": "Installatie Fout",
+    "InstallFromCatalog": "Installeren uit catalogus",
     "PluginUrl": "Plugin url",
-    "InstallPlugin": "Install Plugin",
+    "InstallPlugin": "Plugin Installeren",
     "TooltipFavorite": "Favoriet",
     "TooltipDislike": "Niet leuk",
     "TooltipLike": "Leuk",
@@ -81,7 +81,10 @@
     "CreatePinErrorMessage": "Er is een fout opgetreden bij het aanmaken van een pincode. Klik op Cre\u00eber Nieuwe Pincode om het opnieuw te proberen.",
     "PinExpiredMessage": "De pincode is verlopen. Klik op Cre\u00eber Nieuwe Pincode om het opnieuw te proberen.",
     "ConnectPinCodeHeader": "Bezoek {0} en voeg de volgende pincode in om aan te melden met Emby Connect:",
+    "LocalPinCodeHeader": "To sign in, visit {0} and enter the following pin code:",
     "SoundEffects": "Geluids effecten",
     "ValueSpecialEpisodeName": "Speciaal - {0}",
-    "Sounds": "Geluiden"
+    "Sounds": "Geluiden",
+    "ServerUpdateNeeded": "This Emby Server needs to be updated. To download the latest version, please visit {0}",
+    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}"
 }

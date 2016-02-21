@@ -1,10 +1,10 @@
 {
-    "GenericErrorMessage": "There was an error processing the request. Please try again later.",
-    "InstallFromUrl": "Install from url",
-    "InstallationError": "Installation Failure",
-    "InstallFromCatalog": "Install from catalog",
-    "PluginUrl": "Plugin url",
-    "InstallPlugin": "Install Plugin",
+    "GenericErrorMessage": "Ocorreu um erro ao processar o pedido. Por favor, tente novamente mais tarde.",
+    "InstallFromUrl": "Instalar da url",
+    "InstallationError": "Falha na Instala\u00e7\u00e3o",
+    "InstallFromCatalog": "Instalar do cat\u00e1logo",
+    "PluginUrl": "Url do Plugin",
+    "InstallPlugin": "Instalar Plugin",
     "TooltipFavorite": "Favorito",
     "TooltipDislike": "N\u00e3o curtir",
     "TooltipLike": "Curtir",
@@ -81,7 +81,10 @@
     "CreatePinErrorMessage": "Ocorreu um erro ao criar um c\u00f3digo pin. Por favor, clique Gerar Novo Pin para tentar novamente.",
     "PinExpiredMessage": "O c\u00f3digo pin expirou. Por favor, clique Gerar Novo Pin para tentar novamente.",
     "ConnectPinCodeHeader": "Para entrar com o Emby Connect, visite {0} e digite o seguinte c\u00f3digo pin:",
+    "LocalPinCodeHeader": "To sign in, visit {0} and enter the following pin code:",
     "SoundEffects": "Efeitos sonoros",
     "ValueSpecialEpisodeName": "Especial - {0}",
-    "Sounds": "Sons"
+    "Sounds": "Sons",
+    "ServerUpdateNeeded": "This Emby Server needs to be updated. To download the latest version, please visit {0}",
+    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}"
 }

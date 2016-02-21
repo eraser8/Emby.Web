@@ -81,7 +81,10 @@
     "CreatePinErrorMessage": "Ocurri\u00f3 un error al crear un c\u00f3digo pin. Por favor de clic en Generar Nuevo Pin para intentar de nuevo.",
     "PinExpiredMessage": "El c\u00f3digo pin ha expirado. Por favor de clic en Generar Nuevo Pin para intentar de nuevo.",
     "ConnectPinCodeHeader": "Para iniciar sesi\u00f3n con Emby Connect, visite {0} e ingrese el siguiente c\u00f3digo pin:",
+    "LocalPinCodeHeader": "To sign in, visit {0} and enter the following pin code:",
     "SoundEffects": "Efectos de Sonido",
     "ValueSpecialEpisodeName": "Especial - {0}",
-    "Sounds": "Sonidos"
+    "Sounds": "Sonidos",
+    "ServerUpdateNeeded": "This Emby Server needs to be updated. To download the latest version, please visit {0}",
+    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}"
 }
