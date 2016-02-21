@@ -1,8 +1,8 @@
 {
-    "Play": "Play",
-    "Queue": "Queue",
-    "Shuffle": "Shuffle",
-    "InsstantMix": "Instant Mix",
+    "Play": "Abspielen",
+    "Queue": "Warteschlange",
+    "Shuffle": "Zufallswiedergabe",
+    "InsstantMix": "Schnellmix",
     "ButtonCancel": "Abbrechen",
     "AllSeries": "Alle Serien",
     "Genres": "Genres",
@@ -79,13 +79,13 @@
     "CastAndCrew": "Cast & Crew",
     "Unwatched": "Ungesehen",
     "Movies": "Filme",
-    "Collections": "Collections",
+    "Collections": "Sammlungen",
     "Years": "Jahre",
     "Favorites": "Favoriten",
-    "More": "More",
-    "Playlists": "Playlists",
-    "EnableEpisodeSpoilerProtection": "Enable anti-spoiler features",
-    "EnableEpisodeSpoilerProtectionHelp": "Hide details for episodes beyond the first unwatched",
-    "DefaultTheme": "Default Theme",
-    "DimUnselectedPosters": "Dim unselected posters"
+    "More": "Mehr",
+    "Playlists": "Wiedergabelisten",
+    "EnableEpisodeSpoilerProtection": "Aktiviere Anti-Spoiler Features",
+    "EnableEpisodeSpoilerProtectionHelp": "Verstecke Details f\u00fcr Episoden nach der ersten Ungesehenen",
+    "ThemeName": "Default Theme",
+    "DimUnselectedPosters": "Dimme nicht ausgew\u00e4lte Kacheln"
 }

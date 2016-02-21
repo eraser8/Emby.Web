@@ -82,10 +82,10 @@
     "Collections": "Cole\u00e7\u00f5es",
     "Years": "Anos",
     "Favorites": "Favoritos",
-    "More": "More",
-    "Playlists": "Playlists",
+    "More": "Mais",
+    "Playlists": "Listas de Reprodu\u00e7\u00e3o",
     "EnableEpisodeSpoilerProtection": "Enable anti-spoiler features",
-    "EnableEpisodeSpoilerProtectionHelp": "Hide details for episodes beyond the first unwatched",
-    "DefaultTheme": "Default Theme",
+    "EnableEpisodeSpoilerProtectionHelp": "Ocultar detalhes dos epis\u00f3dios a partir do primeiro n\u00e3o assistido",
+    "ThemeName": "Default Theme",
     "DimUnselectedPosters": "Dim unselected posters"
 }

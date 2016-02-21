@@ -86,6 +86,6 @@
     "Playlists": "Afspeellijsten",
     "EnableEpisodeSpoilerProtection": "Anti-spoiler functies inschakelen",
     "EnableEpisodeSpoilerProtectionHelp": "Verberg details van niet bekeken hoofdstukken",
-    "DefaultTheme": "Standaard Thema",
-    "DimUnselectedPosters": "Dim unselected posters"
+    "ThemeName": "Default Theme",
+    "DimUnselectedPosters": "Niet geselecteerde posters donkerder maken"
 }

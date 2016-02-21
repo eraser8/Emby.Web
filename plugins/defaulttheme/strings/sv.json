@@ -86,6 +86,6 @@
     "Playlists": "Playlists",
     "EnableEpisodeSpoilerProtection": "Enable anti-spoiler features",
     "EnableEpisodeSpoilerProtectionHelp": "Hide details for episodes beyond the first unwatched",
-    "DefaultTheme": "Default Theme",
+    "ThemeName": "Default Theme",
     "DimUnselectedPosters": "Dim unselected posters"
 }

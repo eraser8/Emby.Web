@@ -86,6 +86,6 @@
     "Playlists": "Listas de Reproducci\u00f3n",
     "EnableEpisodeSpoilerProtection": "Habilitar opciones anti-spoilers",
     "EnableEpisodeSpoilerProtectionHelp": "Ocultar detalles para episodios mas all\u00e1 del primero que ha sido visto.",
-    "DefaultTheme": "Tema por defecto",
+    "ThemeName": "Default Theme",
     "DimUnselectedPosters": "Dim unselected posters"
 }
