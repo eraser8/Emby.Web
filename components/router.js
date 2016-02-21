@@ -29,6 +29,10 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager'], function (lo
             return true;
         }
 
+        if (path.indexOf('localpin') != -1) {
+            return true;
+        }
+
         return false;
     }
 
