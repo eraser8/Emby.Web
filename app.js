@@ -279,7 +279,6 @@
             userSettings: "components/usersettings",
             focusManager: embyWebComponentsBowerPath + "/focusmanager",
             tvguide: "components/tvguide/guide",
-            actionsheet: "components/actionsheet/actionsheet",
             playmenu: "components/playmenu",
             datetime: embyWebComponentsBowerPath + "/datetime",
             globalize: "components/globalize",
@@ -384,6 +383,7 @@
 
         define("paperdialoghelper", [embyWebComponentsBowerPath + "/paperdialoghelper/paperdialoghelper"], returnFirstDependency);
         define("slideshow", [embyWebComponentsBowerPath + "/slideshow/slideshow"], returnFirstDependency);
+        define("actionsheet", [embyWebComponentsBowerPath + "/actionsheet/actionsheet"], returnFirstDependency);
 
         define("alphapicker", ["components/alphapicker/alphapicker"], returnFirstDependency);
         define("indicators", ["components/indicators/indicators"], returnFirstDependency);

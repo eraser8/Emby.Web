@@ -1,4 +1,4 @@
-﻿define(['paperdialoghelper', 'paper-button', 'css!components/actionsheet/actionsheet'], function (paperdialoghelper) {
+﻿define(['paperdialoghelper', 'paper-button', 'css!./actionsheet'], function (paperdialoghelper) {
 
     function show(options) {
 
@@ -83,6 +83,10 @@
         return paperdialoghelper.open(dlg).then(function () {
 
             if (submitted) {
+
+                if (options.callback) {
+                    options.callback(selectedId);
+                }
                 return selectedId;
             } else {
                 return Promise.reject();
