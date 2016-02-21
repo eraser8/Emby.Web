@@ -1,4 +1,4 @@
-define(['loading', 'connectionManager', 'startup/startuphelper'], function (loading, connectionManager, startupHelper) {
+define(['loading', 'connectionManager', 'startup/startuphelper', 'coreIcons'], function (loading, connectionManager, startupHelper) {
 
     return function (view, params) {
 

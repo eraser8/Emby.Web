@@ -71,6 +71,15 @@ define(['connectionManager', 'loading', 'themeManager', 'focusManager'], functio
                     Emby.Page.show('/startup/connectlogin.html');
                 }
                 break;
+            case MediaBrowser.ConnectionState.ServerUpdateNeeded:
+                {
+                    require(['alert'], function (alert) {
+                        alert(Globalize.translate('core#ServerUpdateNeeded', '<a href="https://emby.media">https://emby.media</a>')).then(function () {
+                            Emby.Page.show('/startup/selectserver.html');
+                        });
+                    });
+                }
+                break;
             case MediaBrowser.ConnectionState.Unavailable:
                 {
                     require(['alert'], function (alert) {

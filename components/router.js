@@ -84,6 +84,15 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager'], function (lo
                     show('/startup/welcome.html');
                 }
                 break;
+            case MediaBrowser.ConnectionState.ServerUpdateNeeded:
+                {
+                    require(['alert'], function (alert) {
+                        alert(Globalize.translate('core#ServerUpdateNeeded', '<a href="https://emby.media">https://emby.media</a>')).then(function () {
+                            show('/startup/selectserver.html');
+                        });
+                    });
+                }
+                break;
             default:
                 break;
         }

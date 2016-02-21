@@ -54,12 +54,14 @@ define(['paperdialoghelper', 'css!./style.css'], function (paperdialoghelper) {
             }
         });
 
-        paperdialoghelper.open(dlg).then(function () {
+        return paperdialoghelper.open(dlg).then(function () {
             dlg.parentNode.removeChild(dlg);
 
             if (callback) {
                 callback(resultIndex);
             }
+
+            return resultIndex;
         });
     };
 });
