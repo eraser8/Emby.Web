@@ -113,7 +113,10 @@ define(['loading', 'connectionManager', 'startup/startuphelper', 'shell'], funct
 
             if (!isRestored) {
 
-                view.querySelector('.pinCodeHeader').innerHTML = Globalize.translate('core#ConnectPinCodeHeader', '<a tabindex="-1" class="lnkPinSignIn" href="http://emby.media/pin" target="_blank">http://emby.media/pin</a>');
+                view.querySelector('.pinCodeTip').innerHTML = Globalize.translate('core#LocalPinCodeTip', '<span style="color:#52B54B">', '</span>');
+
+                var pinUrl = apiClient.getUrl('pin');
+                view.querySelector('.pinCodeHeader').innerHTML = Globalize.translate('core#LocalPinCodeHeader', '<a tabindex="-1" class="lnkPinSignIn" href="' + pinUrl + '" target="_blank">' + pinUrl + '</a>');
                 createPin();
                 bindEvents();
             }

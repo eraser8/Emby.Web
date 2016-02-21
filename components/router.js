@@ -69,7 +69,7 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager'], function (lo
                         if (users.length) {
                             show('/startup/login.html?serverid=' + result.Servers[0].Id);
                         } else {
-                            show('/startup/manuallogin.html?serverid=' + result.Servers[0].Id);
+                            goToLocalLogin(result.ApiClient, result.Servers[0].Id);
                         }
                     });
                 }
@@ -96,6 +96,19 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager'], function (lo
             default:
                 break;
         }
+    }
+
+    function goToLocalLogin(apiClient, serverId) {
+
+        require(['startup/loginhelper'], function (loginHelper) {
+            loginHelper.enableLocalPin(apiClient).then(function(enableLocalPin) {
+                if (enableLocalPin) {
+                    show('/startup/localpin.html?serverid=' + serverId);
+                } else {
+                    show('/startup/manuallogin.html?serverid=' + serverId);
+                }
+            });
+        });
     }
 
     var cacheParam = new Date().getTime();
