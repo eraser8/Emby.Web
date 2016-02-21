@@ -1026,14 +1026,14 @@
         }
 
         function compareVersions(a, b) {
-            
+
             // -1 a is smaller
             // 1 a is larger
             // 0 equal
             a = a.split('.');
             b = b.split('.');
 
-            for (var i = 0, length = Math.max(a.length, b.length); i < length; i++) {
+            for (var i = 0, length = Math.max(a.length, b.length) ; i < length; i++) {
                 var aVal = parseInt(a[i] || '0');
                 var bVal = parseInt(b[i] || '0');
 
