@@ -171,13 +171,18 @@ define(['connectionManager', 'userSettings', 'events'], function (connectionMana
         return getDictionary(module)[key] || key;
     }
 
+    function replaceAll(str, find, replace) {
+
+        return str.split(find).join(replace);
+    }
+
     function translate(key) {
 
         var val = translateKey(key);
 
         for (var i = 1; i < arguments.length; i++) {
 
-            val = val.replace('{' + (i - 1) + '}', arguments[i]);
+            val = replaceAll(val, '{' + (i - 1) + '}', arguments[i]);
 
         }
 
