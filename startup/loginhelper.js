@@ -27,7 +27,7 @@ define([], function () {
     function enableLocalPin(apiClient) {
 
         return apiClient.getPublicSystemInfo().then(function (result) {
-            return compareVersions(result.Version, '3.0.5895') >= 0;
+            return compareVersions(result.Version, '3.0.5884') >= 0;
         });
     }
 
