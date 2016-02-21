@@ -45,6 +45,12 @@
         });
 
         defineRoute({
+            path: startupRoot + 'localpin.html',
+            transition: 'slide',
+            controller: 'startup/localpin'
+        });
+
+        defineRoute({
             path: startupRoot + 'welcome.html',
             transition: 'slide',
             controller: 'startup/welcome'
