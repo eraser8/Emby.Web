@@ -1,4 +1,4 @@
-﻿define(['paperdialoghelper', 'layoutManager', 'paper-button', 'css!./actionsheet'], function (paperdialoghelper, layoutManager) {
+﻿define(['paperdialoghelper', 'layoutManager', 'dialogText', 'paper-button', 'css!./actionsheet'], function (paperdialoghelper, layoutManager, dialogText) {
 
     function parentWithClass(elem, className) {
 
@@ -129,7 +129,7 @@
                 html += '<iron-icon class="actionSheetItemIcon" icon="' + option.ironIcon + '"></iron-icon>';
             }
             else if (renderIcon && !center) {
-                html += '<iron-icon></iron-icon>';
+                html += '<iron-icon class="actionSheetItemIcon"></iron-icon>';
             }
             html += '<span>' + option.name + '</span>';
             html += '</' + itemTagName + '>';
@@ -141,7 +141,7 @@
 
         if (options.showCancel) {
             html += '<div class="buttons">';
-            html += '<paper-button dialog-dismiss>' + Globalize.translate('core#ButtonCancel') + '</paper-button>';
+            html += '<paper-button dialog-dismiss>' + dialogText.get('Cancel') + '</paper-button>';
             html += '</div>';
         }
         html += '</div>';

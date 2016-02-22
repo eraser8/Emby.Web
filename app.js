@@ -446,14 +446,15 @@
 
         define("swiper", [bowerPath + "/Swiper/dist/js/swiper.min", "css!" + bowerPath + "/Swiper/dist/css/swiper.min"], returnFirstDependency);
 
-        define('dialogText', [], getDialogText());
+        define('dialogText', ['globalize'], getDialogText());
     }
 
     function getDialogText() {
-        return function () {
+        return function (globalize) {
             return {
-                buttonOk: 'core#ButtonOk',
-                buttonCancel: 'core#ButtonCancel'
+                get: function(text) {
+                    return globalize.translate('core#Button' + text);
+                }
             };
         };
     }
