@@ -377,7 +377,7 @@ define(['loading', './../themeinfo', 'alphapicker', './../cards/cardbuilder', '.
 
         function renderFavorites(page, pageParams, autoFocus, slyFrame, resolve) {
 
-            fetch(Emby.PluginManager.mapUrl(themeInfo.id, 'music/views.favorites.html'), { mode: 'no-cors' }).then(function (response) {
+            fetch(Emby.PluginManager.mapPath(themeInfo.id, 'music/views.favorites.html'), { mode: 'no-cors' }, true).then(function (response) {
                 return response.text();
             }).then(function (html) {
 

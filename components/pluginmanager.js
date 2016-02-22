@@ -43,7 +43,10 @@ define(['events'], function (Events) {
             return '/plugins/' + plugin.id + '/' + route;
         };
 
-        self.mapPath = function (plugin, path) {
+        // TODO: replace with each plugin version
+        var cacheParam = new Date().getTime();
+
+        self.mapPath = function (plugin, path, addCacheParam) {
 
             if (typeof plugin === 'string') {
                 plugin = plugins.filter(function (p) {
@@ -51,18 +54,12 @@ define(['events'], function (Events) {
                 })[0];
             }
 
-            return plugin.baseUrl + '/' + path;
-        };
+            var url = plugin.baseUrl + '/' + path;
 
-        // TODO: replace with each plugin version
-        var cacheParam = new Date().getTime();
-
-        self.mapUrl = function (plugin, path) {
-
-            var url = self.mapPath(plugin, path);
-
-            url += url.indexOf('?') == -1 ? '?' : '&';
-            url += 'v=' + cacheParam;
+            if (addCacheParam) {
+                url += url.indexOf('?') == -1 ? '?' : '&';
+                url += 'v=' + cacheParam;
+            }
 
             return url;
         };

@@ -237,7 +237,7 @@ define(['loading', './../themeinfo', 'alphapicker', './../components/horizontall
 
         function renderFavorites(page, pageParams, autoFocus, slyFrame, resolve) {
 
-            fetch(Emby.PluginManager.mapUrl(themeInfo.id, 'tv/views.favorites.html'), { mode: 'no-cors' }).then(function (response) {
+            fetch(Emby.PluginManager.mapPath(themeInfo.id, 'tv/views.favorites.html'), { mode: 'no-cors' }, true).then(function (response) {
                 return response.text();
             }).then(function (html) {
 
