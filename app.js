@@ -267,7 +267,6 @@
         var paths = {
             itemShortcuts: "components/shortcuts",
             alert: "components/alert",
-            confirm: "components/confirm",
             soundeffects: "components/soundeffects",
             apphost: customPaths.apphost || "components/apphost",
             shell: customPaths.shell || "components/shell",
@@ -385,6 +384,7 @@
         define("paperdialoghelper", [embyWebComponentsBowerPath + "/paperdialoghelper/paperdialoghelper"], returnFirstDependency);
         define("slideshow", [embyWebComponentsBowerPath + "/slideshow/slideshow"], returnFirstDependency);
         define("actionsheet", [embyWebComponentsBowerPath + "/actionsheet/actionsheet"], returnFirstDependency);
+        define("confirm", [embyWebComponentsBowerPath + "/confirm/confirm"], returnFirstDependency);
 
         define("alphapicker", ["components/alphapicker/alphapicker"], returnFirstDependency);
         define("indicators", ["components/indicators/indicators"], returnFirstDependency);
