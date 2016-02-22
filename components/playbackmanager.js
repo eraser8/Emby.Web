@@ -531,53 +531,83 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
             }
         }
 
-        self.instantMix = function (id) {
+        self.instantMix = function (id, serverId) {
 
-            Emby.Models.instantMix(id).then(function (result) {
-                self.play({
-                    items: result.Items
+            if (typeof id !== 'string') {
+                var item = id;
+                id = item.Id;
+                serverId = item.ServerId;
+            }
+
+            require(['connectionManager'], function (connectionManager) {
+
+                var apiClient = connectionManager.getApiClient(serverId);
+
+                var options = {};
+                options.UserId = apiClient.getCurrentUserId();
+                options.Fields = 'MediaSources';
+
+                apiClient.getInstantMixFromItem(id, options).then(function (result) {
+                    self.play({
+                        items: result.Items
+                    });
                 });
             });
         };
 
-        self.shuffle = function (id) {
+        self.shuffle = function (id, serverId) {
 
-            Emby.Models.item(id).then(function (item) {
+            if (typeof id !== 'string') {
+                var item = id;
+                id = item.Id;
+                serverId = item.ServerId;
+            }
 
-                var query = {
-                    Fields: "MediaSources,Chapters",
-                    Limit: 100,
-                    Filters: "IsNotFolder",
-                    Recursive: true,
-                    SortBy: "Random"
-                };
+            require(['connectionManager'], function (connectionManager) {
 
-                if (item.Type == "MusicArtist") {
+                var apiClient = connectionManager.getApiClient(serverId);
 
-                    query.MediaTypes = "Audio";
-                    query.ArtistIds = item.Id;
+                var options = {};
+                options.UserId = apiClient.getCurrentUserId();
+                options.Fields = 'MediaSources';
 
-                }
-                else if (item.Type == "MusicGenre") {
+                apiClient.getItem(apiClient.getCurrentUserId(), id).then(function (item) {
 
-                    query.MediaTypes = "Audio";
-                    query.Genres = item.Name;
+                    var query = {
+                        Fields: "MediaSources,Chapters",
+                        Limit: 100,
+                        Filters: "IsNotFolder",
+                        Recursive: true,
+                        SortBy: "Random"
+                    };
 
-                }
-                else if (item.IsFolder) {
-                    query.ParentId = id;
+                    if (item.Type == "MusicArtist") {
 
-                }
-                else {
-                    return;
-                }
+                        query.MediaTypes = "Audio";
+                        query.ArtistIds = item.Id;
 
-                getItemsForPlayback(query).then(function (result) {
+                    }
+                    else if (item.Type == "MusicGenre") {
 
-                    self.play({ items: result.Items });
+                        query.MediaTypes = "Audio";
+                        query.Genres = item.Name;
+
+                    }
+                    else if (item.IsFolder) {
+                        query.ParentId = id;
+
+                    }
+                    else {
+                        return;
+                    }
+
+                    getItemsForPlayback(item.ServerId, query).then(function (result) {
+
+                        self.play({ items: result.Items });
+
+                    });
 
                 });
-
             });
         };
 
@@ -760,20 +790,24 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
 
             if (options.items) {
 
-                translateItemsForPlayback(options.items).then(function (items) {
+                translateItemsForPlayback(options.items, true).then(function (items) {
 
                     playWithIntros(items, options);
                 });
 
             } else {
 
-                getItemsForPlayback({
+                if (!options.serverId) {
+                    throw new Error();
+                }
+
+                getItemsForPlayback(options.serverId, {
 
                     Ids: options.ids.join(',')
 
                 }).then(function (result) {
 
-                    translateItemsForPlayback(result.Items).then(function (items) {
+                    translateItemsForPlayback(result.Items, true).then(function (items) {
 
                         playWithIntros(items, options);
                     });
@@ -782,67 +816,99 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
             }
         }
 
-        function translateItemsForPlayback(items) {
+        function translateItemsForPlayback(items, smart) {
 
-            return new Promise(function (resolve, reject) {
+            var firstItem = items[0];
+            var promise;
 
-                var firstItem = items[0];
-                var promise;
+            var serverId = firstItem.ServerId;
 
-                if (firstItem.Type == "Program") {
+            if (firstItem.Type == "Program") {
 
-                    promise = getItemsForPlayback({
-                        Ids: firstItem.ChannelId,
+                promise = getItemsForPlayback(serverId, {
+                    Ids: firstItem.ChannelId,
+                });
+            }
+            else if (firstItem.Type == "Playlist") {
+
+                promise = getItemsForPlayback(serverId, {
+                    ParentId: firstItem.Id,
+                });
+            }
+            else if (firstItem.Type == "MusicArtist") {
+
+                promise = getItemsForPlayback(serverId, {
+                    ArtistIds: firstItem.Id,
+                    Filters: "IsNotFolder",
+                    Recursive: true,
+                    SortBy: "SortName",
+                    MediaTypes: "Audio"
+                });
+
+            }
+            else if (firstItem.Type == "MusicGenre") {
+
+                promise = getItemsForPlayback(serverId, {
+                    Genres: firstItem.Name,
+                    Filters: "IsNotFolder",
+                    Recursive: true,
+                    SortBy: "SortName",
+                    MediaTypes: "Audio"
+                });
+            }
+            else if (firstItem.IsFolder) {
+
+                promise = getItemsForPlayback(serverId, {
+                    ParentId: firstItem.Id,
+                    Filters: "IsNotFolder",
+                    Recursive: true,
+                    SortBy: "SortName",
+                    MediaTypes: "Audio,Video"
+                });
+            }
+            else if (smart && firstItem.Type == "Episode" && items.length == 1) {
+
+
+                promise = new Promise(function (resolve, reject) {
+                    require(["connectionManager"], function (connectionManager) {
+                        var apiClient = connectionManager.getApiClient(firstItem.ServerId);
+
+                        apiClient.getEpisodes(firstItem.SeriesId, {
+                            IsVirtualUnaired: false,
+                            IsMissing: false,
+                            UserId: apiClient.getCurrentUserId(),
+                            Fields: "MediaSources,Chapters"
+
+                        }).then(function (episodesResult) {
+
+                            var foundItem = false;
+                            episodesResult.Items = episodesResult.Items.filter(function (e) {
+
+                                if (foundItem) {
+                                    return true;
+                                }
+                                if (e.Id == firstItem.Id) {
+                                    foundItem = true;
+                                    return true;
+                                }
+
+                                return false;
+                            });
+                            episodesResult.TotalRecordCount = episodesResult.Items.length;
+                            resolve(episodesResult);
+                        }, reject);
                     });
-                }
-                else if (firstItem.Type == "Playlist") {
+                });
+            }
 
-                    promise = getItemsForPlayback({
-                        ParentId: firstItem.Id,
-                    });
-                }
-                else if (firstItem.Type == "MusicArtist") {
+            if (promise) {
+                return promise.then(function (result) {
 
-                    promise = getItemsForPlayback({
-                        ArtistIds: firstItem.Id,
-                        Filters: "IsNotFolder",
-                        Recursive: true,
-                        SortBy: "SortName",
-                        MediaTypes: "Audio"
-                    });
-
-                }
-                else if (firstItem.Type == "MusicGenre") {
-
-                    promise = getItemsForPlayback({
-                        Genres: firstItem.Name,
-                        Filters: "IsNotFolder",
-                        Recursive: true,
-                        SortBy: "SortName",
-                        MediaTypes: "Audio"
-                    });
-                }
-                else if (firstItem.IsFolder) {
-
-                    promise = getItemsForPlayback({
-                        ParentId: firstItem.Id,
-                        Filters: "IsNotFolder",
-                        Recursive: true,
-                        SortBy: "SortName",
-                        MediaTypes: "Audio,Video"
-                    });
-                }
-
-                if (promise) {
-                    promise.then(function (result) {
-
-                        resolve(result.Items);
-
-                    }, reject);
-                } else {
-                    resolve(items);
-                }
-            });
+                    return result.Items;
+                });
+            } else {
+                return Promise.resolve(items);
+            }
         }
 
         function playWithIntros(items, options, user) {
@@ -969,127 +1035,127 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
 
         function createStreamInfo(apiClient, type, item, mediaSource, startPosition) {
 
-            return new Promise(function (resolve, reject) {
+            var mediaUrl;
+            var contentType;
+            var transcodingOffsetTicks = 0;
+            var playerStartPositionTicks = startPosition;
+            var liveStreamId;
 
-                var mediaUrl;
-                var contentType;
-                var transcodingOffsetTicks = 0;
-                var playerStartPositionTicks = startPosition;
-                var liveStreamId;
+            var playMethod = 'Transcode';
 
-                var playMethod = 'Transcode';
+            if (type == 'Video') {
 
-                if (type == 'Video') {
+                contentType = 'video/' + mediaSource.Container;
 
-                    contentType = 'video/' + mediaSource.Container;
+                if (mediaSource.enableDirectPlay) {
+                    mediaUrl = mediaSource.Path;
 
-                    if (mediaSource.enableDirectPlay) {
-                        mediaUrl = mediaSource.Path;
-
-                        playMethod = 'DirectPlay';
-
-                    } else {
-
-                        if (mediaSource.SupportsDirectStream) {
-
-                            var directOptions = {
-                                Static: true,
-                                mediaSourceId: mediaSource.Id,
-                                deviceId: apiClient.deviceId(),
-                                api_key: apiClient.accessToken()
-                            };
-
-                            if (mediaSource.LiveStreamId) {
-                                directOptions.LiveStreamId = mediaSource.LiveStreamId;
-                                liveStreamId = mediaSource.LiveStreamId;
-                            }
-
-                            mediaUrl = apiClient.getUrl('Videos/' + item.Id + '/stream.' + mediaSource.Container, directOptions);
-
-                            playMethod = 'DirectStream';
-                        } else if (mediaSource.SupportsTranscoding) {
-
-                            mediaUrl = apiClient.getUrl(mediaSource.TranscodingUrl);
-
-                            if (mediaSource.TranscodingSubProtocol == 'hls') {
-
-                                contentType = 'application/x-mpegURL';
-                            } else {
-
-                                transcodingOffsetTicks = startPosition || 0;
-                                playerStartPositionTicks = null;
-                                contentType = 'video/' + mediaSource.TranscodingContainer;
-                            }
-                        }
-                    }
+                    playMethod = 'DirectPlay';
 
                 } else {
 
-                    contentType = 'audio/' + mediaSource.Container;
+                    if (mediaSource.SupportsDirectStream) {
 
-                    if (mediaSource.enableDirectPlay) {
+                        var directOptions = {
+                            Static: true,
+                            mediaSourceId: mediaSource.Id,
+                            deviceId: apiClient.deviceId(),
+                            api_key: apiClient.accessToken()
+                        };
 
-                        mediaUrl = mediaSource.Path;
+                        if (mediaSource.LiveStreamId) {
+                            directOptions.LiveStreamId = mediaSource.LiveStreamId;
+                            liveStreamId = mediaSource.LiveStreamId;
+                        }
 
-                        playMethod = 'DirectPlay';
+                        mediaUrl = apiClient.getUrl('Videos/' + item.Id + '/stream.' + mediaSource.Container, directOptions);
 
-                    } else {
+                        playMethod = 'DirectStream';
+                    } else if (mediaSource.SupportsTranscoding) {
 
-                        var isDirectStream = mediaSource.SupportsDirectStream;
+                        mediaUrl = apiClient.getUrl(mediaSource.TranscodingUrl);
 
-                        if (isDirectStream) {
+                        if (mediaSource.TranscodingSubProtocol == 'hls') {
 
-                            var outputContainer = (mediaSource.Container || '').toLowerCase();
+                            contentType = 'application/x-mpegURL';
+                        } else {
 
-                            var directOptions = {
-                                Static: true,
-                                mediaSourceId: mediaSource.Id,
-                                deviceId: apiClient.deviceId(),
-                                api_key: apiClient.accessToken()
-                            };
+                            playerStartPositionTicks = null;
+                            contentType = 'video/' + mediaSource.TranscodingContainer;
 
-                            if (mediaSource.LiveStreamId) {
-                                directOptions.LiveStreamId = mediaSource.LiveStreamId;
-                                liveStreamId = mediaSource.LiveStreamId;
-                            }
-
-                            mediaUrl = apiClient.getUrl('Audio/' + item.Id + '/stream.' + outputContainer, directOptions);
-
-                            playMethod = 'DirectStream';
-
-                        } else if (mediaSource.SupportsTranscoding) {
-
-                            mediaUrl = apiClient.getUrl(mediaSource.TranscodingUrl);
-
-                            if (mediaSource.TranscodingSubProtocol == 'hls') {
-
-                                contentType = 'application/x-mpegURL';
-                            } else {
-
+                            if (mediaUrl.toLowerCase().indexOf('copytimestamps=true') == -1) {
                                 transcodingOffsetTicks = startPosition || 0;
-                                playerStartPositionTicks = null;
-                                contentType = 'audio/' + mediaSource.TranscodingContainer;
                             }
                         }
                     }
                 }
 
-                var resultInfo = {
-                    url: mediaUrl,
-                    mimeType: contentType,
-                    transcodingOffsetTicks: transcodingOffsetTicks,
-                    playMethod: playMethod,
-                    playerStartPositionTicks: playerStartPositionTicks,
-                    item: item,
-                    mediaSource: mediaSource,
-                    textTracks: getTextTracks(apiClient, mediaSource),
-                    mediaType: type,
-                    liveStreamId: liveStreamId,
-                    playSessionId: getParam('playSessionId', mediaUrl)
-                };
+            } else {
 
-                resolve(resultInfo);
-            });
+                contentType = 'audio/' + mediaSource.Container;
+
+                if (mediaSource.enableDirectPlay) {
+
+                    mediaUrl = mediaSource.Path;
+
+                    playMethod = 'DirectPlay';
+
+                } else {
+
+                    var isDirectStream = mediaSource.SupportsDirectStream;
+
+                    if (isDirectStream) {
+
+                        var outputContainer = (mediaSource.Container || '').toLowerCase();
+
+                        var directOptions = {
+                            Static: true,
+                            mediaSourceId: mediaSource.Id,
+                            deviceId: apiClient.deviceId(),
+                            api_key: apiClient.accessToken()
+                        };
+
+                        if (mediaSource.LiveStreamId) {
+                            directOptions.LiveStreamId = mediaSource.LiveStreamId;
+                            liveStreamId = mediaSource.LiveStreamId;
+                        }
+
+                        mediaUrl = apiClient.getUrl('Audio/' + item.Id + '/stream.' + outputContainer, directOptions);
+
+                        playMethod = 'DirectStream';
+
+                    } else if (mediaSource.SupportsTranscoding) {
+
+                        mediaUrl = apiClient.getUrl(mediaSource.TranscodingUrl);
+
+                        if (mediaSource.TranscodingSubProtocol == 'hls') {
+
+                            contentType = 'application/x-mpegURL';
+                        } else {
+
+                            transcodingOffsetTicks = startPosition || 0;
+                            playerStartPositionTicks = null;
+                            contentType = 'audio/' + mediaSource.TranscodingContainer;
+                        }
+                    }
+                }
+            }
+
+            var resultInfo = {
+                url: mediaUrl,
+                mimeType: contentType,
+                transcodingOffsetTicks: transcodingOffsetTicks,
+                playMethod: playMethod,
+                playerStartPositionTicks: playerStartPositionTicks,
+                item: item,
+                mediaSource: mediaSource,
+                textTracks: getTextTracks(apiClient, mediaSource),
+                mediaType: type,
+                liveStreamId: liveStreamId,
+                playSessionId: getParam('playSessionId', mediaUrl)
+            };
+
+            return Promise.resolve(resultInfo);
         }
 
         function getParam(name, url) {
@@ -1342,26 +1408,35 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
             })[0];
         }
 
-        function getItemsForPlayback(query) {
+        function getItemsForPlayback(serverId, query) {
 
-            if (query.Ids && query.Ids.split(',').length == 1) {
+            return new Promise(function (resolve, reject) {
 
-                return Emby.Models.item(query.Ids.split(',')).then(function (item) {
+                require(['connectionManager'], function (connectionManager) {
+                    var apiClient = connectionManager.getApiClient(serverId);
 
-                    return {
-                        Items: [item],
-                        TotalRecordCount: 1
-                    };
+                    if (query.Ids && query.Ids.split(',').length == 1) {
+
+                        var itemId = query.Ids.split(',');
+
+                        apiClient.getItem(apiClient.getCurrentUserId(), itemId).then(function (item) {
+
+                            resolve({
+                                Items: [item],
+                                TotalRecordCount: 1
+                            });
+                        });
+                    }
+                    else {
+
+                        query.Limit = query.Limit || 100;
+                        query.Fields = "MediaSources,Chapters";
+                        query.ExcludeLocationTypes = "Virtual";
+
+                        apiClient.getItems(apiClient.getCurrentUserId(), query).then(resolve, reject);
+                    }
                 });
-            }
-            else {
-
-                query.Limit = query.Limit || 100;
-                query.Fields = "MediaSources,Chapters";
-                query.ExcludeLocationTypes = "Virtual";
-
-                return Emby.Models.items(query);
-            }
+            });
         };
 
         // Gets or sets the current playlist index

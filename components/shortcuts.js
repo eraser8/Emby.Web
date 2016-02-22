@@ -1,6 +1,6 @@
 define(['playbackManager'], function (playbackManager) {
 
-    function playAllFromHere(card) {
+    function playAllFromHere(card, serverId) {
         var cards = card.parentNode.querySelectorAll('.itemAction[data-id]');
         var ids = [];
 
@@ -14,7 +14,8 @@ define(['playbackManager'], function (playbackManager) {
             }
         }
         playbackManager.play({
-            ids: ids
+            ids: ids,
+            serverId: serverId
         });
     }
 
@@ -79,6 +80,7 @@ define(['playbackManager'], function (playbackManager) {
             if (action) {
 
                 var id = card.getAttribute('data-id');
+                var serverId = card.getAttribute('data-serverid');
                 var type = card.getAttribute('data-type');
                 var isfolder = card.getAttribute('data-isfolder') == 'true';
 
@@ -86,12 +88,13 @@ define(['playbackManager'], function (playbackManager) {
                     showItem({
                         Id: id,
                         Type: type,
-                        IsFolder: isfolder
+                        IsFolder: isfolder,
+                        ServerId: serverId
                     });
                 }
 
                 else if (action == 'instantmix') {
-                    playbackManager.instantMix(id);
+                    playbackManager.instantMix(id, serverId);
                 }
 
                 else if (action == 'play') {
@@ -100,12 +103,13 @@ define(['playbackManager'], function (playbackManager) {
 
                     playbackManager.play({
                         ids: [id],
-                        startPositionTicks: startPositionTicks
+                        startPositionTicks: startPositionTicks,
+                        serverId: serverId
                     });
                 }
 
                 else if (action == 'playallfromhere') {
-                    playAllFromHere(card);
+                    playAllFromHere(card, serverId);
                 }
 
                 else if (action == 'setplaylistindex') {

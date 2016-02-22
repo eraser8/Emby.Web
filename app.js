@@ -265,7 +265,7 @@
         var embyWebComponentsBowerPath = bowerPath + '/emby-webcomponents';
 
         var paths = {
-            itemShortcuts: "js/shortcuts",
+            itemShortcuts: "components/shortcuts",
             alert: "components/alert",
             confirm: "components/confirm",
             soundeffects: "components/soundeffects",

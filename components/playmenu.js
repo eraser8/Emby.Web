@@ -6,6 +6,7 @@ define(['actionsheet', 'datetime', 'playbackManager'], function (actionsheet, da
         var mediaType = item.MediaType;
         var isFolder = item.IsFolder;
         var itemId = item.Id;
+        var serverId = item.ServerId;
         var resumePositionTicks = item.UserData ? item.UserData.PlaybackPositionTicks : null;
 
         if (!resumePositionTicks && mediaType != "Audio" && !isFolder) {
@@ -67,7 +68,10 @@ define(['actionsheet', 'datetime', 'playbackManager'], function (actionsheet, da
             switch (id) {
 
                 case 'play':
-                    playbackManager.play(itemId);
+                    playbackManager.play({
+                        ids: [itemId],
+                        serverId: item.ServerId
+                    });
                     break;
                 case 'resume':
                     playbackManager.play({
@@ -77,13 +81,13 @@ define(['actionsheet', 'datetime', 'playbackManager'], function (actionsheet, da
                     });
                     break;
                 case 'queue':
-                    playbackManager.queue(itemId);
+                    playbackManager.queue(item);
                     break;
                 case 'instantmix':
-                    playbackManager.instantMix(itemId);
+                    playbackManager.instantMix(item);
                     break;
                 case 'shuffle':
-                    playbackManager.shuffle(itemId);
+                    playbackManager.shuffle(item);
                     break;
                 default:
                     break;

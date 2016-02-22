@@ -623,7 +623,7 @@ define(['datetime', './../themeinfo', 'imageLoader', 'connectionManager', 'plugi
         }
 
         return '\
-<' + tagName + ' data-index="' + index + '" data-action="' + action + '" data-isfolder="' + (item.IsFolder || false) + '" data-id="' + (item.Id || item.ItemId) + '" data-type="' + item.Type + '" data-prefix="' + prefix + '" raised class="' + className + '"> \
+<' + tagName + ' data-index="' + index + '" data-action="' + action + '" data-isfolder="' + (item.IsFolder || false) + '" data-serverid="' + (item.ServerId) + '" data-id="' + (item.Id || item.ItemId) + '" data-type="' + item.Type + '" data-prefix="' + prefix + '" raised class="' + className + '"> \
 ' + cardImageContainerOpen + innerCardFooter + data + cardImageContainerClose + '\
 </' + tagName + '>';
     }

@@ -1143,11 +1143,11 @@ define(['loading', './../themeinfo', 'datetime', 'playbackManager', 'imageLoader
             }
 
             function instantMix() {
-                playbackManager.instantMix(currentItem.Id);
+                playbackManager.instantMix(currentItem);
             }
 
             function shuffle() {
-                playbackManager.shuffle(currentItem.Id);
+                playbackManager.shuffle(currentItem);
             }
         }
     });
