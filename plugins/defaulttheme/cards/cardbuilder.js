@@ -1,4 +1,5 @@
-define(['datetime', './../themeinfo', 'imageLoader', 'connectionManager', 'pluginManager', 'itemHelper', 'mediaInfo', 'focusManager', 'connectionManager', 'indicators', 'paper-icon-item', 'paper-item-body'], function (datetime, themeInfo, imageLoader, connectionManager, pluginManager, itemHelper, mediaInfo, focusManager, connectionManager, indicators) {
+define(['datetime', './../themeinfo', 'imageLoader', 'connectionManager', 'pluginManager', 'itemHelper', 'mediaInfo', 'focusManager', 'connectionManager', 'indicators', 'itemShortcuts', 'paper-icon-item', 'paper-item-body'],
+    function (datetime, themeInfo, imageLoader, connectionManager, pluginManager, itemHelper, mediaInfo, focusManager, connectionManager, indicators, itemShortcuts) {
 
     function setShapeHorizontal(items, options) {
 
@@ -673,6 +674,9 @@ define(['datetime', './../themeinfo', 'imageLoader', 'connectionManager', 'plugi
         if (options.indexBy == 'Genres') {
             options.itemsContainer.addEventListener('click', onItemsContainerClick);
         }
+
+        itemShortcuts.off(options.itemsContainer);
+        itemShortcuts.on(options.itemsContainer);
     }
 
     function onItemsContainerClick(e) {

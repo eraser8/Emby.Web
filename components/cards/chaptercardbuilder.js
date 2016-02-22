@@ -1,4 +1,4 @@
-define(['datetime', 'imageLoader'], function (datetime, imageLoader) {
+define(['datetime', 'imageLoader', 'itemShortcuts'], function (datetime, imageLoader, itemShortcuts) {
 
     function buildChapterCardsHtml(item, chapters, options) {
 
@@ -103,6 +103,9 @@ define(['datetime', 'imageLoader'], function (datetime, imageLoader) {
         options.itemsContainer.innerHTML = html;
 
         imageLoader.lazyChildren(options.itemsContainer);
+
+        itemShortcuts.off(options.itemsContainer);
+        itemShortcuts.on(options.itemsContainer);
     }
 
     return {

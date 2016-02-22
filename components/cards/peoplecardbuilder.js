@@ -1,4 +1,4 @@
-define(['imageLoader'], function (imageLoader) {
+define(['imageLoader', 'itemShortcuts'], function (imageLoader, itemShortcuts) {
 
     function buildPeopleCardsHtml(people, options) {
 
@@ -96,6 +96,9 @@ define(['imageLoader'], function (imageLoader) {
         options.itemsContainer.innerHTML = html;
 
         imageLoader.lazyChildren(options.itemsContainer);
+
+        itemShortcuts.off(options.itemsContainer);
+        itemShortcuts.on(options.itemsContainer);
     }
 
     return {

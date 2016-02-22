@@ -1,4 +1,4 @@
-define(['visibleinviewport'], function (visibleinviewport) {
+define(['visibleinviewport', 'itemShortcuts'], function (visibleinviewport, itemShortcuts) {
 
     function loadItemIntoSpotlight(card, item, width) {
 
@@ -86,6 +86,9 @@ define(['visibleinviewport'], function (visibleinviewport) {
     function spotlight(card, items, width) {
 
         var self = this;
+
+        itemShortcuts.off(card);
+        itemShortcuts.on(card);
 
         startSpotlight(self, card, items, width);
     }

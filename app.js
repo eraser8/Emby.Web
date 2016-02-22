@@ -265,6 +265,7 @@
         var embyWebComponentsBowerPath = bowerPath + '/emby-webcomponents';
 
         var paths = {
+            itemShortcuts: "js/shortcuts",
             alert: "components/alert",
             confirm: "components/confirm",
             soundeffects: "components/soundeffects",
@@ -618,7 +619,6 @@
             presentationDependencies.push('js/input/keyboard');
             presentationDependencies.push('js/input/api');
             presentationDependencies.push('js/dom');
-            presentationDependencies.push('js/shortcuts');
 
             presentationDependencies.push('components/controlbox');
             presentationDependencies.push('screensaverManager');

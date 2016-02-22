@@ -115,15 +115,17 @@ define(['playbackManager'], function (playbackManager) {
         }
     }
 
-    function bind(context) {
+    function on(context) {
         context.addEventListener('click', onClick);
     }
 
-    // Add some shortcuts
-    document.addEventListener('click', onClick);
+    function off(context) {
+        context.removeEventListener('click', onClick);
+    }
 
     return {
-        bind: bind
+        on: on,
+        off: off
     };
 
 });

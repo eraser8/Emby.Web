@@ -1,4 +1,4 @@
-define(['playbackManager', 'slyScroller', 'loading', 'imageLoader', './../components/backdrop', './../components/listview', 'focusManager'], function (playbackManager, slyScroller, loading, imageLoader, themeBackdrop, listview, focusManager) {
+define(['playbackManager', 'slyScroller', 'loading', 'imageLoader', './../components/backdrop', './../components/listview', 'focusManager', 'itemShortcuts'], function (playbackManager, slyScroller, loading, imageLoader, themeBackdrop, listview, focusManager, itemShortcuts) {
 
     function createVerticalScroller(view, pageInstance) {
 
@@ -78,6 +78,9 @@ define(['playbackManager', 'slyScroller', 'loading', 'imageLoader', './../compon
                 showParentTitle: true,
                 enableSideMediaInfo: true
             });
+
+            itemShortcuts.off(section);
+            itemShortcuts.on(section);
 
             imageLoader.lazyChildren(section);
 

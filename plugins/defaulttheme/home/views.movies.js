@@ -1,4 +1,4 @@
-define(['./spotlight', 'imageLoader', 'focusManager', './../cards/cardbuilder', './../themeinfo'], function (spotlight, imageLoader, focusManager, cardbuilder, themeInfo) {
+define(['./spotlight', 'imageLoader', 'focusManager', './../cards/cardbuilder', './../themeinfo', 'itemShortcuts'], function (spotlight, imageLoader, focusManager, cardbuilder, themeInfo, itemShortcuts) {
 
 	function loadResume(element, parentId) {
 
@@ -196,6 +196,8 @@ define(['./spotlight', 'imageLoader', 'focusManager', './../cards/cardbuilder', 
         element.querySelector('.movieFavoritesCard').addEventListener('click', function () {
             Emby.Page.show(Emby.PluginManager.mapRoute(themeInfo.id, 'movies/movies.html?tab=favorites&parentid=' + parentId));
         });
+
+        itemShortcuts.on(element.querySelector('.recommendations'));
 
         self.destroy = function () {
 
