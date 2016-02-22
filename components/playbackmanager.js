@@ -567,10 +567,6 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
 
                 var apiClient = connectionManager.getApiClient(serverId);
 
-                var options = {};
-                options.UserId = apiClient.getCurrentUserId();
-                options.Fields = 'MediaSources';
-
                 apiClient.getItem(apiClient.getCurrentUserId(), id).then(function (item) {
 
                     var query = {
@@ -606,7 +602,6 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
                         self.play({ items: result.Items });
 
                     });
-
                 });
             });
         };
