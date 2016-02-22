@@ -70,9 +70,7 @@ define(['playbackManager'], function (playbackManager) {
         Emby.Page.showItem(options);
     }
 
-    // Add some shortcuts
-    document.addEventListener('click', function (e) {
-
+    function onClick(e) {
         var card = Emby.Dom.parentWithClass(e.target, 'itemAction');
 
         if (card) {
@@ -115,7 +113,17 @@ define(['playbackManager'], function (playbackManager) {
                 }
             }
         }
-    });
+    }
 
+    function bind(context) {
+        context.addEventListener('click', onClick);
+    }
+
+    // Add some shortcuts
+    document.addEventListener('click', onClick);
+
+    return {
+        bind: bind
+    };
 
 });
