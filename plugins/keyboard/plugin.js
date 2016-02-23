@@ -138,6 +138,19 @@ define(['pluginManager'], function (pluginManager) {
             return displayValue;
         }
 
+        function parentWithClass(elem, className) {
+
+            while (!elem.classList || !elem.classList.contains(className)) {
+                elem = elem.parentNode;
+
+                if (!elem) {
+                    return null;
+                }
+            }
+
+            return elem;
+        }
+
         function showInternal(options, paperdialoghelper) {
 
             var dlg = paperdialoghelper.createDialog({
@@ -202,7 +215,7 @@ define(['pluginManager'], function (pluginManager) {
 
             dlg.addEventListener('click', function (e) {
 
-                var btn = Emby.Dom.parentWithClass(e.target, 'keyboardButton');
+                var btn = parentWithClass(e.target, 'keyboardButton');
                 if (btn) {
                     onKeyClick(dlg, options.field, btn.getAttribute('data-key'));
                 }

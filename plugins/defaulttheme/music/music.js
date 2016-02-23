@@ -1,6 +1,6 @@
 define(['loading', './../themeinfo', 'alphapicker', './../cards/cardbuilder', './../components/horizontallist', './../components/focushandler', './../components/tabbedpage', './../components/backdrop', 'focusManager'], function (loading, themeInfo, alphaPicker, cardBuilder, horizontalList, focusHandler, tabbedPage, themeBackdrop, focusManager) {
 
-	return function (view, params) {
+    return function (view, params) {
 
         var self = this;
 
@@ -184,9 +184,22 @@ define(['loading', './../themeinfo', 'alphapicker', './../cards/cardbuilder', '.
             self.listController.render();
         }
 
+        function parentWithClass(elem, className) {
+
+            while (!elem.classList || !elem.classList.contains(className)) {
+                elem = elem.parentNode;
+
+                if (!elem) {
+                    return null;
+                }
+            }
+
+            return elem;
+        }
+
         function onMusicGenresContainerClick(e) {
 
-            var card = Emby.Dom.parentWithClass(e.target, 'card');
+            var card = parentWithClass(e.target, 'card');
 
             if (card) {
 

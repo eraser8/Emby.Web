@@ -25,6 +25,19 @@ define(['./spotlight', 'focusManager', './../cards/cardbuilder', './../themeinfo
         });
     }
 
+    function parentWithClass(elem, className) {
+
+        while (!elem.classList || !elem.classList.contains(className)) {
+            elem = elem.parentNode;
+
+            if (!elem) {
+                return null;
+            }
+        }
+
+        return elem;
+    }
+
     function loadNextUp(element, parentId) {
 
         var options = {
@@ -170,7 +183,7 @@ define(['./spotlight', 'focusManager', './../cards/cardbuilder', './../themeinfo
 
         element.addEventListener('focus', function (e) {
 
-            var card = Emby.Dom.parentWithClass(e.target, 'card');
+            var card = parentWithClass(e.target, 'card');
 
             if (card) {
                 startCardFlipTimer(card);
