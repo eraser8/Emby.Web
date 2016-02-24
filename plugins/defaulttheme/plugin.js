@@ -45,6 +45,7 @@ define(['playbackManager', 'pluginManager', './themeinfo.js'], function (playbac
         self.getDependencies = function () {
 
             var list = [
+                'opensansFont',
                 'css!' + pluginManager.mapPath(self, 'css/style'),
                 'css!' + pluginManager.mapPath(self, 'cards/card'),
                 'css!' + pluginManager.mapPath(self, 'css/colors.dark'),

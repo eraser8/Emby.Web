@@ -432,6 +432,9 @@
         define("iron-icon-set", ["html!" + bowerPath + "/iron-icon/iron-icon.html", "html!" + bowerPath + "/iron-iconset-svg/iron-iconset-svg.html"]);
         define("coreIcons", ["html!components/icons.html", 'iron-icon-set']);
 
+        define("robotoFont", ['css!fonts/roboto/style']);
+        define("opensansFont", ['css!fonts/opensans/style']);
+
         define('connectionManagerResolver', [], function () {
             return function () {
                 return connectionManager;
@@ -452,7 +455,7 @@
     function getDialogText() {
         return function (globalize) {
             return {
-                get: function(text) {
+                get: function (text) {
                     return globalize.translate('core#Button' + text);
                 }
             };
