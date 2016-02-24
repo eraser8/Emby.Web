@@ -24,7 +24,7 @@ define(['itemHelper', 'mediaInfo', 'indicators', 'paper-icon-item', 'paper-item-
                 downloadWidth = 500;
             }
 
-            html += '<paper-icon-item class="' + cssClass + '" data-index="' + index + '" data-action="' + action + '" data-isfolder="' + item.IsFolder + '" data-id="' + item.Id + '" data-type="' + item.Type + '">';
+            html += '<paper-icon-item class="' + cssClass + '" data-index="' + index + '" data-action="' + action + '" data-isfolder="' + item.IsFolder + '" data-id="' + item.Id + '"  data-serverid="' + item.ServerId + '" data-type="' + item.Type + '">';
 
             var imgUrl = Emby.Models.imageUrl(item, {
                 width: downloadWidth,
