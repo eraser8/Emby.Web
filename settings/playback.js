@@ -35,13 +35,15 @@ define(['loading', 'appSettings', 'qualityoptions', 'userSettings', 'apiClientRe
             var audioLanguage = view.querySelector('.selectAudioLanguage').getValue();
             var subtitleLanguage = view.querySelector('.selectSubtitleLanguage').getValue();
             var subtitleMode = view.querySelector('.selectSubtitleMode').getValue();
+            var episodeAutoPlay = view.querySelector('.selectEpisodeAutoPlay').getValue();
 
             userSettings.serverConfig().then(function (config) {
 
-                config.PlayDefaultAudioTrack = playDefaultAudioTrack;
+                config.PlayDefaultAudioTrack = playDefaultAudioTrack == 'true';
                 config.AudioLanguagePreference = audioLanguage || null;
                 config.SubtitleLanguagePreference = subtitleLanguage || null;
                 config.SubtitleMode = subtitleMode;
+                config.EnableEpisodeAutoQueue = episodeAutoPlay == 'true';
                 userSettings.serverConfig(config);
             });
         });
@@ -86,6 +88,7 @@ define(['loading', 'appSettings', 'qualityoptions', 'userSettings', 'apiClientRe
 
                 view.querySelector('.selectPlayDefaultAudioTrack').setValue(config.PlayDefaultAudioTrack);
                 view.querySelector('.selectSubtitleMode').setValue(config.SubtitleMode);
+                view.querySelector('.selectEpisodeAutoPlay').setValue(config.EnableEpisodeAutoQueue);
 
                 var selectAudioLanguage = view.querySelector('.selectAudioLanguage');
                 fillLanguages(selectAudioLanguage, cultures);

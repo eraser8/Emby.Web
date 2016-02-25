@@ -863,35 +863,43 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
             }
             else if (smart && firstItem.Type == "Episode" && items.length == 1) {
 
-
                 promise = new Promise(function (resolve, reject) {
                     require(["connectionManager"], function (connectionManager) {
+
                         var apiClient = connectionManager.getApiClient(firstItem.ServerId);
 
-                        apiClient.getEpisodes(firstItem.SeriesId, {
-                            IsVirtualUnaired: false,
-                            IsMissing: false,
-                            UserId: apiClient.getCurrentUserId(),
-                            Fields: "MediaSources,Chapters"
+                        apiClient.getCurrentUser().then(function (user) {
 
-                        }).then(function (episodesResult) {
+                            if (!user.Configuration.EnableEpisodeAutoQueue) {
+                                resolve(null);
+                                return;
+                            }
 
-                            var foundItem = false;
-                            episodesResult.Items = episodesResult.Items.filter(function (e) {
+                            apiClient.getEpisodes(firstItem.SeriesId, {
+                                IsVirtualUnaired: false,
+                                IsMissing: false,
+                                UserId: apiClient.getCurrentUserId(),
+                                Fields: "MediaSources,Chapters"
 
-                                if (foundItem) {
-                                    return true;
-                                }
-                                if (e.Id == firstItem.Id) {
-                                    foundItem = true;
-                                    return true;
-                                }
+                            }).then(function (episodesResult) {
 
-                                return false;
-                            });
-                            episodesResult.TotalRecordCount = episodesResult.Items.length;
-                            resolve(episodesResult);
-                        }, reject);
+                                var foundItem = false;
+                                episodesResult.Items = episodesResult.Items.filter(function (e) {
+
+                                    if (foundItem) {
+                                        return true;
+                                    }
+                                    if (e.Id == firstItem.Id) {
+                                        foundItem = true;
+                                        return true;
+                                    }
+
+                                    return false;
+                                });
+                                episodesResult.TotalRecordCount = episodesResult.Items.length;
+                                resolve(episodesResult);
+                            }, reject);
+                        });
                     });
                 });
             }
@@ -899,7 +907,7 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
             if (promise) {
                 return promise.then(function (result) {
 
-                    return result.Items;
+                    return result ? result.Items : items;
                 });
             } else {
                 return Promise.resolve(items);

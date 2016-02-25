@@ -1,6 +1,37 @@
 <div class="externalPageContainer">
     <div style="width: 50%; margin: auto;">
 
+        <h2 style="margin-top:0;">${HeaderAudioSettings}</h2>
+
+        <emby-dropdown-menu class="selectAudioLanguage" label="${AudioLanguagePreference}">
+            <div class="dropdown-content">
+            </div>
+        </emby-dropdown-menu>
+
+        <emby-dropdown-menu class="selectPlayDefaultAudioTrack" label="${PlayDefaultAudioTrack}">
+            <div class="dropdown-content">
+                <div class="dropdownItem" data-value="true">${Yes}</div>
+                <div class="dropdownItem" data-value="false">${No}</div>
+            </div>
+        </emby-dropdown-menu>
+
+        <h2 style="margin-top:1.5em;">${HeaderSubtitleSettings}</h2>
+        <emby-dropdown-menu class="selectSubtitleLanguage" label="${SubtitleLanguagePreference}">
+            <div class="dropdown-content">
+            </div>
+        </emby-dropdown-menu>
+
+        <emby-dropdown-menu class="selectSubtitleMode" label="${SubtitleMode}">
+            <div class="dropdown-content">
+                <div class="dropdownItem" data-value="Default">${OptionDefaultSubtitles}</div>
+                <div class="dropdownItem" data-value="Smart">${OptionSmartSubtitles}</div>
+                <div class="dropdownItem" data-value="OnlyForced">${OptionOnlyForcedSubtitles}</div>
+                <div class="dropdownItem" data-value="Always">${OptionAlwaysPlaySubtitles}</div>
+                <div class="dropdownItem" data-value="None">${OptionNoSubtitles}</div>
+            </div>
+        </emby-dropdown-menu>
+
+        <h2 style="margin-top:1.5em;">${HeaderAdvanced}</h2>
         <emby-dropdown-menu class="selectStreamingBitrate" label="${MaxStreamingBitrate}">
             <div class="dropdown-content">
                 <div class="dropdownItem" data-value="-1">${Auto}</div>
@@ -19,34 +50,12 @@
             <div class="fieldDescription">${EnableCinemaModeHelp}</div>
         </emby-dropdown-menu>
 
-        <br />
-        <h2>${HeaderLanguageSettings}</h2>
-
-        <emby-dropdown-menu class="selectAudioLanguage" label="${AudioLanguagePreference}">
-            <div class="dropdown-content">
-            </div>
-        </emby-dropdown-menu>
-
-        <emby-dropdown-menu class="selectPlayDefaultAudioTrack" label="${PlayDefaultAudioTrack}">
+        <emby-dropdown-menu class="selectEpisodeAutoPlay" label="${PlayNextEpisodeAutomatically}">
             <div class="dropdown-content">
                 <div class="dropdownItem" data-value="true">${Yes}</div>
                 <div class="dropdownItem" data-value="false">${No}</div>
             </div>
         </emby-dropdown-menu>
 
-        <emby-dropdown-menu class="selectSubtitleLanguage" label="${SubtitleLanguagePreference}">
-            <div class="dropdown-content">
-            </div>
-        </emby-dropdown-menu>
-
-        <emby-dropdown-menu class="selectSubtitleMode" label="${SubtitleMode}">
-            <div class="dropdown-content">
-                <div class="dropdownItem" data-value="Default">${OptionDefaultSubtitles}</div>
-                <div class="dropdownItem" data-value="Smart">${OptionSmartSubtitles}</div>
-                <div class="dropdownItem" data-value="OnlyForced">${OptionOnlyForcedSubtitles}</div>
-                <div class="dropdownItem" data-value="Always">${OptionAlwaysPlaySubtitles}</div>
-                <div class="dropdownItem" data-value="None">${OptionNoSubtitles}</div>
-            </div>
-    </emby-dropdown-menu>
     </div>
 </div>
