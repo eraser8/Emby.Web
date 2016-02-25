@@ -870,7 +870,7 @@ define(['events', 'datetime', 'appSettings', 'pluginManager', 'userSettings'], f
 
                         apiClient.getCurrentUser().then(function (user) {
 
-                            if (!user.Configuration.EnableEpisodeAutoQueue) {
+                            if (!user.Configuration.EnableNextEpisodeAutoPlay) {
                                 resolve(null);
                                 return;
                             }

@@ -43,7 +43,7 @@ define(['loading', 'appSettings', 'qualityoptions', 'userSettings', 'apiClientRe
                 config.AudioLanguagePreference = audioLanguage || null;
                 config.SubtitleLanguagePreference = subtitleLanguage || null;
                 config.SubtitleMode = subtitleMode;
-                config.EnableEpisodeAutoQueue = episodeAutoPlay == 'true';
+                config.EnableNextEpisodeAutoPlay = episodeAutoPlay == 'true';
                 userSettings.serverConfig(config);
             });
         });
@@ -88,7 +88,7 @@ define(['loading', 'appSettings', 'qualityoptions', 'userSettings', 'apiClientRe
 
                 view.querySelector('.selectPlayDefaultAudioTrack').setValue(config.PlayDefaultAudioTrack);
                 view.querySelector('.selectSubtitleMode').setValue(config.SubtitleMode);
-                view.querySelector('.selectEpisodeAutoPlay').setValue(config.EnableEpisodeAutoQueue);
+                view.querySelector('.selectEpisodeAutoPlay').setValue(config.EnableNextEpisodeAutoPlay || false);
 
                 var selectAudioLanguage = view.querySelector('.selectAudioLanguage');
                 fillLanguages(selectAudioLanguage, cultures);
