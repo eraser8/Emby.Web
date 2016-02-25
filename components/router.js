@@ -100,15 +100,7 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager'], function (lo
 
     function goToLocalLogin(apiClient, serverId) {
 
-        require(['startup/loginhelper'], function (loginHelper) {
-            loginHelper.enableLocalPin(apiClient).then(function(enableLocalPin) {
-                if (enableLocalPin) {
-                    show('/startup/localpin.html?serverid=' + serverId);
-                } else {
-                    show('/startup/manuallogin.html?serverid=' + serverId);
-                }
-            });
-        });
+        show('/startup/manuallogin.html?serverid=' + serverId);
     }
 
     var cacheParam = new Date().getTime();

@@ -1,4 +1,4 @@
-define(['loading', 'connectionManager', './startuphelper', './loginhelper', 'focusManager', 'coreIcons'], function (loading, connectionManager, startupHelper, loginHelper, focusManager) {
+define(['loading', 'connectionManager', './startuphelper', 'focusManager', 'coreIcons'], function (loading, connectionManager, startupHelper, focusManager) {
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -6,88 +6,86 @@ define(['loading', 'connectionManager', './startuphelper', './loginhelper', 'foc
 
     function renderLoginUsers(view, apiClient, users, serverId, initScroller) {
 
-        loginHelper.enableLocalPin(apiClient).then(function (enableLocalPin) {
+        var items = users.map(function (user) {
 
-            var items = users.map(function (user) {
+            var imgUrl = user.PrimaryImageTag ?
+                apiClient.getUserImageUrl(user.Id, {
+                    width: 400,
+                    tag: user.PrimaryImageTag,
+                    type: "Primary"
+                }) :
+                '';
 
-                var imgUrl = user.PrimaryImageTag ?
-                    apiClient.getUserImageUrl(user.Id, {
-                        width: 400,
-                        tag: user.PrimaryImageTag,
-                        type: "Primary"
-                    }) :
-                    '';
+            var loginPage = 'manuallogin';
 
-                var loginPage = enableLocalPin ? 'localpin' : 'manuallogin';
+            var url = user.HasPassword ?
+                ('/startup/' + loginPage + '.html?serverid=' + serverId + '&user=' + user.Name) :
+                '';
 
-                var url = user.HasPassword ?
-                    ('/startup/' + loginPage + '.html?serverid=' + serverId + '&user=' + user.Name) :
-                    '';
+            return {
+                name: user.Name,
+                showIcon: !imgUrl,
+                showImage: imgUrl,
+                icon: 'person',
+                cardImageStyle: "background-image:url('" + imgUrl + "');",
+                id: user.Id,
+                url: url,
+                serverId: user.ServerId,
+                defaultText: true
+            };
 
-                return {
-                    name: user.Name,
-                    showIcon: !imgUrl,
-                    showImage: imgUrl,
-                    icon: 'person',
-                    cardImageStyle: "background-image:url('" + imgUrl + "');",
-                    id: user.Id,
-                    url: url,
-                    serverId: user.ServerId,
-                    defaultText: true
-                };
+        });
 
-            });
+        items.push({
+            name: Globalize.translate('core#ButtonManualLogin'),
+            showIcon: true,
+            showImage: false,
+            icon: 'lock',
+            cardImageStyle: '',
+            cardType: 'manuallogin',
+            defaultText: true,
+            url: '/startup/manuallogin.html?serverid=' + serverId
+        });
 
-            items.push({
-                name: Globalize.translate('core#ButtonManualLogin'),
-                showIcon: true,
-                showImage: false,
-                icon: 'lock',
-                cardImageStyle: '',
-                cardType: 'manuallogin',
-                defaultText: true,
-                url: '/startup/manuallogin.html?serverid=' + serverId
-            });
+        items.push({
+            name: Globalize.translate('core#EmbyConnect'),
+            showIcon: true,
+            showImage: false,
+            icon: 'cloud',
+            cardImageStyle: '',
+            cardType: 'embyconnect',
+            defaultText: true,
+            url: '/startup/connectlogin.html'
+        });
 
-            items.push({
-                name: Globalize.translate('core#EmbyConnect'),
-                showIcon: true,
-                showImage: false,
-                icon: 'cloud',
-                cardImageStyle: '',
-                cardType: 'embyconnect',
-                defaultText: true,
-                url: '/startup/connectlogin.html'
-            });
+        items.push({
+            name: Globalize.translate('core#ButtonChangeServer'),
+            showIcon: true,
+            showImage: false,
+            icon: 'cast',
+            cardImageStyle: '',
+            cardType: 'changeserver',
+            defaultText: true,
+            url: '/startup/selectserver.html'
+        });
 
-            items.push({
-                name: Globalize.translate('core#ButtonChangeServer'),
-                showIcon: true,
-                showImage: false,
-                icon: 'cast',
-                cardImageStyle: '',
-                cardType: 'changeserver',
-                defaultText: true,
-                url: '/startup/selectserver.html'
-            });
+        var html = items.map(function (item) {
 
-            var html = items.map(function (item) {
+            var secondaryText = item.defaultText ? '&nbsp;' : '';
 
-                var secondaryText = item.defaultText ? '&nbsp;' : '';
+            var cardImageContainer;
 
-                var cardImageContainer;
+            if (item.showIcon) {
+                cardImageContainer = '<iron-icon class="cardImageIcon" icon="' + item.icon + '"></iron-icon>';
+            } else {
+                cardImageContainer = '<div class="cardImage" style="' + item.cardImageStyle + '"></div>';
+            }
 
-                if (item.showIcon) {
-                    cardImageContainer = '<iron-icon class="cardImageIcon" icon="' + item.icon + '"></iron-icon>';
-                } else {
-                    cardImageContainer = '<div class="cardImage" style="' + item.cardImageStyle + '"></div>';
-                }
+            var tagName = 'paper-button';
+            var innerOpening = '<div class="cardBox">';
+            var innerClosing = '</div>';
 
-                var tagName = 'paper-button';
-                var innerOpening = '<div class="cardBox">';
-                var innerClosing = '</div>';
-
-                return '\
+            return '\
 <' + tagName + ' raised class="card squareCard loginSquareCard scalableCard" data-cardtype="' + item.cardType + '" data-url="' + item.url + '" data-name="' + item.name + '" data-serverid="' + item.serverId + '">\
 '+ innerOpening + '<div class="cardScalable">\
 <div class="cardPadder"></div>\
@@ -102,21 +100,20 @@ define(['loading', 'connectionManager', './startuphelper', './loginhelper', 'foc
 </div>'+ innerClosing + '\
 </'+ tagName + '>';
 
-            }).join('');
+        }).join('');
 
-            var scrollSlider = view.querySelector('.scrollSlider');
-            scrollSlider.innerHTML = html;
+        var scrollSlider = view.querySelector('.scrollSlider');
+        scrollSlider.innerHTML = html;
 
-            require(["Sly"], function (Sly) {
+        require(["Sly"], function (Sly) {
 
-                loading.hide();
+            loading.hide();
 
-                if (initScroller) {
-                    startupHelper.createHorizontalScroller(view, Sly);
-                }
+            if (initScroller) {
+                startupHelper.createHorizontalScroller(view, Sly);
+            }
 
-                focusManager.autoFocus(scrollSlider);
-            });
+            focusManager.autoFocus(scrollSlider);
         });
     }
 
