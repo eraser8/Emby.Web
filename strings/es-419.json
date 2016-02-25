@@ -17,7 +17,9 @@
     "OptionNoSubtitlesHelp": "Los subtitulos no ser\u00e1n cargados por defecto.",
     "OptionDefaultSubtitlesHelp": "Los subtitulos son cargados basados en las configuraciones por defecto y el indicador de subtitulo forzado. Las preferencias de idioma son consideradas cuando hay varias opciones disponibles.",
     "OptionOnlyForcedSubtitles": "Solo subtitulos forzados",
-    "HeaderLanguageSettings": "Configuraci\u00f3n de Idioma",
+    "HeaderAudioSettings": "Audio Settings",
+    "HeaderSubtitleSettings": "Subtitle Settings",
+    "HeaderAdvanced": "Advanced",
     "OptionSmartSubtitlesHelp": "Los subtitulos que concuerden con la configuraci\u00f3n de preferencias de idioma ser\u00e1n cargados cuando el audio este en un idioma extranjero.",
     "OptionNoSubtitles": "Ninguno",
     "OptionSmartSubtitles": "Inteligente",
@@ -86,5 +88,6 @@
     "ValueSpecialEpisodeName": "Especial - {0}",
     "Sounds": "Sonidos",
     "ServerUpdateNeeded": "This Emby Server needs to be updated. To download the latest version, please visit {0}",
-    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}"
+    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}",
+    "PlayNextEpisodeAutomatically": "Play next episode automatically"
 }

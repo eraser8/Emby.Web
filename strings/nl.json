@@ -17,7 +17,9 @@
     "OptionNoSubtitlesHelp": "Ondertiteling wordt standaard niet weergegeven.",
     "OptionDefaultSubtitlesHelp": "Ondertitels worden geladen op basis van de standaard en geforceerde markeringen in de ingesloten metadata. Indien er meerdere opties beschikbaar zijn wordt met de taal voorkeuren rekening gehouden.",
     "OptionOnlyForcedSubtitles": "Alleen geforceerde ondertitels",
-    "HeaderLanguageSettings": "Taal Instellingen",
+    "HeaderAudioSettings": "Audio Settings",
+    "HeaderSubtitleSettings": "Subtitle Settings",
+    "HeaderAdvanced": "Advanced",
     "OptionSmartSubtitlesHelp": "Wanneer de audio taal buitenlands is worden ondertitels die met de taal voorkeur overeenkomen geladen.",
     "OptionNoSubtitles": "Geen",
     "OptionSmartSubtitles": "Smart",
@@ -86,5 +88,6 @@
     "ValueSpecialEpisodeName": "Speciaal - {0}",
     "Sounds": "Geluiden",
     "ServerUpdateNeeded": "This Emby Server needs to be updated. To download the latest version, please visit {0}",
-    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}"
+    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}",
+    "PlayNextEpisodeAutomatically": "Play next episode automatically"
 }

@@ -17,7 +17,9 @@
     "OptionNoSubtitlesHelp": "Par d\u00e9faut, les sous-titres ne seront pas charg\u00e9s.",
     "OptionDefaultSubtitlesHelp": "Les sous-titres seront charg\u00e9s depuis le langage par d\u00e9faut, et par ceux forc\u00e9s dans les m\u00e9ta-donn\u00e9es int\u00e9gr\u00e9es. Les pr\u00e9f\u00e9rences de langage seront utilis\u00e9es quand plusieurs options seront disponibles.",
     "OptionOnlyForcedSubtitles": "Seulement les sous-titres forc\u00e9s",
-    "HeaderLanguageSettings": "Param\u00e8tres linguistiques",
+    "HeaderAudioSettings": "Audio Settings",
+    "HeaderSubtitleSettings": "Subtitle Settings",
+    "HeaderAdvanced": "Advanced",
     "OptionSmartSubtitlesHelp": "Les sous-titres correspondants \u00e0 la langue pr\u00e9f\u00e9r\u00e9e seront charg\u00e9s quand la piste audio est dans une langue \u00e9trang\u00e8re",
     "OptionNoSubtitles": "Aucun",
     "OptionSmartSubtitles": "Intelligent",
@@ -86,5 +88,6 @@
     "ValueSpecialEpisodeName": "Sp\u00e9cial - {0}",
     "Sounds": "Sons",
     "ServerUpdateNeeded": "This Emby Server needs to be updated. To download the latest version, please visit {0}",
-    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}"
+    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}",
+    "PlayNextEpisodeAutomatically": "Play next episode automatically"
 }

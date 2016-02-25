@@ -17,7 +17,9 @@
     "OptionNoSubtitlesHelp": "As legendas n\u00e3o ser\u00e3o carregadas por padr\u00e3o.",
     "OptionDefaultSubtitlesHelp": "Subtitles are loaded based on the default and forced flags in the embedded metadata. Language preferences are considered when multiple options are available.",
     "OptionOnlyForcedSubtitles": "Apenas legendas for\u00e7adas",
-    "HeaderLanguageSettings": "Ajustes do Idioma",
+    "HeaderAudioSettings": "Audio Settings",
+    "HeaderSubtitleSettings": "Subtitle Settings",
+    "HeaderAdvanced": "Advanced",
     "OptionSmartSubtitlesHelp": "Subtitles matching the language preference will be loaded when the audio is in a foreign language.",
     "OptionNoSubtitles": "Nenhum",
     "OptionSmartSubtitles": "Inteligente",
@@ -86,5 +88,6 @@
     "ValueSpecialEpisodeName": "Special - {0}",
     "Sounds": "Sons",
     "ServerUpdateNeeded": "This Emby Server needs to be updated. To download the latest version, please visit {0}",
-    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}"
+    "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}",
+    "PlayNextEpisodeAutomatically": "Play next episode automatically"
 }

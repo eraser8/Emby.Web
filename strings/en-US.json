@@ -19,7 +19,7 @@
     "OptionOnlyForcedSubtitles": "Only forced subtitles",
     "HeaderAudioSettings": "Audio Settings",
     "HeaderSubtitleSettings": "Subtitle Settings",
-    "HeaderAdvanced":  "Advanced",
+    "HeaderAdvanced": "Advanced",
     "OptionSmartSubtitlesHelp": "Subtitles matching the language preference will be loaded when the audio is in a foreign language.",
     "OptionNoSubtitles": "None",
     "OptionSmartSubtitles": "Smart",
