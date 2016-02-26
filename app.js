@@ -145,6 +145,13 @@
             transition: 'slide',
             dependencies: []
         });
+
+        defineRoute({
+            path: '/',
+            isDefaultRoute: true,
+            transition: 'slide',
+            dependencies: []
+        });
     }
 
     function getCapabilities(apphost) {
