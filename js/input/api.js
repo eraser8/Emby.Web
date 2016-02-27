@@ -64,10 +64,10 @@ define(['connectionManager', 'playbackManager', 'events'], function (connectionM
         events.on(apiClient, "websocketmessage", onWebSocketMessageReceived);
     }
 
-    var current = connectionManager.currentApiClient();
-    if (current) {
-        bindEvents(current);
-    }
+    //var current = connectionManager.currentApiClient();
+    //if (current) {
+    //    bindEvents(current);
+    //}
 
     events.on(connectionManager, 'apiclientcreated', function (e, newApiClient) {
 
