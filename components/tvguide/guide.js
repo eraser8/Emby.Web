@@ -1,4 +1,4 @@
-define(['datetime', 'focusManager'], function (datetime, focusManager) {
+define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusManager, imageLoader) {
 
     return function (options) {
 
@@ -80,7 +80,7 @@ define(['datetime', 'focusManager'], function (datetime, focusManager) {
                 var nextDay = new Date(date.getTime() + msPerDay - 2000);
 
                 console.log(nextDay);
-                channelsPromise.done(function (channelsResult) {
+                channelsPromise.then(function (channelsResult) {
 
                     apiClient.getLiveTvPrograms({
                         UserId: apiClient.getCurrentUserId(),
@@ -93,7 +93,7 @@ define(['datetime', 'focusManager'], function (datetime, focusManager) {
                         EnableImageTypes: "Primary",
                         SortBy: "StartDate"
 
-                    }).done(function (programsResult) {
+                    }).then(function (programsResult) {
 
                         renderGuide(page, date, channelsResult.Items, programsResult.Items, apiClient);
 
@@ -361,7 +361,7 @@ define(['datetime', 'focusManager'], function (datetime, focusManager) {
 
             var channelList = page.querySelector('.channelList');
             channelList.innerHTML = html;
-            Emby.ImageLoader.lazyChildren(channelList);
+            imageLoader.lazyChildren(channelList);
         }
 
         function renderGuide(page, date, channels, programs, apiClient) {
@@ -479,7 +479,7 @@ define(['datetime', 'focusManager'], function (datetime, focusManager) {
 
                 var apiClient = connectionManager.currentApiClient();
 
-                apiClient.getLiveTvGuideInfo().done(function (guideInfo) {
+                apiClient.getLiveTvGuideInfo().then(function (guideInfo) {
 
                     setDateRange(page, guideInfo);
                 });
