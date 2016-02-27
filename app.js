@@ -611,46 +611,96 @@
         });
     }
 
+
+    function isBrowserSupported(browser) {
+
+        if (browser.msie) {
+            return false;
+        }
+
+        if (browser.safari) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function handleUnsupportedBrowser() {
+
+        var html = 'Please use one of the following supported browsers:';
+
+        html += '<br/>';
+        html += '<br/>Google Chrome 45+';
+        html += '<br/>Opera';
+        html += '<br/>Microsoft Edge';
+        html += '<br/>Firefox 40+';
+
+        var themeHeader = document.querySelector('.themeHeader');
+        themeHeader.style.padding = '1em';
+        themeHeader.style.color = 'white';
+        themeHeader.innerHTML = html;
+    }
+
+    function checkBrowser() {
+
+        return new Promise(function (resolve, reject) {
+
+            require(['browser'], function (browser) {
+
+                if (isBrowserSupported(browser)) {
+                    resolve();
+                } else {
+                    handleUnsupportedBrowser();
+                    reject();
+                }
+            });
+        });
+    }
+
     function loadPresentation() {
 
         loadGlobalizaton().then(function () {
 
-            var presentationDependencies = [];
+            checkBrowser().then(function () {
 
-            presentationDependencies.push('layoutManager');
-            presentationDependencies.push('events');
-            presentationDependencies.push('js/models');
-            presentationDependencies.push('js/soundeffectplayer');
-            presentationDependencies.push('js/thememediaplayer');
+                var presentationDependencies = [];
 
-            presentationDependencies.push('js/input/gamepad');
-            presentationDependencies.push('js/input/mouse');
-            presentationDependencies.push('js/input/onscreenkeyboard');
-            presentationDependencies.push('js/input/keyboard');
-            presentationDependencies.push('js/input/api');
-            presentationDependencies.push('js/dom');
+                presentationDependencies.push('layoutManager');
+                presentationDependencies.push('events');
+                presentationDependencies.push('js/models');
+                presentationDependencies.push('js/soundeffectplayer');
+                presentationDependencies.push('js/thememediaplayer');
 
-            presentationDependencies.push('components/controlbox');
-            presentationDependencies.push('screensaverManager');
+                presentationDependencies.push('js/input/gamepad');
+                presentationDependencies.push('js/input/mouse');
+                presentationDependencies.push('js/input/onscreenkeyboard');
+                presentationDependencies.push('js/input/keyboard');
+                presentationDependencies.push('js/input/api');
+                presentationDependencies.push('js/dom');
 
-            require(presentationDependencies, function (layoutManager, events) {
+                presentationDependencies.push('components/controlbox');
+                presentationDependencies.push('screensaverManager');
 
-                layoutManager.setFormFactor('tv');
-                globalScope.Events = events;
+                require(presentationDependencies, function (layoutManager, events) {
 
-                console.log('Loading presentation');
+                    layoutManager.setFormFactor('tv');
+                    globalScope.Events = events;
 
-                // Start by loading the default theme. Once a user is logged in we can change the theme based on settings
-                loadDefaultTheme(function () {
+                    console.log('Loading presentation');
 
-                    document.documentElement.classList.remove('preload');
+                    // Start by loading the default theme. Once a user is logged in we can change the theme based on settings
+                    loadDefaultTheme(function () {
 
-                    Emby.Page.start();
+                        document.documentElement.classList.remove('preload');
 
-                    document.dispatchEvent(new CustomEvent("appready", {}));
+                        Emby.Page.start();
 
-                    loadCoreDictionary();
+                        document.dispatchEvent(new CustomEvent("appready", {}));
+
+                        loadCoreDictionary();
+                    });
                 });
+
             });
         });
     }
