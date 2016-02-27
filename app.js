@@ -273,7 +273,6 @@
 
         var paths = {
             itemShortcuts: "components/shortcuts",
-            alert: "components/alert",
             soundeffects: "components/soundeffects",
             apphost: customPaths.apphost || "components/apphost",
             shell: customPaths.shell || "components/shell",
@@ -392,6 +391,7 @@
         define("slideshow", [embyWebComponentsBowerPath + "/slideshow/slideshow"], returnFirstDependency);
         define("actionsheet", [embyWebComponentsBowerPath + "/actionsheet/actionsheet"], returnFirstDependency);
         define("confirm", [embyWebComponentsBowerPath + "/confirm/confirm"], returnFirstDependency);
+        define("alert", [embyWebComponentsBowerPath + "/alert/alert"], returnFirstDependency);
 
         define("alphapicker", ["components/alphapicker/alphapicker"], returnFirstDependency);
         define("indicators", ["components/indicators/indicators"], returnFirstDependency);
