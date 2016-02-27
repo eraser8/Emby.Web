@@ -114,7 +114,7 @@ define(['browser', 'pluginManager'], function (browser, pluginManager) {
                     var currentTrackIndex = -1;
                     for (var i = 0, length = tracks.length; i < length; i++) {
                         if (tracks[i].isDefault) {
-                            currentTrackIndex = i;
+                            currentTrackIndex = tracks[i].index;
                             break;
                         }
                     }
@@ -161,14 +161,6 @@ define(['browser', 'pluginManager'], function (browser, pluginManager) {
         }
 
         self.setSubtitleStreamIndex = function (index) {
-
-            // map the metadata index to the element index
-            if (index != -1) {
-
-                var track = mediaElement.querySelector('track[data-index=\'' + index + '\']');
-
-                index = parseInt(track.getAttribute('data-elementindex'));
-            }
 
             setCurrentTrackElement(index);
         };
@@ -474,15 +466,13 @@ define(['browser', 'pluginManager'], function (browser, pluginManager) {
 
                 var defaultAttribute = t.isDefault ? ' default' : '';
 
-                var txt = '<track data-index="' + t.index + '" data-elementindex="' + elementIndex + '" kind="subtitles" src="' + t.url + '" srclang="' + t.language + '"' + defaultAttribute + '></track>';
+                var txt = '<track id="textTrack' + t.index + '" kind="subtitles" src="' + t.url + '" srclang="' + t.language + '"' + defaultAttribute + '></track>';
                 elementIndex++;
                 return txt;
 
             }).join('');
 
-            if (html) {
-                elem.innerHTML = html;
-            }
+            elem.innerHTML = html;
         }
 
         var _supportsTextTracks;
@@ -496,39 +486,26 @@ define(['browser', 'pluginManager'], function (browser, pluginManager) {
             return _supportsTextTracks;
         }
 
-        function setCurrentTrackElement(trackIndex) {
+        function setCurrentTrackElement(streamIndex) {
 
-            console.log('Setting new text track index to: ' + trackIndex);
+            console.log('Setting new text track index to: ' + streamIndex);
 
             var allTracks = mediaElement.textTracks; // get list of tracks
 
-            var modes = ['disabled', 'showing', 'hidden'];
+            var expectedId = 'textTrack' + streamIndex;
 
             for (var i = 0; i < allTracks.length; i++) {
 
-                var mode;
+                var currentTrack = allTracks[i];
 
-                if (trackIndex == i) {
-                    mode = 1; // show this track
+                if (currentTrack.id == expectedId) {
+                    console.log('Setting track ' + i + ' mode to: showing');
+                    allTracks[i].mode = 'showing'; // show this track
                 } else {
-                    mode = 0; // hide all other tracks
+                    console.log('Setting track ' + i + ' mode to: disabled');
+                    allTracks[i].mode = 'disabled'; // hide all other tracks
                 }
 
-                console.log('Setting track ' + i + ' mode to: ' + mode);
-
-                // Safari uses integers for the mode property
-                // http://www.jwplayer.com/html5/scripting/
-                var useNumericMode = false;
-
-                if (!isNaN(allTracks[i].mode)) {
-                    useNumericMode = true;
-                }
-
-                if (useNumericMode) {
-                    allTracks[i].mode = mode;
-                } else {
-                    allTracks[i].mode = modes[mode];
-                }
             }
         };
 
