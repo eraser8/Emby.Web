@@ -41,7 +41,7 @@
             path: startupRoot + 'manuallogin.html',
             transition: 'slide',
             controller: 'startup/manuallogin',
-            dependencies: ['paper-input']
+            dependencies: ['paper-input', 'coreIcons']
         });
 
         defineRoute({
@@ -53,7 +53,8 @@
         defineRoute({
             path: startupRoot + 'welcome.html',
             transition: 'slide',
-            controller: 'startup/welcome'
+            controller: 'startup/welcome',
+            dependencies: ['coreIcons']
         });
 
         defineRoute({
@@ -66,7 +67,7 @@
             path: startupRoot + 'manualserver.html',
             transition: 'slide',
             controller: 'startup/manualserver',
-            dependencies: ['paper-input']
+            dependencies: ['paper-input', 'coreIcons']
         });
 
         defineRoute({
