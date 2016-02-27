@@ -1,5 +1,5 @@
-paper-dialog .buttons {
-    padding: 2em 1em 1em 2em;
+paper-button.block {
+    margin: .25em 0;
 }
 
 paper-progress.block {
