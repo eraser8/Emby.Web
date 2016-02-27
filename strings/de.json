@@ -17,9 +17,9 @@
     "OptionNoSubtitlesHelp": "Untertitel werden standardm\u00e4\u00dfig nicht geladen",
     "OptionDefaultSubtitlesHelp": "Untertitel werden gem\u00e4\u00df der Standard und Erzwungenen-Ansicht aus den eingebetteten Metadaten geladen. Spracheinstellungen zur Verf\u00fcgung gesttellt wenn mehrere Sprachen verf\u00fcgbar sind.",
     "OptionOnlyForcedSubtitles": "Nur erzwungene Untertitel",
-    "HeaderAudioSettings": "Audio Settings",
-    "HeaderSubtitleSettings": "Subtitle Settings",
-    "HeaderAdvanced": "Advanced",
+    "HeaderAudioSettings": "Audio Einstellungen",
+    "HeaderSubtitleSettings": "Untertitel Einstellungen",
+    "HeaderAdvanced": "Erweitert",
     "OptionSmartSubtitlesHelp": "Untertitel gem\u00e4\u00df der in den Einstellung gew\u00e4hlten Sprache werden geladen, wenn die Tonspur in einer Fremdsprache vorliegt.",
     "OptionNoSubtitles": "Keine",
     "OptionSmartSubtitles": "Smart",
@@ -49,6 +49,7 @@
     "HeaderPlaybackError": "Wiedergabefehler",
     "ButtonCancel": "Abbrechen",
     "ButtonOk": "Ok",
+    "ButtonGotIt": "Got It",
     "Settings": "Einstellungen",
     "ButtonPlay": "Wiedergabe",
     "ButtonShuffle": "Zufallswiedergabe",
@@ -89,5 +90,5 @@
     "Sounds": "Sounds",
     "ServerUpdateNeeded": "Dieser Emby Server ben\u00f6tigt ein Update. Um die aktuellste Version herunter zu laden besuche {0}",
     "LocalPinCodeTip": "{0} Tipp: {1} Du kannst auch die Emby web App, Android oder iOS App verwenden. Klicke auf Dein Benutzerprofil in der rechten oberen Ecke, dann klicke {0} PIN Code eingeben {1}",
-    "PlayNextEpisodeAutomatically": "Play next episode automatically"
+    "PlayNextEpisodeAutomatically": "Starte n\u00e4chste Episode automatisch"
 }
