@@ -10,9 +10,21 @@
 
         <paper-button raised class="block btnNewPin"><span>${ButtonGenerateNewPin}</span></paper-button>
 
-        <div class="skip" style="text-align:center;">
+        <div class="skip" style="text-align: center;">
             <paper-button raised class="block btnSkipConnect"><iron-icon icon="close"></iron-icon><span>${ButtonSkip}</span></paper-button>
             <div class="fieldDescription">${TextConnectToServerManually}</div>
         </div>
+
+        <div style="margin-top: 1.5em;">
+            <!-- The new user section is not needed for the pin login because the pin page has a signup link -->
+            <div class="hide">
+                <h2 style="margin-bottom:0;">${HeaderNewUsers}</h2>
+                <a href="https://emby.media/community/index.php?app=core&module=global&section=register" target="_blank" class="clearLink lnkSignup">
+                    <paper-button raised class="submit block btnSignupForConnect"><iron-icon icon="add"></iron-icon><span>${ButtonSignUp}</span></paper-button>
+                </a>
+            </div>
+            <div class="terms fieldDescription" style="margin-top:.5em;"></div>
+        </div>
+
     </div>
 </div>
