@@ -347,8 +347,7 @@ define(['loading', 'datetime', 'focusManager', 'imageLoader', 'itemShortcuts', '
                 if (hasChannelImage) {
 
                     var url = apiClient.getScaledImageUrl(channel.Id, {
-                        maxHeight: 40,
-                        maxWidth: 80,
+                        maxHeight: 200,
                         tag: channel.ImageTags.Primary,
                         type: "Primary"
                     });
