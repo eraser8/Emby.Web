@@ -1,4 +1,4 @@
-define(['datetime', 'focusManager', 'imageLoader', 'itemShortcuts', 'css!./guide.css'], function (datetime, focusManager, imageLoader, itemShortcuts) {
+define(['loading', 'datetime', 'focusManager', 'imageLoader', 'itemShortcuts', 'css!./guide.css'], function (loading, datetime, focusManager, imageLoader, itemShortcuts) {
 
     return function (options) {
 
@@ -50,11 +50,11 @@ define(['datetime', 'focusManager', 'imageLoader', 'itemShortcuts', 'css!./guide
         }
 
         function showLoading() {
-
+            loading.show();
         }
 
         function hideLoading() {
-
+            loading.hide();
         }
 
         function reloadGuide(context, newStartDate) {
