@@ -21,11 +21,6 @@
     position: relative;
 }
 
-.detailSectionHeader + .tvProgram {
-    border-top: 6px solid #121212;
-    margin-top: 1px;
-}
-
 .tvProgramTimeSlotInner {
     padding: .5em;
 }
@@ -33,7 +28,7 @@
 .tvProgramInfo {
     vertical-align: middle;
     padding: .5em .5em;
-    border-bottom: 6px solid #121212;
+    border-bottom: .65vh solid #121212;
 }
 
 .tvProgramCurrentTimeSlot {
@@ -116,13 +111,6 @@
         left: -21px;
     }
 
-.channelImageContainer .itemDetailImage {
-    max-width: 200px;
-    max-height: 110px;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
 .channelTimeslotHeader {
     float: left;
 }
@@ -177,7 +165,7 @@
 }
 
 .channelHeaderCell {
-    border-bottom: 6px solid #121212 !important;
+    border-bottom: .65vh solid #121212 !important;
 }
 
 .channelPrograms, .channelHeaderCell {
@@ -193,7 +181,7 @@
 }
 
 .timeslotHeader, .channelTimeslotHeader {
-    height: 62px;
+    height: 5.75vh;
 }
 
 .pointerInput .channelHeaderCell:hover {
@@ -208,10 +196,6 @@
     padding-bottom: 4px;
 }
 
-/*.programGrid, .timeslotHeaders {
-    margin-left: 200px;
-}*/
-
 .timeslotHeader {
     width: 2.0833333333333333333333333333333%;
 }
@@ -219,8 +203,9 @@
 .programCell {
     position: absolute;
     top: 0;
-    bottom: 6px;
-    border-left: 6px solid #121212 !important;
+    /* Unfortunately the borders using vh get rounded while the bottom property doesn't. So this is a little hack to try and make them even*/
+    bottom: .59vh;
+    border-left: .65vh solid #121212 !important;
     background-color: #202020;
     display: flex;
     color: #fff !important;
