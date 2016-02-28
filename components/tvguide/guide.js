@@ -378,12 +378,13 @@ define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusMan
 
         var gridScrolling = false;
         var headersScrolling = false;
-        function onProgramGridScroll(page, elem) {
+        function onProgramGridScroll(context, elem) {
 
             if (!headersScrolling) {
                 gridScrolling = true;
 
                 //$(page.querySelector('.timeslotHeaders')).scrollLeft($(elem).scrollLeft());
+                context.querySelector('.timeslotHeaders').scrollTo(elem.scrollLeft, 0);
                 gridScrolling = false;
             }
         }
@@ -663,14 +664,14 @@ define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusMan
             return response.text();
         }).then(function (template) {
 
-            var tabContent = options.element;
-            tabContent.innerHTML = template;
+            var context = options.element;
+            context.innerHTML = template;
 
-            var programGrid = tabContent.querySelector('.programGrid');
+            var programGrid = context.querySelector('.programGrid');
 
             programGrid.addEventListener('scroll', function () {
 
-                onProgramGridScroll(tabContent, this);
+                onProgramGridScroll(context, this);
             });
 
             var isMobile = false;
@@ -681,18 +682,18 @@ define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusMan
 
                 //tabContent.querySelector('.tvGuide').classList.remove('mobileGuide');
 
-                tabContent.querySelector('.timeslotHeaders').addEventListener('scroll', function () {
+                context.querySelector('.timeslotHeaders').addEventListener('scroll', function () {
 
-                    onTimeslotHeadersScroll(tabContent, this);
+                    onTimeslotHeadersScroll(context, this);
                 });
             }
 
-            tabContent.querySelector('.btnSelectDate').addEventListener('click', function () {
+            context.querySelector('.btnSelectDate').addEventListener('click', function () {
 
-                selectDate(tabContent);
+                selectDate(context);
             });
 
-            createVerticalScroller(tabContent, self);
+            createVerticalScroller(context, self);
             self.refresh();
         });
     };
