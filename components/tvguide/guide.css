@@ -164,7 +164,7 @@
     text-overflow: ellipsis;
     border-right: 1px solid #121212;
     width: 12vw;
-    background: #202020;
+    background: #282828;
     display: flex;
     align-items: center;
     color: #fff !important;
@@ -181,7 +181,7 @@
 }
 
 .channelPrograms, .channelHeaderCell {
-    height: 6.6vh;
+    height: 7vh;
 }
 
 .channelTimeslotHeader {
@@ -221,7 +221,7 @@
     top: 0;
     bottom: 6px;
     border-left: 6px solid #121212 !important;
-    background-color: #282828;
+    background-color: #202020;
     display: flex;
     color: #fff !important;
     text-decoration: none;
