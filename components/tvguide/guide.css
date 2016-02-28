@@ -1,0 +1,297 @@
+.tvguide {
+    display: flex;
+    flex-direction: column;
+    align-items: initial;
+}
+
+.tvGuideHeader {
+    white-space: nowrap;
+    background-color: #121212;
+    width: 100%;
+}
+
+.tvProgramSectionHeader {
+    margin: 0;
+}
+
+.tvProgram {
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+}
+
+.detailSectionHeader + .tvProgram {
+    border-top: 6px solid #121212;
+    margin-top: 1px;
+}
+
+.tvProgramTimeSlotInner {
+    padding: .5em;
+}
+
+.tvProgramInfo {
+    vertical-align: middle;
+    padding: .5em .5em;
+    border-bottom: 6px solid #121212;
+}
+
+.tvProgramCurrentTimeSlot {
+    background-color: green;
+}
+
+.tvProgramName {
+    color: #fff;
+    margin-bottom: .5em;
+}
+
+.tvProgramTime {
+    color: #fff;
+}
+
+.newTvProgram {
+    color: #E88606;
+}
+
+.liveTvProgram {
+    color: #64A239;
+}
+
+.premiereTvProgram {
+    color: yellow;
+}
+
+.programAccent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+}
+
+.sportsProgramInfo .programAccent {
+    background-color: #0A7C33;
+}
+
+.newsProgramInfo .programAccent {
+    background-color: #523378;
+}
+
+.movieProgramInfo .programAccent {
+    background-color: #A43913;
+}
+
+.childProgramInfo .programAccent {
+    background-color: #0B487D;
+}
+
+.timerCircle {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: #cc0000;
+    border: 1px solid #cc3333;
+    margin-left: 1em;
+}
+
+.seriesTimerCircle {
+    position: relative;
+    margin-left: 0;
+    left: 21px;
+    opacity: .3;
+}
+
+.itemMiscInfo .seriesTimerCircle:first-child {
+    margin-left: 1em;
+}
+
+.seriesTimerCircle + .seriesTimerCircle {
+    opacity: .65;
+    left: 0;
+}
+
+    .seriesTimerCircle + .seriesTimerCircle + .seriesTimerCircle {
+        opacity: 1;
+        left: -21px;
+    }
+
+.channelImageContainer .itemDetailImage {
+    max-width: 200px;
+    max-height: 110px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.channelTimeslotHeader {
+    float: left;
+}
+
+.timeslotHeaders {
+    white-space: nowrap;
+}
+
+.mobileGuide .timeslotHeaders {
+    overflow-x: hidden;
+}
+
+.programContainer {
+    white-space: nowrap;
+    position: relative;
+}
+
+.programGridContainer {
+    margin-left: 225px;
+}
+
+.channelPrograms {
+    white-space: nowrap;
+    height: 71px;
+    position: relative;
+}
+
+.channelPrograms, .timeslotHeadersInner {
+    width: 12000px;
+}
+
+.timeslotHeader {
+    display: inline-flex;
+    align-items: center;
+    text-indent: .35em;
+}
+
+.channelHeaderCell, .channelTimeslotHeader {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-right: 1px solid #121212;
+    width: 220px;
+    background: #202020;
+    display: flex;
+    align-items: center;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.btnSelectDate {
+    color: #fff;
+    padding-left: .5em;
+}
+
+.channelHeaderCell {
+    border-bottom: 6px solid #121212 !important;
+    height: 71px;
+}
+
+.channelTimeslotHeader {
+    border-right-color: transparent;
+}
+
+.channelTimeslotHeader, .timeslotHeader {
+    background: transparent;
+}
+
+.timeslotHeader, .channelTimeslotHeader {
+    height: 62px;
+}
+
+.pointerInput .channelHeaderCell:hover {
+    background-color: #444;
+}
+
+.channelList {
+    float: left;
+}
+
+.programGrid {
+    padding-bottom: 4px;
+}
+
+/*.programGrid, .timeslotHeaders {
+    margin-left: 200px;
+}*/
+
+.timeslotHeader {
+    width: 2.0833333333333333333333333333333%;
+}
+
+.programCell {
+    position: absolute;
+    top: 0;
+    bottom: 6px;
+    border-left: 6px solid #121212 !important;
+    background-color: #282828;
+    display: flex;
+    color: #fff !important;
+    text-decoration: none;
+    overflow: hidden;
+    align-items: center;
+}
+
+.timeslotCellInner {
+    position: absolute;
+    bottom: 0;
+    overflow: hidden;
+    width: 100%;
+    top: 0;
+    display: block;
+    text-decoration: none;
+    color: #fff !important;
+}
+
+.guideProgramName {
+    padding: 0 .5em 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.guideProgramTime {
+    padding: 0 .5em .35em;
+    color: #bbb;
+}
+
+.programCell iron-icon {
+    margin-left: auto;
+    margin-right: .5em;
+    height: 3.5vh;
+    width: 3.5vh;
+    color: #ccc;
+    flex-shrink: 0;
+}
+
+.guideChannelInfo {
+    display: inline-block;
+    max-width: 110px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: .7em;
+}
+
+.guideChannelImage {
+    width: 7.4vh;
+    height: 3.7vh;
+    margin-left: auto;
+    margin-right: .3em;
+    background-size: contain;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 1920px) {
+
+    .channelPrograms, .timeslotHeadersInner {
+        width: 12000px;
+    }
+}
+
+.channelList, .programGrid {
+    height: auto !important;
+}
+
+.programCell:focus, .channelHeaderCell:focus, .btnSelectDate:focus {
+    background-color: #52B54B;
+    outline: none !important;
+}
+
+    .programCell:focus .programAccent {
+        background-color: transparent !important;
+    }

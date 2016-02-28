@@ -285,7 +285,6 @@
             appSettings: "components/appsettings",
             userSettings: "components/usersettings",
             focusManager: embyWebComponentsBowerPath + "/focusmanager",
-            tvguide: "components/tvguide/guide",
             playmenu: "components/playmenu",
             datetime: embyWebComponentsBowerPath + "/datetime",
             globalize: "components/globalize",
@@ -396,6 +395,7 @@
 
         define("alphapicker", ["components/alphapicker/alphapicker"], returnFirstDependency);
         define("indicators", ["components/indicators/indicators"], returnFirstDependency);
+        define("tvguide", ["components/tvguide/guide"], returnFirstDependency);
 
         define("backMenu", ["components/backmenu/backmenu"], returnFirstDependency);
         define("prompt", [embyWebComponentsBowerPath + "/prompt/prompt"], returnFirstDependency);

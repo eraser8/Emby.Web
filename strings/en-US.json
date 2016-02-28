@@ -91,5 +91,6 @@
     "ServerUpdateNeeded": "This Emby Server needs to be updated. To download the latest version, please visit {0}",
     "LocalPinCodeTip": "{0}Tip:{1} You can also use the Emby web app, Android, or iOS. Click your user icon in the upper right, then click {0}Enter Pin Code.{1}",
     "PlayNextEpisodeAutomatically": "Play next episode automatically",
-    "EmbyLoginTerms": "Emby is designed to help you manage your personal media library, such as home videos and photos. Please see our {0}terms of use{1}. The use of any Emby software constitutes acceptance of these terms."
+    "EmbyLoginTerms": "Emby is designed to help you manage your personal media library, such as home videos and photos. Please see our {0}terms of use{1}. The use of any Emby software constitutes acceptance of these terms.",
+    "HeaderSelectDate": "Select Date"
 }

@@ -22,7 +22,7 @@ define(['tvguide'], function (tvguide) {
         function initGuide() {
 
             guideInstance = new tvguide({
-                element: view.querySelector('.epg')
+                element: view.querySelector('.guidePageContainer')
             });
         }
     }

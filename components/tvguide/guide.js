@@ -1,4 +1,4 @@
-define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusManager, imageLoader) {
+define(['datetime', 'focusManager', 'imageLoader', 'itemShortcuts', 'css!./guide.css'], function (datetime, focusManager, imageLoader, itemShortcuts) {
 
     return function (options) {
 
@@ -499,7 +499,7 @@ define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusMan
 
                 actionsheet.show({
                     items: dateOptions,
-                    title: Globalize.translate('HeaderSelectDate'),
+                    title: Globalize.translate('core#HeaderSelectDate'),
                     callback: function (id) {
 
                         var date = new Date();
@@ -513,37 +513,8 @@ define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusMan
 
         function createVerticalScroller(view, pageInstance) {
 
-            require(["slyScroller", 'loading'], function (slyScroller, loading) {
-
-                var scrollFrame = view.querySelector('.scrollFrameY');
-                var scrollSlider = view.querySelector('.scrollSliderY');
-
-                var options = {
-                    horizontal: 0,
-                    itemNav: 0,
-                    mouseDragging: 1,
-                    touchDragging: 1,
-                    slidee: scrollSlider,
-                    itemSelector: '.card',
-                    smart: true,
-                    easing: 'swing',
-                    releaseSwing: true,
-                    scrollBar: view.querySelector('.scrollbarY'),
-                    scrollBy: 200,
-                    speed: 300,
-                    dragHandle: 1,
-                    dynamicHandle: 1,
-                    clickBar: 1
-                };
-
-                slyScroller.create(scrollFrame, options).then(function (slyFrame) {
-                    pageInstance.verticalSlyFrame = slyFrame;
-                    slyFrame.init();
-                    initFocusHandler(view, scrollSlider, slyFrame);
-
-                    initNativeFocusHandler(view, view.querySelector('.programGrid'), true);
-                });
-            });
+            initNativeFocusHandler(view, view.querySelector('.hiddenScrollY'), false);
+            initNativeFocusHandler(view, view.querySelector('.programGrid'), true);
         }
 
         function getOffset(elem) {
@@ -582,7 +553,7 @@ define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusMan
                 offset += scrollContainer.scrollTop;
             }
 
-            var frameSize = scrollContainer.offsetWidth;
+            var frameSize = horizontal ? scrollContainer.offsetWidth : scrollContainer.offsetHeight;
 
             return {
                 start: offset,
@@ -601,26 +572,12 @@ define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusMan
                 if (focused) {
                     var pos = getPos(scrollSlider, focused, horizontal);
                     console.log(pos.center);
-                    scrollSlider.scrollTo(pos.center, 0);
-                }
 
-            }, true);
-        }
-
-        function initFocusHandler(view, scrollSlider, slyFrame) {
-
-            scrollSlider.addEventListener('focus', function (e) {
-
-                var focused = focusManager.focusableParent(e.target);
-
-                if (focused) {
-                    var now = new Date().getTime();
-
-                    var threshold = 50;
-                    var animate = (now - lastFocus) > threshold;
-
-                    slyFrame.toCenter(focused, !animate);
-                    lastFocus = now;
+                    if (horizontal) {
+                        scrollSlider.scrollTo(pos.center, 0);
+                    } else {
+                        scrollSlider.scrollTo(0, pos.center);
+                    }
                 }
 
             }, true);
@@ -659,7 +616,11 @@ define(['datetime', 'focusManager', 'imageLoader'], function (datetime, focusMan
                 selectDate(context);
             });
 
+            context.classList.add('tvguide');
+
             createVerticalScroller(context, self);
+            itemShortcuts.on(context);
+
             self.refresh();
         });
     };
