@@ -1,28 +1,34 @@
-<div class="verticalPageContainer searchPageContainer hiddenScrollY" style="scroll-behavior: smooth;width:auto;padding:0 3%;">
-    <div class="searchFields">
-        <div style="display: flex;align-items: flex-end;justify-content: center;">
-            <iron-icon icon="search" class="mediumSizeIcon iconSearch"></iron-icon>
-            <paper-input class="txtSearch" type="text" data-keyboard="false"></paper-input>
-        </div>
-        <div class="alphaPicker"></div>
-    </div>
+<div class="verticalPageContainer searchPageContainer">
+    <div class="scrollFrame scrollFrameY itemScrollFrame">
 
-    <div class="searchResults">
-        <div class="verticalSection movieResults hide">
-            <h2>${MoviesAndTV}</h2>
-            <div class="itemsContainer verticalItemsContainer"></div>
-        </div>
-        <div class="verticalSection peopleResults hide">
-            <h2>${People}</h2>
-            <div class="itemsContainer verticalItemsContainer"></div>
-        </div>
-        <div class="verticalSection artistResults hide">
-            <h2>${Artists}</h2>
-            <div class="itemsContainer verticalItemsContainer"></div>
-        </div>
-        <div class="verticalSection albumResults hide">
-            <h2>${Albums}</h2>
-            <div class="itemsContainer verticalItemsContainer"></div>
+        <div class="scrollSlider">
+
+            <div class="searchFields">
+                <div style="display: flex;align-items: flex-end;justify-content: center;">
+                    <iron-icon icon="search" class="mediumSizeIcon iconSearch"></iron-icon>
+                    <paper-input class="txtSearch" type="text" data-keyboard="false"></paper-input>
+                </div>
+                <div class="alphaPicker"></div>
+            </div>
+
+            <div class="searchResults">
+                <div class="verticalSection movieResults hide">
+                    <h2>${MoviesAndTV}</h2>
+                    <div class="itemsContainer verticalItemsContainer"></div>
+                </div>
+                <div class="verticalSection peopleResults hide">
+                    <h2>${People}</h2>
+                    <div class="itemsContainer verticalItemsContainer"></div>
+                </div>
+                <div class="verticalSection artistResults hide">
+                    <h2>${Artists}</h2>
+                    <div class="itemsContainer verticalItemsContainer"></div>
+                </div>
+                <div class="verticalSection albumResults hide">
+                    <h2>${Albums}</h2>
+                    <div class="itemsContainer verticalItemsContainer"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
