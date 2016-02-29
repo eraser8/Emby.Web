@@ -52,14 +52,14 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
         // Catch events on the view headers
         var userViewNames = view.querySelector('.userViewNames');
-        userViewNames.addEventListener('mousedown', function (e) {
+        //userViewNames.addEventListener('mousedown', function (e) {
 
-            var elem = parentWithClass(e.target, 'btnUserViewHeader');
+        //    var elem = parentWithClass(e.target, 'btnUserViewHeader');
 
-            if (elem) {
-                elem.focus();
-            }
-        });
+        //    if (elem) {
+        //        elem.focus();
+        //    }
+        //});
 
         userViewNames.addEventListener('focus', function (e) {
 
