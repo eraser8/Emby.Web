@@ -183,15 +183,12 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
             var btn = view.querySelector('.btnUserViewHeader.selected');
 
-            if (btn) {
-
-                if (viewId == btn.getAttribute('data-id')) {
-                    return;
+            if (elem !== btn) {
+                if (btn) {
+                    btn.classList.remove('selected');
                 }
-                btn.classList.remove('selected');
+                elem.classList.add('selected');
             }
-
-            elem.classList.add('selected');
 
             if (focusTimeout) {
                 clearTimeout(focusTimeout);
