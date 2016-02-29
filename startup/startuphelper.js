@@ -96,10 +96,6 @@ define(['connectionManager', 'loading', 'themeManager', 'focusManager'], functio
         }
     }
 
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
     function onScrollSliderClick(e, callback) {
 
         var card = Emby.Dom.parentWithClass(e.target, 'card');
@@ -156,138 +152,10 @@ define(['connectionManager', 'loading', 'themeManager', 'focusManager'], functio
         });
     }
 
-    function createHorizontalScroller(view, Sly) {
-
-        var scrollFrame = view.querySelector('.scrollFrame');
-
-        loading.hide();
-
-        scrollFrame.style.display = 'block';
-
-        var options = {
-            horizontal: 1,
-            itemNav: 0,
-            mouseDragging: 1,
-            touchDragging: 1,
-            slidee: view.querySelector('.scrollSlider'),
-            itemSelector: '.card',
-            smart: true,
-            releaseSwing: true,
-            scrollBy: 200,
-            speed: 340,
-            elasticBounds: 1,
-            dragHandle: 1,
-            dynamicHandle: 1,
-            clickBar: 1,
-            scrollWidth: 100000
-        };
-
-        var frame = new Sly(scrollFrame, options).init();
-
-        view.querySelector('.scrollSlider').addEventListener('focus', function (e) {
-
-            var focused = focusManager.focusableParent(e.target);
-            focusedElement = focused;
-
-            if (focused) {
-                frame.toCenter(focused);
-            }
-        }, true);
-
-        // TODO: Not exactly sure yet why this can't be focused immediately
-        setTimeout(function () {
-            var firstCard = scrollFrame.querySelector('.card');
-
-            if (firstCard) {
-                focusManager.focus(firstCard);
-            }
-        }, 200);
-    }
-
-    function renderSelectServerItems(view, servers, initScroller) {
-
-        var items = servers.map(function (server) {
-
-            return {
-                name: server.Name,
-                showIcon: true,
-                icon: 'cast',
-                cardType: '',
-                id: server.Id,
-                server: server
-            };
-
-        });
-
-        items.push({
-            name: Globalize.translate('core#ButtonNewServer'),
-            showIcon: true,
-            showImage: false,
-            icon: 'add',
-            cardImageStyle: '',
-            id: 'changeserver',
-            cardType: 'changeserver',
-            url: '/startup/manualserver.html'
-        });
-
-        items.push({
-            name: Globalize.translate('core#EmbyConnect'),
-            showIcon: true,
-            showImage: false,
-            icon: 'cloud',
-            cardImageStyle: '',
-            cardType: 'embyconnect',
-            defaultText: true,
-            url: '/startup/connectlogin.html'
-        });
-
-        var html = items.map(function (item) {
-
-            var cardImageContainer;
-
-            if (item.showIcon) {
-                cardImageContainer = '<iron-icon class="cardImageIcon" icon="' + item.icon + '"></iron-icon>';
-            } else {
-                cardImageContainer = '<div class="cardImage" style="' + item.cardImageStyle + '"></div>';
-            }
-
-            var tagName = 'paper-button';
-            var innerOpening = '<div class="cardBox">';
-            var innerClosing = '</div>';
-
-            return '\
-<' + tagName + ' raised class="card squareCard loginSquareCard scalableCard" data-id="' + item.id + '" data-url="' + (item.url || '') + '" data-cardtype="' + item.cardType + '">\
-'+ innerOpening + '<div class="cardScalable">\
-<div class="cardPadder"></div>\
-<div class="cardContent">\
-<div class="cardImageContainer coveredImage defaultCardColor' + getRandomInt(1, 5) + '">\
-'+ cardImageContainer + '</div>\
-</div>\
-</div>\
-<div class="cardFooter">\
-<div class="cardText">'+ item.name + '</div>\
-</div>'+ innerClosing + '\
-</'+ tagName + '>';
-
-        }).join('');
-
-        view.querySelector('.scrollSlider').innerHTML = html;
-
-        require(["Sly"], function (Sly) {
-            loading.hide();
-
-            if (initScroller) {
-                createHorizontalScroller(view, Sly);
-            }
-        });
-    }
-
     return {
         handleConnectionResult: handleConnectionResult,
         signIntoConnect: signIntoConnect,
         authenticateUser: authenticateUser,
-        onScrollSliderClick: onScrollSliderClick,
-        renderSelectServerItems: renderSelectServerItems,
-        createHorizontalScroller: createHorizontalScroller
+        onScrollSliderClick: onScrollSliderClick
     };
 });

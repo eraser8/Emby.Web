@@ -102,16 +102,16 @@ define(['loading', 'scrollHelper', 'connectionManager', './startuphelper', 'focu
 
         }).join('');
 
-        var userContainer = view.querySelector('.users');
-        userContainer.innerHTML = html;
+        var itemsContainer = view.querySelector('.users');
+        itemsContainer.innerHTML = html;
 
         loading.hide();
 
         if (initScroller) {
-            scrollHelper.centerFocus.on(userContainer, true);
+            scrollHelper.centerFocus.on(itemsContainer, true);
         }
 
-        focusManager.autoFocus(userContainer);
+        focusManager.autoFocus(itemsContainer);
     }
 
     return function (view, params) {
@@ -127,8 +127,7 @@ define(['loading', 'scrollHelper', 'connectionManager', './startuphelper', 'focu
             Emby.Page.setTitle(null);
             Emby.Backdrop.clear();
 
-            require(['connectionManager', 'loading'], function (connectionManager, loading) {
-
+            if (!isRestored) {
                 loading.show();
                 var apiClient = connectionManager.getApiClient(serverId);
                 apiClient.getPublicUsers().then(function (result) {
@@ -140,9 +139,7 @@ define(['loading', 'scrollHelper', 'connectionManager', './startuphelper', 'focu
 
                     renderLoginUsers(view, apiClient, [], serverId, !isRestored);
                 });
-            });
 
-            if (!isRestored) {
                 view.querySelector('.users').addEventListener('click', function (e) {
 
                     startupHelper.onScrollSliderClick(e, function (card) {

@@ -1,4 +1,87 @@
-define(['loading', 'connectionManager', 'startup/startuphelper', 'coreIcons'], function (loading, connectionManager, startupHelper) {
+define(['loading', 'scrollHelper', 'focusManager', 'connectionManager', 'startup/startuphelper', 'coreIcons'], function (loading, scrollHelper, focusManager, connectionManager, startupHelper) {
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function renderSelectServerItems(view, servers, initScroller) {
+
+        var items = servers.map(function (server) {
+
+            return {
+                name: server.Name,
+                showIcon: true,
+                icon: 'cast',
+                cardType: '',
+                id: server.Id,
+                server: server
+            };
+
+        });
+
+        items.push({
+            name: Globalize.translate('core#ButtonNewServer'),
+            showIcon: true,
+            showImage: false,
+            icon: 'add',
+            cardImageStyle: '',
+            id: 'changeserver',
+            cardType: 'changeserver',
+            url: '/startup/manualserver.html'
+        });
+
+        items.push({
+            name: Globalize.translate('core#EmbyConnect'),
+            showIcon: true,
+            showImage: false,
+            icon: 'cloud',
+            cardImageStyle: '',
+            cardType: 'embyconnect',
+            defaultText: true,
+            url: '/startup/connectlogin.html'
+        });
+
+        var html = items.map(function (item) {
+
+            var cardImageContainer;
+
+            if (item.showIcon) {
+                cardImageContainer = '<iron-icon class="cardImageIcon" icon="' + item.icon + '"></iron-icon>';
+            } else {
+                cardImageContainer = '<div class="cardImage" style="' + item.cardImageStyle + '"></div>';
+            }
+
+            var tagName = 'paper-button';
+            var innerOpening = '<div class="cardBox">';
+            var innerClosing = '</div>';
+
+            return '\
+<' + tagName + ' raised class="card squareCard loginSquareCard scalableCard" data-id="' + item.id + '" data-url="' + (item.url || '') + '" data-cardtype="' + item.cardType + '">\
+'+ innerOpening + '<div class="cardScalable">\
+<div class="cardPadder"></div>\
+<div class="cardContent">\
+<div class="cardImageContainer coveredImage defaultCardColor' + getRandomInt(1, 5) + '">\
+'+ cardImageContainer + '</div>\
+</div>\
+</div>\
+<div class="cardFooter">\
+<div class="cardText">'+ item.name + '</div>\
+</div>'+ innerClosing + '\
+</'+ tagName + '>';
+
+        }).join('');
+
+        var itemsContainer = view.querySelector('.servers');
+        itemsContainer.innerHTML = html;
+
+        loading.hide();
+
+        if (initScroller) {
+            scrollHelper.centerFocus.on(itemsContainer, true);
+        }
+
+        focusManager.autoFocus(itemsContainer);
+    }
 
     return function (view, params) {
 
@@ -12,26 +95,23 @@ define(['loading', 'connectionManager', 'startup/startuphelper', 'coreIcons'], f
             Emby.Page.setTitle(null);
             Emby.Backdrop.clear();
 
-            require(['connectionManager', 'loading'], function (connectionManager, loading) {
-
+            if (!isRestored) {
                 loading.show();
 
                 connectionManager.getAvailableServers().then(function (result) {
 
                     servers = result;
-                    startupHelper.renderSelectServerItems(view, result, !isRestored);
+                    renderSelectServerItems(view, result, !isRestored);
                     view.querySelector('.pageHeader').classList.remove('hide');
 
                 }, function (result) {
 
                     servers = [];
-                    startupHelper.renderSelectServerItems(view, [], !isRestored);
+                    renderSelectServerItems(view, [], !isRestored);
                     view.querySelector('.pageHeader').classList.remove('hide');
                 });
-            });
 
-            if (!isRestored) {
-                view.querySelector('.scrollSlider').addEventListener('click', function (e) {
+                view.querySelector('.servers').addEventListener('click', function (e) {
 
                     startupHelper.onScrollSliderClick(e, function (card) {
 
