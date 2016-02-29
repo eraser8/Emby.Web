@@ -16,7 +16,7 @@ define(['loading', 'datetime', 'focusManager', 'imageLoader', 'itemShortcuts', '
 
         var currentDate;
 
-        var defaultChannels = 50;
+        var defaultChannels = 200;
         var channelLimit = 1000;
 
         var channelQuery = {
