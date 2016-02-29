@@ -1,4 +1,4 @@
-define(['imageLoader', 'itemHelper', './backdrop', 'mediaInfo', 'focusManager'], function (imageLoader, itemHelper, themeBackdrop, mediaInfo, focusManager) {
+define(['imageLoader', 'itemHelper', './backdrop', 'mediaInfo', 'focusManager', 'scrollHelper'], function (imageLoader, itemHelper, themeBackdrop, mediaInfo, focusManager, scrollHelper) {
 
     function focusHandler(options) {
 
@@ -8,7 +8,8 @@ define(['imageLoader', 'itemHelper', './backdrop', 'mediaInfo', 'focusManager'],
         var focusedElement;
         var zoomElement;
         var currentAnimation;
-        var zoomScale = options.zoomScale || (options.slyFrame.options.horizontal ? '1.16' : '1.12');
+        var isHorizontal = options.slyFrame ? options.slyFrame.options.horizontal : options.horizontal;
+        var zoomScale = options.zoomScale || (isHorizontal ? '1.16' : '1.12');
         var zoomInEase = 'ease-out-sine';
         var zoomOutEase = 'ease-in-cubic';
         var zoomDuration = 160;
@@ -36,11 +37,15 @@ define(['imageLoader', 'itemHelper', './backdrop', 'mediaInfo', 'focusManager'],
                     }
                 }
 
-                var now = new Date().getTime();
+                if (options.slyFrame) {
+                    var now = new Date().getTime();
 
-                var animate = (now - lastFocus) > 50;
-                options.slyFrame.toCenter(focused, !animate);
-                lastFocus = now;
+                    var animate = (now - lastFocus) > 50;
+                    options.slyFrame.toCenter(focused, !animate);
+                    lastFocus = now;
+                } else if (options.scrollElement) {
+                    scrollHelper.toCenter(options.scrollElement, focused, options.horizontal);
+                }
                 startZoomTimer();
             }
         }
