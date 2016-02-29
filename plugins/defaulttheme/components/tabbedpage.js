@@ -111,7 +111,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
         var selectedItemInfoInner = page.querySelector('.selectedItemInfoInner');
         var selectedIndexElement = page.querySelector('.selectedIndex');
 
-        var tagName = 'paper-button';
+        var tagName = 'button';
 
         self.renderTabs = function (tabs, initialTabId) {
 
