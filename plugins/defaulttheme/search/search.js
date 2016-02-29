@@ -1,39 +1,13 @@
-define(['loading', 'alphapicker', 'slyScroller', './../components/focushandler', './../cards/cardbuilder'], function (loading, alphaPicker, slyScroller, focusHandler, cardBuilder) {
+define(['loading', 'alphapicker', './../components/focushandler', './../cards/cardbuilder'], function (loading, alphaPicker, focusHandler, cardBuilder) {
 
     function createVerticalScroller(view, pageInstance) {
-
-        var scrollFrame = view.querySelector('.scrollFrameY');
-
-        var options = {
-            horizontal: 0,
-            itemNav: 0,
-            mouseDragging: 1,
-            touchDragging: 1,
-            slidee: view.querySelector('.scrollSlider'),
-            itemSelector: '.card',
-            smart: true,
-            scrollBy: 200,
-            speed: 270,
-            dragHandle: 1,
-            dynamicHandle: 1,
-            clickBar: 1,
-            scrollWidth: 10000
-        };
-
-        slyScroller.create(scrollFrame, options).then(function (slyFrame) {
-            pageInstance.verticalSlyFrame = slyFrame;
-            slyFrame.init();
-            initFocusHandler(view, slyFrame);
-        });
-    }
-
-    function initFocusHandler(view, slyFrame) {
 
         var searchResults = view.querySelector('.searchResults');
 
         self.focusHandler = new focusHandler({
             parent: searchResults,
-            slyFrame: slyFrame
+            scrollElement: view.querySelector('.hiddenScrollY'),
+            horizontal: false
         });
     }
 
@@ -239,9 +213,6 @@ define(['loading', 'alphapicker', 'slyScroller', './../components/focushandler',
             }
             if (self.alphaPicker) {
                 self.alphaPicker.destroy();
-            }
-            if (self.verticalSlyFrame) {
-                self.verticalSlyFrame.destroy();
             }
         });
     }
