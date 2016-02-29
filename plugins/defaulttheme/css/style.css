@@ -128,10 +128,10 @@ a {
     /* Somehow this resolves the issue of the content getting distorted 
         https://github.com/MediaBrowser/Emby.Theater.Windows/issues/270
     */
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
-    .userViewNames .scrollFrameX .scrollSlider {
+    .userViewNames {
         padding-left: 3.75%;
     }
 

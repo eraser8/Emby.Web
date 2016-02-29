@@ -1,46 +1,34 @@
-define(['loading', 'slyScroller', './focushandler', 'focusManager'], function (loading, slyScroller, focusHandler, focusManager) {
+define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelper'], function (loading, slyScroller, focusHandler, focusManager, scrollHelper) {
+
+    function focusViewSlider() {
+
+        var selected = this.querySelector('.selected');
+
+        if (selected) {
+            focusManager.focus(selected);
+        } else {
+            focusManager.autoFocus(this);
+        }
+    }
 
     function createHeaderScroller(view, instance, initialTabId) {
 
         var userViewNames = view.querySelector('.userViewNames');
 
-        var scrollFrame = userViewNames.querySelector('.scrollFrame');
+        userViewNames.classList.add('hiddenScrollX');
+        userViewNames.classList.add('focusable');
+        userViewNames.classList.add('focuscontainer-x');
+        userViewNames.style.scrollBehavior = 'smooth';
+        userViewNames.focus = focusViewSlider;
 
-        var options = {
-            horizontal: 1,
-            itemNav: 'basic',
-            mouseDragging: 1,
-            touchDragging: 1,
-            slidee: userViewNames.querySelector('.scrollSlider'),
-            itemSelector: '.btnUserViewHeader',
-            activateOn: 'focus',
-            smart: true,
-            releaseSwing: true,
-            scrollBy: 200,
-            speed: 500,
-            elasticBounds: 1,
-            dragHandle: 1,
-            dynamicHandle: 1,
-            clickBar: 1,
-            elasticBounds: 1,
-            dragHandle: 1,
-            dynamicHandle: 1,
-            clickBar: 1,
-            scrollWidth: userViewNames.querySelectorAll('.btnUserViewHeader').length * (screen.width / 5)
-        };
+        loading.hide();
 
-        slyScroller.create(scrollFrame, options).then(function (slyFrame) {
-            slyFrame.init();
-            loading.hide();
+        var initialTab = initialTabId ? userViewNames.querySelector('.btnUserViewHeader[data-id=\'' + initialTabId + '\']') : null;
 
-            var initialTab = initialTabId ? userViewNames.querySelector('.btnUserViewHeader[data-id=\'' + initialTabId + '\']') : null;
-
-            if (!initialTab) {
-                initialTab = userViewNames.querySelector('.btnUserViewHeader');
-            }
-            instance.headerSlyFrame = slyFrame;
-            instance.setFocusDelay(view, initialTab);
-        });
+        if (!initialTab) {
+            initialTab = userViewNames.querySelector('.btnUserViewHeader');
+        }
+        instance.setFocusDelay(view, initialTab);
     }
 
     function parentWithClass(elem, className) {
@@ -74,7 +62,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager'], function (l
             var elem = parentWithClass(e.target, 'btnUserViewHeader');
 
             if (elem) {
-                instance.headerSlyFrame.toCenter(elem);
+                scrollHelper.toCenter(userViewNames, elem, true);
                 instance.setFocusDelay(view, elem);
             }
         }, true);
@@ -122,7 +110,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager'], function (l
 
         self.renderTabs = function (tabs, initialTabId) {
 
-            page.querySelector('.viewsScrollSlider').innerHTML = tabs.map(function (i) {
+            page.querySelector('.userViewNames').innerHTML = tabs.map(function (i) {
 
                 return '<' + tagName + ' class="flat btnUserViewHeader" data-id="' + i.Id + '" data-type="' + (i.CollectionType || '') + '"><h2 class="userViewButtonText">' + i.Name + '</h2></' + tagName + '>';
 
@@ -132,11 +120,6 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager'], function (l
             initEvents(page, self);
             createHorizontalScroller(page);
         };
-
-        var viewsScrollSlider = page.querySelector('.viewsScrollSlider');
-        viewsScrollSlider.classList.add('focusable');
-        viewsScrollSlider.classList.add('focuscontainer-x');
-        viewsScrollSlider.focus = focusViewSlider;
 
         function onAlphaPickerValueChanged() {
 
@@ -185,17 +168,6 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager'], function (l
 
         if (pageOptions.alphaPicker) {
             pageOptions.alphaPicker.on('alphavaluechanged', onAlphaPickerValueChanged);
-        }
-
-        function focusViewSlider() {
-
-            var selected = this.querySelector('.selected');
-
-            if (selected) {
-                focusManager.focus(selected);
-            } else {
-                focusManager.autoFocus(this);
-            }
         }
 
         var focusTimeout;
@@ -289,10 +261,6 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager'], function (l
             if (self.bodySlyFrame) {
                 self.bodySlyFrame.destroy();
                 self.bodySlyFrame = null
-            }
-            if (self.headerSlyFrame) {
-                self.headerSlyFrame.destroy();
-                self.headerSlyFrame = null
             }
         };
     }
