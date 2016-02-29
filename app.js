@@ -304,7 +304,6 @@
             packageManager: 'components/packagemanager',
             themeManager: 'components/thememanager',
             itemHelper: 'components/itemhelper',
-            scrollHelper: 'components/scrollhelper',
             mediaInfo: 'components/mediainfo/mediainfo',
             playbackManager: 'components/playbackmanager',
             credentialprovider: 'bower_components/emby-apiclient/credentials',
@@ -400,6 +399,7 @@
         define("backMenu", ["components/backmenu/backmenu"], returnFirstDependency);
         define("tvguide", ["components/tvguide/guide"], returnFirstDependency);
         define("prompt", [embyWebComponentsBowerPath + "/prompt/prompt"], returnFirstDependency);
+        define("scrollHelper", [embyWebComponentsBowerPath + "/scrollhelper"], returnFirstDependency);
 
         define("paper-base", ["css!style/paperstyles.css"]);
         define("paper-spinner", ["html!" + bowerPath + "/paper-spinner/paper-spinner.html", 'paper-base']);
