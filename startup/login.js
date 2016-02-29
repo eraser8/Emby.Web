@@ -143,7 +143,7 @@ define(['loading', 'scrollHelper', 'connectionManager', './startuphelper', 'focu
             });
 
             if (!isRestored) {
-                view.querySelector('.scrollSlider').addEventListener('click', function (e) {
+                view.querySelector('.users').addEventListener('click', function (e) {
 
                     startupHelper.onScrollSliderClick(e, function (card) {
 
