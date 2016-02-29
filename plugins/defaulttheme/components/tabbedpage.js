@@ -58,7 +58,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
             if (elem) {
                 scrollHelper.toCenter(userViewNames, elem, true);
-                instance.setFocusDelay(view, elem, true);
+                instance.setFocusDelay(view, elem);
             }
         });
 
@@ -182,6 +182,13 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
             var viewId = elem.getAttribute('data-id');
 
             var btn = view.querySelector('.btnUserViewHeader.selected');
+
+            if (btn) {
+
+                if (viewId == btn.getAttribute('data-id')) {
+                    return;
+                }
+            }
 
             if (elem !== btn) {
                 if (btn) {
