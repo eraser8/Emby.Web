@@ -304,6 +304,7 @@
             packageManager: 'components/packagemanager',
             themeManager: 'components/thememanager',
             itemHelper: 'components/itemhelper',
+            scrollHelper: 'components/scrollhelper',
             mediaInfo: 'components/mediainfo/mediainfo',
             playbackManager: 'components/playbackmanager',
             credentialprovider: 'bower_components/emby-apiclient/credentials',
@@ -395,9 +396,9 @@
 
         define("alphapicker", ["components/alphapicker/alphapicker"], returnFirstDependency);
         define("indicators", ["components/indicators/indicators"], returnFirstDependency);
-        define("tvguide", ["components/tvguide/guide"], returnFirstDependency);
 
         define("backMenu", ["components/backmenu/backmenu"], returnFirstDependency);
+        define("tvguide", ["components/tvguide/guide"], returnFirstDependency);
         define("prompt", [embyWebComponentsBowerPath + "/prompt/prompt"], returnFirstDependency);
 
         define("paper-base", ["css!style/paperstyles.css"]);
