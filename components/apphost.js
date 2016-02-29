@@ -37,7 +37,7 @@ define(['appStorage'], function (appStorage) {
             return 'Emby Theater';
         },
         appVersion: function () {
-            return '3.0';
+            return '2.0';
         },
         deviceName: function () {
             return "Web Browser";
@@ -78,7 +78,7 @@ define(['appStorage'], function (appStorage) {
                         deviceId: id,
                         deviceName: deviceName,
                         appName: appName,
-                        appVersion: '3.0'
+                        appVersion: '2.0'
                     });
                 }
 

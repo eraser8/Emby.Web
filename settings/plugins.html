@@ -1,13 +1,9 @@
 <div class="externalPageContainer settingsPageContainer" style="display: flex;">
 
-    <div class="centeredPageContent" style="margin: 0 5vw;flex-grow:1;">
-        <div class="scrollFrame scrollFrameY itemScrollFrame">
-            <div class="scrollSlider">
-                <div style="text-align: right;">
-                    <paper-button class="btnInstall mini" raised><iron-icon icon="core:add"></iron-icon><span>${InstallPlugin}</span></paper-button>
-                </div>
-                <div class="itemsContainer verticalItemsContainer"></div>
-            </div>
+    <div class="centeredPageContent hiddenScrollY" style="margin: 0 5vw;flex-grow:1; scroll-behavior: smooth;">
+        <div style="text-align: right;">
+            <paper-button class="btnInstall mini" raised><iron-icon icon="core:add"></iron-icon><span>${InstallPlugin}</span></paper-button>
         </div>
+        <div class="itemsContainer verticalItemsContainer"></div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-define(['loading', 'packageManager', 'imageLoader', 'focusManager', 'slyScroller'], function (loading, packageManager, imageLoader, focusManager, slyScroller) {
+define(['loading', 'packageManager', 'imageLoader', 'focusManager', 'scrollHelper'], function (loading, packageManager, imageLoader, focusManager, scrollHelper) {
 
     return function (view, params) {
 
@@ -7,48 +7,7 @@ define(['loading', 'packageManager', 'imageLoader', 'focusManager', 'slyScroller
 
         function createVerticalScroller() {
 
-            var scrollFrame = view.querySelector('.scrollFrame');
-
-            var options = {
-                horizontal: 0,
-                itemNav: 0,
-                mouseDragging: 1,
-                touchDragging: 1,
-                slidee: view.querySelector('.scrollSlider'),
-                itemSelector: '.card',
-                smart: true,
-                scrollBy: 200,
-                speed: 270,
-                dragHandle: 1,
-                dynamicHandle: 1,
-                clickBar: 1,
-                scrollWidth: 50000,
-                immediateSpeed: 100
-            };
-
-            slyScroller.create(scrollFrame, options).then(function (slyFrame) {
-                self.slyFrame = slyFrame;
-                slyFrame.init();
-                initFocusHandler(view.querySelector('.scrollSlider'), slyFrame);
-            });
-        }
-
-        function initFocusHandler(parent, slyFrame) {
-
-            parent.addEventListener('focus', function (e) {
-
-                var focused = focusManager.focusableParent(e.target);
-
-                if (focused) {
-
-                    var now = new Date().getTime();
-
-                    var animate = (now - lastFocus) > 50;
-                    self.slyFrame.toCenter(focused, !animate);
-                    lastFocus = now;
-                }
-
-            }, true);
+            scrollHelper.centerFocus.on(view.querySelector('.hiddenScrollY'), false);
         }
 
         view.addEventListener('viewbeforeshow', function (e) {
