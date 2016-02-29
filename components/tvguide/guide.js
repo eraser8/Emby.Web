@@ -272,7 +272,7 @@ define(['loading', 'datetime', 'focusManager', 'imageLoader', 'itemShortcuts', '
                 html += '</div>';
 
                 if (program.IsHD) {
-                    html += '<iron-icon icon="hd"></iron-icon>';
+                    html += '<iron-icon icon="core:hd"></iron-icon>';
                 }
 
                 //html += '<div class="guideProgramTime">';
@@ -290,16 +290,12 @@ define(['loading', 'datetime', 'focusManager', 'imageLoader', 'itemShortcuts', '
                 //html += ' - ';
                 //html += getDisplayTime(program.EndDateLocal);
 
-                //if (program.SeriesTimerId) {
-                //    html += '<div class="timerCircle seriesTimerCircle"></div>';
-                //    html += '<div class="timerCircle seriesTimerCircle"></div>';
-                //    html += '<div class="timerCircle seriesTimerCircle"></div>';
-                //}
-                //else if (program.TimerId) {
-
-                //    html += '<div class="timerCircle"></div>';
-                //}
-                //html += '</div>';
+                if (program.SeriesTimerId) {
+                    html += '<iron-icon class="seriesTimerIcon" icon="core:fiber-smart-record"></iron-icon>';
+                }
+                else if (program.TimerId) {
+                    html += '<iron-icon class="timerIcon" icon="core:fiber-manual-record"></iron-icon>';
+                }
 
                 if (addAccent) {
                     html += '<div class="programAccent"></div>';

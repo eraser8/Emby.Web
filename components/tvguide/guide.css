@@ -245,6 +245,10 @@
     flex-shrink: 0;
 }
 
+    .programCell iron-icon + iron-icon {
+        margin-left: .25em;
+    }
+
 .guideChannelInfo {
     display: inline-block;
     max-width: 110px;
@@ -275,3 +279,7 @@
     .programCell:focus .programAccent {
         background-color: transparent !important;
     }
+
+.timerIcon, .seriesTimerIcon {
+    color: #cc3333 !important;
+}
