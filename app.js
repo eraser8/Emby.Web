@@ -620,10 +620,6 @@
             return false;
         }
 
-        if (browser.safari) {
-            return false;
-        }
-
         return true;
     }
 
