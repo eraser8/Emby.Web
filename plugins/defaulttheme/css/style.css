@@ -116,8 +116,15 @@ a {
 }
 
 .centeredPageContent {
-    width: 50%;
+    width: 80%;
     margin: 14vh auto auto;
+}
+
+@media all and (min-width: 1280px) {
+
+    .centeredPageContent {
+        width: 50%;
+    }
 }
 
 .itemScrollFrame.scrollFrameX .scrollSlider {
@@ -131,9 +138,9 @@ a {
     /*overflow: hidden;*/
 }
 
-    .userViewNames {
-        padding-left: 3.75%;
-    }
+.userViewNames {
+    padding-left: 3.75%;
+}
 
 .itemScrollFrame.scrollFrameX {
     overflow: hidden;
