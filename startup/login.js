@@ -1,4 +1,4 @@
-define(['loading', 'connectionManager', './startuphelper', 'focusManager', 'coreIcons'], function (loading, connectionManager, startupHelper, focusManager) {
+define(['loading', 'scrollHelper', 'connectionManager', './startuphelper', 'focusManager', 'coreIcons'], function (loading, scrollHelper, connectionManager, startupHelper, focusManager) {
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -102,19 +102,16 @@ define(['loading', 'connectionManager', './startuphelper', 'focusManager', 'core
 
         }).join('');
 
-        var scrollSlider = view.querySelector('.scrollSlider');
-        scrollSlider.innerHTML = html;
+        var userContainer = view.querySelector('.users');
+        userContainer.innerHTML = html;
 
-        require(["Sly"], function (Sly) {
+        loading.hide();
 
-            loading.hide();
+        if (initScroller) {
+            scrollHelper.centerFocus.on(userContainer, true);
+        }
 
-            if (initScroller) {
-                startupHelper.createHorizontalScroller(view, Sly);
-            }
-
-            focusManager.autoFocus(scrollSlider);
-        });
+        focusManager.autoFocus(userContainer);
     }
 
     return function (view, params) {
