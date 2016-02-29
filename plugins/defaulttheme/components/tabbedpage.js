@@ -28,7 +28,11 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
         if (!initialTab) {
             initialTab = userViewNames.querySelector('.btnUserViewHeader');
         }
-        instance.setFocusDelay(view, initialTab);
+
+        // In Edge the web components aren't always immediately accessible
+        setTimeout(function() {
+            instance.setFocusDelay(view, initialTab);
+        }, 0);
     }
 
     function parentWithClass(elem, className) {
