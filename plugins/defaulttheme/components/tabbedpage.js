@@ -31,7 +31,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
         // In Edge the web components aren't always immediately accessible
         setTimeout(function() {
-            instance.setFocusDelay(view, initialTab);
+            instance.setFocusDelay(view, initialTab, true);
         }, 0);
     }
 
@@ -58,7 +58,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
             if (elem) {
                 scrollHelper.toCenter(userViewNames, elem, true);
-                instance.setFocusDelay(view, elem);
+                instance.setFocusDelay(view, elem, true);
             }
         });
 
@@ -177,7 +177,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
         var focusTimeout;
         var focusDelay = 0;
-        self.setFocusDelay = function (view, elem) {
+        self.setFocusDelay = function (view, elem, immediate) {
 
             var viewId = elem.getAttribute('data-id');
 
@@ -196,11 +196,18 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
             if (focusTimeout) {
                 clearTimeout(focusTimeout);
             }
-            focusTimeout = setTimeout(function () {
+
+            var onTimeout = function() {
 
                 selectUserView(view, viewId, self);
 
-            }, focusDelay);
+            };
+
+            if (immediate) {
+                onTimeout();
+            } else {
+                focusTimeout = setTimeout(onTimeout, focusDelay);
+            }
 
             // No delay the first time
             focusDelay = 700;
