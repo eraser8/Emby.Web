@@ -57,9 +57,9 @@ define(['focusManager'], function (focusManager) {
             }
         } else {
             if (horizontal) {
-                container.scrollTop = pos.center;
+                container.scrollLeft = Math.round(pos.center);
             } else {
-                container.scrollLeft = pos.center;
+                container.scrollTop = Math.round(pos.center);
             }
         }
     }
