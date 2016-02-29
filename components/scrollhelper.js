@@ -1,4 +1,4 @@
-define([], function () {
+define(['focusManager'], function (focusManager) {
 
     function getOffset(elem) {
 
@@ -46,7 +46,44 @@ define([], function () {
         };
     }
 
+    function centerOnFocus(e, scrollSlider, horizontal) {
+        var focused = focusManager.focusableParent(e.target);
+
+        if (focused) {
+            var pos = getPosition(scrollSlider, focused, horizontal);
+
+            if (horizontal) {
+                scrollSlider.scrollTo(pos.center, 0);
+            } else {
+                scrollSlider.scrollTo(0, pos.center);
+            }
+        }
+    }
+
+    function centerOnFocusHorizontal(e) {
+        centerOnFocus(e, this, true);
+    }
+    function centerOnFocusVertical(e) {
+        centerOnFocus(e, this, false);
+    }
+
     return {
-        getPosition: getPosition
+        getPosition: getPosition,
+        centerFocus: {
+            on: function(element, horizontal) {
+                if (horizontal) {
+                    element.addEventListener('focus', centerOnFocusHorizontal, true);
+                } else {
+                    element.addEventListener('focus', centerOnFocusVertical, true);
+                }
+            },
+            off: function (element, horizontal) {
+                if (horizontal) {
+                    element.removeEventListener('focus', centerOnFocusHorizontal, true);
+                } else {
+                    element.removeEventListener('focus', centerOnFocusVertical, true);
+                }
+            }
+        }
     };
 });

@@ -508,28 +508,8 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
 
         function createVerticalScroller(view, pageInstance) {
 
-            initNativeFocusHandler(view, view.querySelector('.hiddenScrollY'), false);
-            initNativeFocusHandler(view, view.querySelector('.programGrid'), true);
-        }
-
-        function initNativeFocusHandler(view, scrollSlider, horizontal) {
-
-            scrollSlider.addEventListener('focus', function (e) {
-
-                var focused = focusManager.focusableParent(e.target);
-
-                if (focused) {
-                    var pos = scrollHelper.getPosition(scrollSlider, focused, horizontal);
-                    console.log(pos.center);
-
-                    if (horizontal) {
-                        scrollSlider.scrollTo(pos.center, 0);
-                    } else {
-                        scrollSlider.scrollTo(0, pos.center);
-                    }
-                }
-
-            }, true);
+            scrollHelper.centerFocus.on(view.querySelector('.hiddenScrollY'), false);
+            scrollHelper.centerFocus.on(view.querySelector('.programGrid'), true);
         }
 
         fetch(Emby.Page.baseUrl() + '/components/tvguide/tvguide.template.html', { mode: 'no-cors' }).then(function (response) {
