@@ -58,7 +58,9 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
             if (elem) {
                 scrollHelper.toCenter(userViewNames, elem, true);
-                instance.setFocusDelay(view, elem);
+                //instance.setFocusDelay(view, elem);
+                var viewId = elem.getAttribute('data-id');
+                selectUserView(view, viewId, instance);
             }
         });
 
