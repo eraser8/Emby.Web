@@ -23,7 +23,8 @@ define(['loading', 'slyScroller', 'playbackManager', 'alphapicker', './../compon
             dynamicHandle: 1,
             clickBar: 1,
             //centerOffset: window.innerWidth * .05,
-            scrollWidth: 200000
+            scrollWidth: 200000,
+            enableAutoNativeScroll: true
         };
 
         slyScroller.create(scrollFrame, options).then(function (slyFrame) {

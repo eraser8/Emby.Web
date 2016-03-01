@@ -3,16 +3,18 @@ define(['browser', 'Sly'], function (browser, Sly) {
     return {
         create: function (element, options) {
 
-            if (browser.mobile) {
+            if (options.enableAutoNativeScroll) {
+                if (browser.mobile) {
 
-                options.enableNativeScroll = true;
-            } else {
-                
-                var isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
-                if (isSmoothScrollSupported) {
+                    options.enableNativeScroll = true;
+                } else {
 
-                    if (options.horizontal && browser.firefox) {
-                        //options.enableNativeScroll = true;
+                    var isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
+                    if (isSmoothScrollSupported) {
+
+                        if (browser.firefox) {
+                            options.enableNativeScroll = true;
+                        }
                     }
                 }
             }
