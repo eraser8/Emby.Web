@@ -352,17 +352,6 @@ define([], function () {
 		 */
         function slideTo(newPos, immediate, dontAlign) {
 
-            if (!transform) {
-
-                newPos = Math.max(0, newPos);
-                if (o.horizontal) {
-                    slideeElement.scrollTo(newPos, 0);
-                } else {
-                    slideeElement.scrollTo(0, newPos);
-                }
-                return;
-            }
-
             // Handle overflowing position limits
             if (dragging.init && dragging.slidee && o.elasticBounds) {
                 if (newPos > pos.end) {
@@ -372,6 +361,17 @@ define([], function () {
                 }
             } else {
                 newPos = within(newPos, pos.start, pos.end);
+            }
+
+            if (!transform) {
+
+                newPos = Math.max(0, newPos);
+                if (o.horizontal) {
+                    slideeElement.scrollTo(newPos, 0);
+                } else {
+                    slideeElement.scrollTo(0, newPos);
+                }
+                return;
             }
 
             // Update the animation object
@@ -1003,14 +1003,11 @@ define([], function () {
                 //    m.style.position = 'absolute';
                 //});
                 if (o.horizontal) {
-                    slideeElement.style['overflow-x'] = 'auto';
-                    slideeElement.style['overflow-y'] = 'hidden';
+                    slideeElement.classList.add('hiddenScrollX');
                 } else {
-                    slideeElement.style['overflow-y'] = 'auto';
-                    slideeElement.style['overflow-x'] = 'hidden';
+                    slideeElement.classList.add('hiddenScrollY');
                 }
                 slideeElement.style['scroll-behavior'] = 'smooth';
-                slideeElement.style.overflow = '-moz-scrollbars-none';
             }
 
             // Scrolling navigation
