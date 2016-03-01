@@ -365,7 +365,12 @@ define([], function () {
 
             if (!transform) {
 
-                newPos = Math.max(0, newPos);
+                if (immediate) {
+
+                } else {
+                    
+                }
+                //newPos = Math.max(0, newPos);
                 if (o.horizontal) {
                     slideeElement.scrollTo(newPos, 0);
                 } else {

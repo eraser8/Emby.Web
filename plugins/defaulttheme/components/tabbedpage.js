@@ -77,7 +77,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
         var btn = page.querySelector(".btnUserViewHeader[data-id='" + id + "']");
 
-        //self.bodySlyFrame.slideTo(0, true);
+        self.bodySlyFrame.slideTo(0, true);
 
         page.querySelector('.contentScrollSlider').innerHTML = '';
         var promise = self.loadViewContent.call(self, page, id, btn.getAttribute('data-type'));
