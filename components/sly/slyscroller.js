@@ -5,7 +5,7 @@ define(['browser', 'Sly'], function (browser, Sly) {
 
             if (browser.mobile) {
 
-                options.enableNativeScroll = true;
+                //options.enableNativeScroll = true;
             } else {
                 
                 var isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
