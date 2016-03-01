@@ -295,7 +295,6 @@
             visibleinviewport: embyWebComponentsBowerPath + "/visibleinviewport",
             performanceManager: embyWebComponentsBowerPath + "/performancemanager",
             layoutManager: embyWebComponentsBowerPath + "/layoutmanager",
-            appSettings: embyWebComponentsBowerPath + "/appsettings",
             isMobile: "bower_components/isMobile/isMobile.min",
             howler: 'bower_components/howler.js/howler.min',
             screenfull: 'bower_components/screenfull/dist/screenfull',
@@ -374,6 +373,7 @@
         define("Sly", ["components/sly/sly"], returnFirstDependency);
 
         // alias
+        define("appSettings", [embyWebComponentsBowerPath + "/appsettings"], returnFirstDependency);
         define("appsettings", ['appSettings'], returnFirstDependency);
 
         // alias
