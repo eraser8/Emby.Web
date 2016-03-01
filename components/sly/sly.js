@@ -365,16 +365,20 @@ define([], function () {
 
             if (!transform) {
 
+                //newPos = Math.max(0, newPos);
                 if (immediate) {
 
+                    if (o.horizontal) {
+                        slideeElement.scrollLeft = newPos;
+                    } else {
+                        slideeElement.scrollTop = newPos;
+                    }
                 } else {
-                    
-                }
-                //newPos = Math.max(0, newPos);
-                if (o.horizontal) {
-                    slideeElement.scrollTo(newPos, 0);
-                } else {
-                    slideeElement.scrollTo(0, newPos);
+                    if (o.horizontal) {
+                        slideeElement.scrollTo(newPos, 0);
+                    } else {
+                        slideeElement.scrollTo(0, newPos);
+                    }
                 }
                 return;
             }

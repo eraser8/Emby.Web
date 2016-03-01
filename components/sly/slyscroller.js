@@ -16,6 +16,7 @@ define(['browser', 'Sly'], function (browser, Sly) {
                     }
                 }
             }
+
             var sly = new Sly(element, options);
             return Promise.resolve(sly);
         }
