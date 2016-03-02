@@ -16,7 +16,10 @@ define(['tvguide'], function (tvguide) {
         });
 
         view.addEventListener('viewdestroy', function () {
-
+            if (guideInstance) {
+                guideInstance.destroy();
+                guideInstance = null;
+            }
         });
 
         function initGuide() {

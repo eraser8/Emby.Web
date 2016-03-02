@@ -146,7 +146,7 @@
 
         var images = items.map(function (i) {
 
-            if (i.BackdropImageTags.length > 0) {
+            if (i.BackdropImageTags && i.BackdropImageTags.length > 0) {
                 return {
                     id: i.Id,
                     tag: i.BackdropImageTags[0]

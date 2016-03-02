@@ -4,9 +4,15 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
 
         var self = this;
         var lastFocus = 0;
+        var items = {};
 
         self.refresh = function () {
             reloadPage(options.element);
+        };
+
+        self.destroy = function () {
+            itemShortcuts.off(options.element);
+            items = {};
         };
 
         // 30 mins
@@ -90,7 +96,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
                             return c.Id;
                         }).join(','),
                         ImageTypeLimit: 1,
-                        EnableImageTypes: "Primary",
+                        EnableImageTypes: "Primary,Backdrop",
                         SortBy: "StartDate"
 
                     }).then(function (programsResult) {
@@ -237,6 +243,8 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
                     break;
                 }
 
+                items[program.Id] = program;
+
                 var renderStartMs = Math.max(program.StartDateLocal.getTime(), startMs);
                 var startPercent = (program.StartDateLocal.getTime() - startMs) / msPerDay;
                 startPercent *= 100;
@@ -366,6 +374,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
             var startDate = date;
             var endDate = new Date(startDate.getTime() + msPerDay);
             context.querySelector('.timeslotHeaders').innerHTML = getTimeslotHeadersHtml(startDate, endDate);
+            items = {};
             renderPrograms(context, date, channels, programs);
 
             focusManager.autoFocus(context.querySelector('.programGrid'), true);
@@ -509,7 +518,54 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
         function createVerticalScroller(view, pageInstance) {
 
             scrollHelper.centerFocus.on(view.querySelector('.hiddenScrollY'), false);
-            scrollHelper.centerFocus.on(view.querySelector('.programGrid'), true);
+
+            var programGrid = view.querySelector('.programGrid');
+
+            scrollHelper.centerFocus.on(programGrid, true);
+        }
+
+        function parentWithClass(elem, className) {
+
+            while (!elem.classList || !elem.classList.contains(className)) {
+                elem = elem.parentNode;
+
+                if (!elem) {
+                    return null;
+                }
+            }
+
+            return elem;
+        }
+
+        var selectedMediaInfoTimeout;
+        var focusedElement;
+        function onProgramGridFocus(e) {
+
+            var programCell = parentWithClass(e.target, 'programCell');
+
+            if (!programCell) {
+                return;
+            }
+
+            focusedElement = e.target;
+            if (selectedMediaInfoTimeout) {
+                clearTimeout(selectedMediaInfoTimeout);
+            }
+            selectedMediaInfoTimeout = setTimeout(onSelectedMediaInfoTimeout, 1000);
+        }
+
+        function onSelectedMediaInfoTimeout() {
+            var focused = focusedElement
+            if (focused && document.activeElement == focused) {
+                var id = focused.getAttribute('data-id');
+                var item = items[id];
+
+                var backdropItems = [];
+                if (item) {
+                    backdropItems.push(item);
+                }
+                Emby.Backdrop.setBackdrops(backdropItems);
+            }
         }
 
         fetch(Emby.Page.baseUrl() + '/components/tvguide/tvguide.template.html', { mode: 'no-cors' }).then(function (response) {
@@ -521,6 +577,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
 
             var programGrid = context.querySelector('.programGrid');
 
+            programGrid.addEventListener('focus', onProgramGridFocus, true);
             programGrid.addEventListener('scroll', function () {
 
                 onProgramGridScroll(context, this);
