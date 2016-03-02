@@ -1,4 +1,4 @@
-define(['imageLoader', 'itemHelper', 'backdrop', 'mediaInfo', 'focusManager', 'scrollHelper'], function (imageLoader, itemHelper, backdrop, mediaInfo, focusManager, scrollHelper) {
+define(['imageLoader', 'itemHelper', 'backdrop', 'mediaInfo', 'focusManager', 'scrollHelper', 'browser'], function (imageLoader, itemHelper, backdrop, mediaInfo, focusManager, scrollHelper, browser) {
 
     function focusHandler(options) {
 
@@ -23,6 +23,20 @@ define(['imageLoader', 'itemHelper', 'backdrop', 'mediaInfo', 'focusManager', 's
         var selectedItemPanel;
 
         var enableSelectedItemPanel = options.selectedItemMode == 'panel';
+
+        var enableAnimations = function() {
+            
+            if (browser.animate) {
+                return true;
+            }
+
+            // Performs ok here
+            if (browser.firefox) {
+                return true;
+            }
+
+            return false;
+        }();
 
         function onFocusIn(e) {
             var focused = focusManager.focusableParent(e.target);
@@ -99,6 +113,10 @@ define(['imageLoader', 'itemHelper', 'backdrop', 'mediaInfo', 'focusManager', 's
         }
 
         function zoomIn(elem) {
+
+            if (!enableAnimations) {
+                return;
+            }
 
             if (elem.classList.contains('noScale')) {
                 return;
@@ -221,7 +239,7 @@ define(['imageLoader', 'itemHelper', 'backdrop', 'mediaInfo', 'focusManager', 's
             var rect = card.getBoundingClientRect();
             selectedItemInfoInner.parentNode.style.left = (Math.max(rect.left, 70)) + 'px';
 
-            if (html) {
+            if (html && enableAnimations) {
                 fadeIn(selectedItemInfoInner, 1);
             }
         }
