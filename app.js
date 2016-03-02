@@ -292,7 +292,6 @@
             browser: embyWebComponentsBowerPath + "/browser",
             qualityoptions: embyWebComponentsBowerPath + "/qualityoptions",
             visibleinviewport: embyWebComponentsBowerPath + "/visibleinviewport",
-            performanceManager: embyWebComponentsBowerPath + "/performancemanager",
             layoutManager: embyWebComponentsBowerPath + "/layoutmanager",
             isMobile: "bower_components/isMobile/isMobile.min",
             howler: 'bower_components/howler.js/howler.min',
