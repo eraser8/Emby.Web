@@ -282,7 +282,6 @@
             screensaverManager: "components/screensavermanager",
             viewManager: "components/viewmanager",
             slyScroller: "components/sly/slyscroller",
-            userSettings: "components/usersettings",
             focusManager: embyWebComponentsBowerPath + "/focusmanager",
             playmenu: "components/playmenu",
             datetime: embyWebComponentsBowerPath + "/datetime",
@@ -371,6 +370,8 @@
         define("cryptojs-md5", [md5Path]);
 
         define("Sly", ["components/sly/sly"], returnFirstDependency);
+
+        define("userSettings", [embyWebComponentsBowerPath + "/usersettings"], returnFirstDependency);
 
         // alias
         define("appSettings", [embyWebComponentsBowerPath + "/appsettings"], returnFirstDependency);

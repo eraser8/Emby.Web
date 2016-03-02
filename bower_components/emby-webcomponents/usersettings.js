@@ -1,11 +1,11 @@
-define(['appSettings', 'connectionManagerResolver', 'events', 'browser'], function (appsettings, connectionManagerResolver, events, browser) {
+define(['appSettings', 'apiClientResolver', 'events'], function (appsettings, apiClientResolver, events) {
 
     function getUserId() {
 
-        var connectionManager = connectionManagerResolver();
+        var apiClient = apiClientResolver();
 
-        if (connectionManager.currentApiClient) {
-            return connectionManager.currentApiClient().getCurrentUserId();
+        if (apiClient) {
+            return apiClient.getCurrentUserId();
         }
 
         return null;
@@ -50,22 +50,27 @@ define(['appSettings', 'connectionManagerResolver', 'events', 'browser'], functi
                 return val != 'false';
             }
 
-            if (browser.mobile) {
-                return false;
+            return true;
+        };
+
+        self.language = function (val) {
+
+            if (val != null) {
+                self.set('language', val.toString());
             }
 
-            return true;
+            return self.get('language');
         };
 
         self.serverConfig = function (config) {
 
             if (config) {
 
-                return connectionManagerResolver().currentApiClient().updateUserConfiguration(getUserId(), config);
+                return apiClientResolver().updateUserConfiguration(getUserId(), config);
 
             } else {
 
-                return connectionManagerResolver().currentApiClient().getUser(getUserId()).then(function (user) {
+                return apiClientResolver().getUser(getUserId()).then(function (user) {
 
                     return user.Configuration;
                 });
