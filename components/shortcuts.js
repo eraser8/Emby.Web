@@ -1,4 +1,4 @@
-define(['playbackManager'], function (playbackManager) {
+define(['playbackManager', 'inputManager'], function (playbackManager, inputManager) {
 
     function playAllFromHere(card, serverId) {
         var cards = card.parentNode.querySelectorAll('.itemAction[data-id]');
@@ -71,6 +71,45 @@ define(['playbackManager'], function (playbackManager) {
         Emby.Page.showItem(options);
     }
 
+    function executeAction(card, action) {
+        var id = card.getAttribute('data-id');
+        var serverId = card.getAttribute('data-serverid');
+        var type = card.getAttribute('data-type');
+        var isfolder = card.getAttribute('data-isfolder') == 'true';
+
+        if (action == 'link') {
+            showItem({
+                Id: id,
+                Type: type,
+                IsFolder: isfolder,
+                ServerId: serverId
+            });
+        }
+
+        else if (action == 'instantmix') {
+            playbackManager.instantMix(id, serverId);
+        }
+
+        else if (action == 'play') {
+
+            var startPositionTicks = parseInt(card.getAttribute('data-startpositionticks') || '0');
+
+            playbackManager.play({
+                ids: [id],
+                startPositionTicks: startPositionTicks,
+                serverId: serverId
+            });
+        }
+
+        else if (action == 'playallfromhere') {
+            playAllFromHere(card, serverId);
+        }
+
+        else if (action == 'setplaylistindex') {
+
+        }
+    }
+
     function onClick(e) {
         var card = Emby.Dom.parentWithClass(e.target, 'itemAction');
 
@@ -78,53 +117,44 @@ define(['playbackManager'], function (playbackManager) {
             var action = card.getAttribute('data-action');
 
             if (action) {
+                executeAction(card, action);
+            }
+        }
+    }
 
-                var id = card.getAttribute('data-id');
-                var serverId = card.getAttribute('data-serverid');
-                var type = card.getAttribute('data-type');
-                var isfolder = card.getAttribute('data-isfolder') == 'true';
+    function parentWithClass(elem, className) {
 
-                if (action == 'link') {
-                    showItem({
-                        Id: id,
-                        Type: type,
-                        IsFolder: isfolder,
-                        ServerId: serverId
-                    });
-                }
+        while (!elem.classList || !elem.classList.contains(className)) {
+            elem = elem.parentNode;
 
-                else if (action == 'instantmix') {
-                    playbackManager.instantMix(id, serverId);
-                }
+            if (!elem) {
+                return null;
+            }
+        }
 
-                else if (action == 'play') {
+        return elem;
+    }
 
-                    var startPositionTicks = parseInt(card.getAttribute('data-startpositionticks') || '0');
+    function onCommand(e) {
+        var cmd = e.detail.command;
 
-                    playbackManager.play({
-                        ids: [id],
-                        startPositionTicks: startPositionTicks,
-                        serverId: serverId
-                    });
-                }
+        if (cmd == 'play') {
+            var card = parentWithClass(e.target, 'itemAction');
 
-                else if (action == 'playallfromhere') {
-                    playAllFromHere(card, serverId);
-                }
-
-                else if (action == 'setplaylistindex') {
-
-                }
+            if (card) {
+                executeAction(card, cmd);
             }
         }
     }
 
     function on(context) {
         context.addEventListener('click', onClick);
+        inputManager.on(context, onCommand);
     }
 
     function off(context) {
         context.removeEventListener('click', onClick);
+        inputManager.off(context, onCommand);
     }
 
     return {

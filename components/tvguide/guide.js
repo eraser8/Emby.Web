@@ -263,7 +263,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
                     addAccent = false;
                 }
 
-                html += '<button data-action="link" data-isfolder="' + program.IsFolder + '" data-id="' + program.Id + '" data-type="' + program.Type + '" class="' + cssClass + '" style="left:' + startPercent + '%;width:' + endPercent + '%;">';
+                html += '<button data-action="link" data-isfolder="' + program.IsFolder + '" data-id="' + program.Id + '" data-serverid="' + program.ServerId + '" data-type="' + program.Type + '" class="' + cssClass + '" style="left:' + startPercent + '%;width:' + endPercent + '%;">';
 
                 var guideProgramNameClass = "guideProgramName";
 
