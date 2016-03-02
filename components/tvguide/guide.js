@@ -341,7 +341,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
 
                 var channel = channels[i];
 
-                html += '<button type="button" class="channelHeaderCell clearButton itemAction" data-action="link" data-isfolder="' + channel.IsFolder + '" data-id="' + channel.Id + '" data-type="' + channel.Type + '">';
+                html += '<button type="button" class="channelHeaderCell clearButton itemAction" data-action="link" data-isfolder="' + channel.IsFolder + '" data-id="' + channel.Id + '" data-serverid="' + channel.ServerId + '" data-type="' + channel.Type + '">';
 
                 var hasChannelImage = channel.ImageTags.Primary;
                 var cssClass = hasChannelImage ? 'guideChannelInfo guideChannelInfoWithImage' : 'guideChannelInfo';
