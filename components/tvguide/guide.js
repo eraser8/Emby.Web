@@ -379,6 +379,23 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
             focusManager.autoFocus(context.querySelector('.programGrid'), true);
         }
 
+        function nativeScrollTo(container, pos, horizontal) {
+
+            if (container.scrollTo) {
+                if (horizontal) {
+                    container.scrollTo(pos, 0);
+                } else {
+                    container.scrollTo(0, pos);
+                }
+            } else {
+                if (horizontal) {
+                    container.scrollLeft = Math.round(pos);
+                } else {
+                    container.scrollTop = Math.round(pos);
+                }
+            }
+        }
+
         var gridScrolling = false;
         var headersScrolling = false;
         function onProgramGridScroll(context, elem) {
@@ -386,7 +403,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
             if (!headersScrolling) {
                 gridScrolling = true;
 
-                context.querySelector('.timeslotHeaders').scrollTo(elem.scrollLeft, 0);
+                nativeScrollTo(context.querySelector('.timeslotHeaders'), elem.scrollLeft, true);
                 gridScrolling = false;
             }
         }
