@@ -8,9 +8,22 @@ define(['paperdialoghelper', 'apphost', 'css!./backmenu.css'], function (paperdi
         return html;
     }
 
+    function parentWithClass(elem, className) {
+
+        while (!elem.classList || !elem.classList.contains(className)) {
+            elem = elem.parentNode;
+
+            if (!elem) {
+                return null;
+            }
+        }
+
+        return elem;
+    }
+
     function onFocusIn(e) {
 
-        var btn = Emby.Dom.parentWithClass(e.target, 'backMenuButton');
+        var btn = parentWithClass(e.target, 'backMenuButton');
 
         if (btn) {
             document.querySelector('.backMenuButtonTitle').innerHTML = btn.getAttribute('title');
@@ -74,7 +87,7 @@ define(['paperdialoghelper', 'apphost', 'css!./backmenu.css'], function (paperdi
 
         dlg.addEventListener('click', function (e) {
 
-            var backMenuButton = Emby.Dom.parentWithClass(e.target, 'backMenuButton');
+            var backMenuButton = parentWithClass(e.target, 'backMenuButton');
 
             if (backMenuButton) {
 

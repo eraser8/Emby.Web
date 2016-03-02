@@ -170,12 +170,25 @@ define([], function () {
         }
     }
 
+    function parentWithClass(elem, className) {
+
+        while (!elem.classList || !elem.classList.contains(className)) {
+            elem = elem.parentNode;
+
+            if (!elem) {
+                return null;
+            }
+        }
+
+        return elem;
+    }
+
     function tryRestoreView(options) {
         return new Promise(function (resolve, reject) {
 
             var url = options.url;
             var view = document.querySelector(".page-view[data-url='" + url + "']");
-            var page = Emby.Dom.parentWithClass(view, 'mainAnimatedPage');
+            var page = parentWithClass(view, 'mainAnimatedPage');
 
             if (view) {
 

@@ -25,7 +25,7 @@ define(['loading', 'packageManager', 'imageLoader', 'focusManager', 'scrollHelpe
 
         view.querySelector('.itemsContainer').addEventListener('click', function (e) {
 
-            var card = Emby.Dom.parentWithClass(e.target, 'card');
+            var card = parentWithClass(e.target, 'card');
 
             if (!card) {
                 return;
@@ -58,6 +58,19 @@ define(['loading', 'packageManager', 'imageLoader', 'focusManager', 'scrollHelpe
             });
 
         });
+
+        function parentWithClass(elem, className) {
+
+            while (!elem.classList || !elem.classList.contains(className)) {
+                elem = elem.parentNode;
+
+                if (!elem) {
+                    return null;
+                }
+            }
+
+            return elem;
+        }
 
         function uninstallPackage(name) {
 

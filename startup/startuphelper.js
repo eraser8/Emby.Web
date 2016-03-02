@@ -96,9 +96,22 @@ define(['connectionManager', 'loading', 'themeManager', 'focusManager'], functio
         }
     }
 
+    function parentWithClass(elem, className) {
+
+        while (!elem.classList || !elem.classList.contains(className)) {
+            elem = elem.parentNode;
+
+            if (!elem) {
+                return null;
+            }
+        }
+
+        return elem;
+    }
+
     function onScrollSliderClick(e, callback) {
 
-        var card = Emby.Dom.parentWithClass(e.target, 'card');
+        var card = parentWithClass(e.target, 'card');
 
         if (card) {
             callback(card);

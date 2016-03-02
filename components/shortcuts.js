@@ -111,7 +111,7 @@ define(['playbackManager', 'inputManager'], function (playbackManager, inputMana
     }
 
     function onClick(e) {
-        var card = Emby.Dom.parentWithClass(e.target, 'itemAction');
+        var card = parentWithClass(e.target, 'itemAction');
 
         if (card) {
             var action = card.getAttribute('data-action');

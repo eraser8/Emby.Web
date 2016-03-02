@@ -675,7 +675,6 @@
                 presentationDependencies.push('js/input/onscreenkeyboard');
                 presentationDependencies.push('js/input/keyboard');
                 presentationDependencies.push('js/input/api');
-                presentationDependencies.push('js/dom');
 
                 presentationDependencies.push('components/controlbox');
                 presentationDependencies.push('screensaverManager');

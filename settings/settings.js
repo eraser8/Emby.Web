@@ -28,7 +28,7 @@ define(['loading', 'apphost', 'imageLoader', 'focusManager', 'scrollHelper'], fu
 
         view.addEventListener('click', function (e) {
 
-            var card = Emby.Dom.parentWithClass(e.target, 'card');
+            var card = parentWithClass(e.target, 'card');
 
             if (card) {
                 var path = card.getAttribute('data-path');
@@ -36,6 +36,19 @@ define(['loading', 'apphost', 'imageLoader', 'focusManager', 'scrollHelper'], fu
                 Emby.Page.show(path);
             }
         });
+
+        function parentWithClass(elem, className) {
+
+            while (!elem.classList || !elem.classList.contains(className)) {
+                elem = elem.parentNode;
+
+                if (!elem) {
+                    return null;
+                }
+            }
+
+            return elem;
+        }
 
         function renderSettings() {
 
