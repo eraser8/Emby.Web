@@ -96,7 +96,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
                             return c.Id;
                         }).join(','),
                         ImageTypeLimit: 1,
-                        EnableImageTypes: "Primary,Backdrop,Logo",
+                        EnableImageTypes: "Primary,Backdrop",
                         SortBy: "StartDate"
 
                     }).then(function (programsResult) {
