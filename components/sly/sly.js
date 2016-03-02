@@ -341,6 +341,23 @@ define([], function () {
 
         self.reload = function () { load(); };
 
+        function nativeScrollTo(container, pos, immediate) {
+            
+            if (container.scrollTo && !immediate) {
+                if (o.horizontal) {
+                    container.scrollTo(pos, 0);
+                } else {
+                    container.scrollTo(0, pos);
+                }
+            } else {
+                if (o.horizontal) {
+                    container.scrollLeft = Math.round(pos);
+                } else {
+                    container.scrollTop = Math.round(pos);
+                }
+            }
+        }
+
         /**
 		 * Animate to a position.
 		 *
@@ -365,21 +382,7 @@ define([], function () {
 
             if (!transform) {
 
-                //newPos = Math.max(0, newPos);
-                if (immediate) {
-
-                    if (o.horizontal) {
-                        slideeElement.scrollLeft = newPos;
-                    } else {
-                        slideeElement.scrollTop = newPos;
-                    }
-                } else {
-                    if (o.horizontal) {
-                        slideeElement.scrollTo(newPos, 0);
-                    } else {
-                        slideeElement.scrollTo(0, newPos);
-                    }
-                }
+                nativeScrollTo(slideeElement, newPos, immediate);
                 return;
             }
 
