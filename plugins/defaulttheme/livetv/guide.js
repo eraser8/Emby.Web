@@ -1,4 +1,4 @@
-define(['tvguide', 'events', 'datetime'], function (tvguide, events, datetime) {
+define(['tvguide', 'events', 'datetime', 'imageLoader'], function (tvguide, events, datetime, imageLoader) {
 
     return function (view, params) {
 
@@ -6,6 +6,7 @@ define(['tvguide', 'events', 'datetime'], function (tvguide, events, datetime) {
         var guideInstance;
 
         var guideItemDetailsElement = view.querySelector('.guideItemDetails');
+        var guideImageElement = view.querySelector('.guideImage');
 
         view.addEventListener('viewshow', function (e) {
 
@@ -107,6 +108,13 @@ define(['tvguide', 'events', 'datetime'], function (tvguide, events, datetime) {
             }
 
             guideItemDetailsElement.innerHTML = html;
+
+            var imgUrl = Emby.Models.imageUrl(item);
+            if (imgUrl) {
+                imageLoader.lazyImage(guideImageElement, imgUrl);
+            } else {
+                guideImageElement.style.backgroundImage = '';
+            }
         }
 
         function initGuide() {

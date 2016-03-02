@@ -6,13 +6,19 @@
 
 .guideSelectedInfo {
     top: 83%;
-    left: 9%;
+    left: 7%;
     position: absolute;
     max-width: 80%;
+    display: flex;
+    align-items: center;
 }
 
     .guideSelectedInfo h2 {
         margin: 0;
+    }
+
+    .guideItemDetails {
+        max-width: 90%;
     }
 
 .guideOverview {
@@ -26,4 +32,14 @@
     flex-shrink: 0;
     width: 3vh;
     height: 3vh;
+}
+
+.guideImage {
+    margin-right: 1em;
+    background-position: right center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 15vh;
+    width: 22vh;
+    flex-shrink: 0;
 }

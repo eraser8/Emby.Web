@@ -550,7 +550,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
             if (selectedMediaInfoTimeout) {
                 clearTimeout(selectedMediaInfoTimeout);
             }
-            selectedMediaInfoTimeout = setTimeout(onSelectedMediaInfoTimeout, 1000);
+            selectedMediaInfoTimeout = setTimeout(onSelectedMediaInfoTimeout, 700);
         }
 
         function onSelectedMediaInfoTimeout() {
