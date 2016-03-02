@@ -1,4 +1,4 @@
-define(['loading', 'appSettings', 'qualityoptions', 'userSettings', 'apiClientResolver', 'focusManager'], function (loading, appSettings, qualityoptions, userSettings, apiClientResolver, focusManager) {
+define(['loading', 'appSettings', 'qualityoptions', 'userSettings', 'apiClientResolver', 'focusManager', 'scrollHelper'], function (loading, appSettings, qualityoptions, userSettings, apiClientResolver, focusManager, scrollHelper) {
 
     return function (view, params) {
 
@@ -13,6 +13,7 @@ define(['loading', 'appSettings', 'qualityoptions', 'userSettings', 'apiClientRe
             loading.hide();
 
             if (!isRestored) {
+                scrollHelper.centerFocus.on(view.querySelector('.hiddenScrollY'), false);
                 renderSettings();
             }
         });

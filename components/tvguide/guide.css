@@ -151,7 +151,7 @@
     text-overflow: ellipsis;
     border-right: 1px solid #121212;
     width: 12vw;
-    background: rgba(40, 40, 40, .8);
+    background: rgba(40, 40, 40, .9);
     display: flex;
     align-items: center;
     color: #fff !important;
@@ -205,7 +205,7 @@
     /* Unfortunately the borders using vh get rounded while the bottom property doesn't. So this is a little hack to try and make them even*/
     bottom: .59vh;
     border-left: .65vh solid #121212 !important;
-    background-color: rgba(32, 32, 32, .85);
+    background-color: rgba(32, 32, 32, .95);
     display: flex;
     color: #fff !important;
     text-decoration: none;
