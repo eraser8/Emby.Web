@@ -65,10 +65,10 @@ define(['tvguide', 'events', 'datetime', 'imageLoader', 'backdrop'], function (t
             }
 
             if (item.SeriesTimerId) {
-                html += '<iron-icon icon="fiber-smart-record"></iron-icon>';
+                html += '<iron-icon class="seriesTimerIcon" icon="fiber-smart-record"></iron-icon>';
             }
             else if (item.TimerId) {
-                html += '<iron-icon icon="fiber-manual-record"></iron-icon>';
+                html += '<iron-icon class="timerIcon" icon="fiber-manual-record"></iron-icon>';
             }
 
             html += '</div>';
