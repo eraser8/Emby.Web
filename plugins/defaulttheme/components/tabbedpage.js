@@ -31,7 +31,7 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
 
         // In Edge the web components aren't always immediately accessible
         setTimeout(function() {
-            instance.setFocusDelay(view, initialTab, true);
+            instance.setFocusDelay(view, initialTab);
         }, 0);
     }
 
@@ -122,8 +122,8 @@ define(['loading', 'slyScroller', './focushandler', 'focusManager', 'scrollHelpe
             }).join('');
 
             createHeaderScroller(page, self, initialTabId);
-            initEvents(page, self);
             createHorizontalScroller(page);
+            initEvents(page, self);
         };
 
         function onAlphaPickerValueChanged() {
