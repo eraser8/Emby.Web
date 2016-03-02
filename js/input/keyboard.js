@@ -30,7 +30,6 @@ require(['inputmanager'], function (inputmanager) {
     globalScope.addEventListener('keydown', function (evt) {
 
         //var isShift = !!evt.shiftKey;
-
         switch (evt.keyCode) {
 
             case 27:
@@ -112,6 +111,11 @@ require(['inputmanager'], function (inputmanager) {
                         sendCommand('previous', evt.target);
                         return;
                     }
+                }
+                if (evt.altKey) {
+                    evt.preventDefault();
+                    sendCommand('back', evt.target);
+                    return;
                 }
                 break;
             case 70:
