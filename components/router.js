@@ -233,6 +233,7 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager', 'backdrop'], 
     }
 
     function enableHistory() {
+
         var userAgent = navigator.userAgent.toLowerCase();
 
         if (userAgent.indexOf('xbox') != -1) {
@@ -240,6 +241,10 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager', 'backdrop'], 
         }
 
         return true;
+    }
+
+    function enableNativeHistory() {
+        return page.enableNativeHistory();
     }
 
     function authenticate(ctx, route, callback) {
@@ -517,7 +522,8 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager', 'backdrop'], 
             None: 0,
             Backdrop: 1,
             Full: 2
-        }
+        },
+        enableNativeHistory: enableNativeHistory
     };
 
 });

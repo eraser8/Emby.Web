@@ -249,6 +249,10 @@
     }
   };
 
+  page.enableNativeHistory = function () {
+      return enableHistory;
+  };
+
   page.canGoBack = function () {
       if (enableHistory) {
           return history.length > 1;
