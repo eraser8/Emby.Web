@@ -1,4 +1,4 @@
-define(['./../themeinfo'], function (themeInfo) {
+define(['./../themeinfo', 'backdrop'], function (themeInfo, backdrop) {
 
 	function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -9,7 +9,7 @@ define(['./../themeinfo'], function (themeInfo) {
         return;
         //var path = Emby.PluginManager.mapPath(themeId, 'css/images/blur' + getRandomInt(1, 6) + '.png');
         var path = Emby.PluginManager.mapPath(themeInfo.id, 'css/images/bg1.jpg');
-        Emby.Backdrop.setBackdrop(path);
+        backdrop.setBackdrop(path);
 
         setTimeout(function () {
             document.querySelector('.themeContainer').classList.add('staticBackdrop');
@@ -33,7 +33,7 @@ define(['./../themeinfo'], function (themeInfo) {
         //}
         //document.querySelector('.themeContainer').classList.remove('staticBackdrop');
 
-        Emby.Backdrop.setBackdrops(items);
+        backdrop.setBackdrops(items);
     }
 
     function subdued(isSubdued) {

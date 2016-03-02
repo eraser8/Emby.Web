@@ -1,4 +1,4 @@
-define(['userSettings', 'events', 'pluginManager'], function (userSettings, events, pluginManager) {
+define(['userSettings', 'events', 'pluginManager', 'backdrop'], function (userSettings, events, pluginManager, backdrop) {
 
     var currentTheme;
     var currentThemeDependencies = [];
@@ -60,7 +60,7 @@ define(['userSettings', 'events', 'pluginManager'], function (userSettings, even
 
     function unloadTheme(theme) {
 
-        Emby.Backdrop.clear();
+        backdrop.clear();
 
         console.log('Unloading theme: ' + theme.name);
 

@@ -1,4 +1,4 @@
-define(['loading', 'connectionManager', 'startup/startuphelper'], function (loading, connectionManager, startupHelper) {
+define(['loading', 'connectionManager', 'startup/startuphelper', 'backdrop'], function (loading, connectionManager, startupHelper, backdrop) {
 
     return function (view, params) {
 
@@ -9,7 +9,7 @@ define(['loading', 'connectionManager', 'startup/startuphelper'], function (load
             var isRestored = e.detail.isRestored;
 
             Emby.Page.setTitle(null);
-            Emby.Backdrop.clear();
+            backdrop.clear();
 
             view.querySelector('.txtServerHost').value = '';
             view.querySelector('.txtServerPort').value = '8096';

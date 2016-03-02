@@ -1,4 +1,4 @@
-﻿(function (globalScope) {
+﻿define([], function () {
 
     function backdrop() {
 
@@ -202,11 +202,11 @@
         }
     }
 
-    if (!globalScope.Emby) {
-        globalScope.Emby = {};
+    if (!window.Emby) {
+        window.Emby = {};
     }
 
-    globalScope.Emby.Backdrop = {
+    window.Emby.Backdrop = {
 
         setBackdrops: setBackdrops,
         setBackdrop: setBackdrop,
@@ -214,4 +214,6 @@
         externalBackdrop: externalBackdrop
     };
 
-})(this);
+    return window.Emby.Backdrop;
+
+});

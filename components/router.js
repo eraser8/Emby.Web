@@ -1,4 +1,4 @@
-define(['loading', 'viewManager', 'themeManager', 'pluginManager'], function (loading, viewManager, themeManager, pluginManager) {
+define(['loading', 'viewManager', 'themeManager', 'pluginManager', 'backdrop'], function (loading, viewManager, themeManager, pluginManager, backdrop) {
 
     var connectionManager;
 
@@ -43,7 +43,7 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager'], function (lo
 
     function redirectToLogin() {
 
-        Emby.Backdrop.clear();
+        backdrop.clear();
 
         loading.show();
 
@@ -473,14 +473,14 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager'], function (lo
     function setTransparency(level) {
 
         if (level == Emby.TransparencyLevel.Full) {
-            Emby.Backdrop.clear(true);
+            backdrop.clear(true);
             document.documentElement.classList.add('transparentDocument');
         }
         else if (level == Emby.TransparencyLevel.Backdrop) {
-            Emby.Backdrop.externalBackdrop(true);
+            backdrop.externalBackdrop(true);
             document.documentElement.classList.add('transparentDocument');
         } else {
-            Emby.Backdrop.externalBackdrop(false);
+            backdrop.externalBackdrop(false);
             document.documentElement.classList.remove('transparentDocument');
         }
     }

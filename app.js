@@ -401,6 +401,7 @@
         define("tvguide", ["components/tvguide/guide"], returnFirstDependency);
         define("prompt", [embyWebComponentsBowerPath + "/prompt/prompt"], returnFirstDependency);
         define("scrollHelper", [embyWebComponentsBowerPath + "/scrollhelper"], returnFirstDependency);
+        define("backdrop", ["components/backdrop"], returnFirstDependency);
 
         define("paper-base", ["css!style/paperstyles.css"]);
         define("paper-spinner", ["html!" + bowerPath + "/paper-spinner/paper-spinner.html", 'paper-base']);
@@ -496,8 +497,7 @@
             var list = [
              'bower_components/page.js/page.js',
              'components/router',
-             'css!style/style.css',
-             'js/backdrops'
+             'css!style/style.css'
             ];
 
             if (!('registerElement' in document && 'content' in document.createElement('template'))) {

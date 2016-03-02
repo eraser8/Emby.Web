@@ -1,4 +1,4 @@
-define(['loading', 'scrollHelper', 'connectionManager', './startuphelper', 'focusManager', 'coreIcons'], function (loading, scrollHelper, connectionManager, startupHelper, focusManager) {
+define(['loading', 'scrollHelper', 'connectionManager', './startuphelper', 'focusManager', 'backdrop', 'coreIcons'], function (loading, scrollHelper, connectionManager, startupHelper, focusManager, backdrop) {
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -125,7 +125,7 @@ define(['loading', 'scrollHelper', 'connectionManager', './startuphelper', 'focu
             var serverId = params.serverid;
 
             Emby.Page.setTitle(null);
-            Emby.Backdrop.clear();
+            backdrop.clear();
 
             if (!isRestored) {
                 loading.show();

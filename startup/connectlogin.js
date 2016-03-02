@@ -1,4 +1,4 @@
-define(['loading', 'connectionManager', 'startup/startuphelper', 'shell'], function (loading, connectionManager, startupHelper, shell) {
+define(['loading', 'connectionManager', 'startup/startuphelper', 'shell', 'backdrop'], function (loading, connectionManager, startupHelper, shell, backdrop) {
 
     return function (view, params) {
 
@@ -125,7 +125,7 @@ define(['loading', 'connectionManager', 'startup/startuphelper', 'shell'], funct
             currentPinInfo = null;
 
             Emby.Page.setTitle(null);
-            Emby.Backdrop.clear();
+            backdrop.clear();
 
             if (!isRestored) {
 

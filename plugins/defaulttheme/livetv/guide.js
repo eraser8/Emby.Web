@@ -1,4 +1,4 @@
-define(['tvguide', 'events', 'datetime', 'imageLoader'], function (tvguide, events, datetime, imageLoader) {
+define(['tvguide', 'events', 'datetime', 'imageLoader', 'backdrop'], function (tvguide, events, datetime, imageLoader, backdrop) {
 
     return function (view, params) {
 
@@ -11,7 +11,7 @@ define(['tvguide', 'events', 'datetime', 'imageLoader'], function (tvguide, even
         view.addEventListener('viewshow', function (e) {
 
             Emby.Page.setTitle(Globalize.translate('Guide'));
-            Emby.Backdrop.clear();
+            backdrop.clear();
 
             if (!e.detail.isRestored) {
                 initGuide();
@@ -28,7 +28,7 @@ define(['tvguide', 'events', 'datetime', 'imageLoader'], function (tvguide, even
         function onGuideFocus(e, detail) {
 
             Emby.Models.item(detail.item.Id).then(setSelectedInfo);
-            Emby.Backdrop.setBackdrops([detail.item]);
+            backdrop.setBackdrops([detail.item]);
         }
 
         function getTime(date) {

@@ -1,4 +1,4 @@
-define(['loading', 'alphapicker', './../components/horizontallist', './../components/tabbedpage'], function (loading, alphaPicker, horizontalList, tabbedPage) {
+define(['loading', 'alphapicker', './../components/horizontallist', './../components/tabbedpage', 'backdrop'], function (loading, alphaPicker, horizontalList, tabbedPage, backdrop) {
 
     function renderTabs(view, initialTabId, pageInstance, params) {
 
@@ -134,7 +134,7 @@ define(['loading', 'alphapicker', './../components/horizontallist', './../compon
                 }
 
                 Emby.Page.setTitle(Globalize.translate('LiveTV'));
-                Emby.Backdrop.clear();
+                backdrop.clear();
             });
         });
 

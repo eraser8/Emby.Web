@@ -1,4 +1,4 @@
-define(['loading', 'connectionManager', 'startup/startuphelper', 'focusManager'], function (loading, connectionManager, startupHelper, focusManager) {
+define(['loading', 'connectionManager', 'startup/startuphelper', 'focusManager', 'backdrop'], function (loading, connectionManager, startupHelper, focusManager, backdrop) {
 
     return function (view, params) {
 
@@ -9,7 +9,7 @@ define(['loading', 'connectionManager', 'startup/startuphelper', 'focusManager']
             var isRestored = e.detail.isRestored;
 
             Emby.Page.setTitle(null);
-            Emby.Backdrop.clear();
+            backdrop.clear();
 
             view.querySelector('.txtUserName').value = params.user || '';
             view.querySelector('.txtPassword').value = '';
