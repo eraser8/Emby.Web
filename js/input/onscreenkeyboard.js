@@ -1,4 +1,4 @@
-require(['inputmanager', 'browser'], function (inputManager, browser) {
+require(['inputmanager', 'browser', 'pluginManager'], function (inputManager, browser, pluginManager) {
 
     function hasBuiltInKeyboard() {
 
@@ -89,7 +89,7 @@ require(['inputmanager', 'browser'], function (inputManager, browser) {
     }
 
     function getKeyboard() {
-        return Emby.PluginManager.ofType('keyboard')[0];
+        return pluginManager.ofType('keyboard')[0];
     }
 
 });

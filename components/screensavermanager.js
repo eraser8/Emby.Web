@@ -1,4 +1,4 @@
-define(['events', 'playbackManager'], function (events, playbackManager) {
+define(['events', 'playbackManager', 'pluginManager'], function (events, playbackManager, pluginManager) {
 
     function getMinIdleTime() {
         // Returns the minimum amount of idle time required before the screen saver can be displayed
@@ -62,7 +62,7 @@ define(['events', 'playbackManager'], function (events, playbackManager) {
         };
 
         self.show = function () {
-            var screensavers = Emby.PluginManager.ofType('screensaver');
+            var screensavers = pluginManager.ofType('screensaver');
 
             require(['connectionManager'], function (connectionManager) {
 

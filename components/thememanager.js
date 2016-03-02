@@ -1,4 +1,4 @@
-define(['userSettings', 'events'], function (userSettings, events) {
+define(['userSettings', 'events', 'pluginManager'], function (userSettings, events, pluginManager) {
 
     var currentTheme;
     var currentThemeDependencies = [];
@@ -9,12 +9,12 @@ define(['userSettings', 'events'], function (userSettings, events) {
 
     function loadTheme(id, callback) {
 
-        var newTheme = Emby.PluginManager.plugins().filter(function (p) {
+        var newTheme = pluginManager.plugins().filter(function (p) {
             return p.id == id;
         })[0];
 
         if (!newTheme) {
-            newTheme = Emby.PluginManager.plugins().filter(function (p) {
+            newTheme = pluginManager.plugins().filter(function (p) {
                 return p.id == 'defaulttheme';
             })[0];
         }
