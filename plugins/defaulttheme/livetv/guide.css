@@ -3,3 +3,27 @@
     bottom: 20%;
     left: 3%;
 }
+
+.guideSelectedInfo {
+    top: 83%;
+    left: 9%;
+    position: absolute;
+    max-width: 80%;
+}
+
+    .guideSelectedInfo h2 {
+        margin: 0;
+    }
+
+.guideOverview {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.guideSelectedInfo iron-icon {
+    margin-left: 1em;
+    flex-shrink: 0;
+    width: 3vh;
+    height: 3vh;
+}

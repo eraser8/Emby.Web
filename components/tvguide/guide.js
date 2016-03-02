@@ -1,4 +1,4 @@
-define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'itemShortcuts', 'css!./guide.css'], function (loading, scrollHelper, datetime, focusManager, imageLoader, itemShortcuts) {
+define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'itemShortcuts', 'events', 'css!./guide.css'], function (loading, scrollHelper, datetime, focusManager, imageLoader, itemShortcuts, events) {
 
     return function (options) {
 
@@ -96,7 +96,7 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
                             return c.Id;
                         }).join(','),
                         ImageTypeLimit: 1,
-                        EnableImageTypes: "Primary,Backdrop",
+                        EnableImageTypes: "Primary,Backdrop,Logo",
                         SortBy: "StartDate"
 
                     }).then(function (programsResult) {
@@ -159,7 +159,6 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
 
             return text;
         }
-
 
         function getTimeslotHeadersHtml(startDate, endDateTime) {
 
@@ -560,11 +559,12 @@ define(['loading', 'scrollHelper', 'datetime', 'focusManager', 'imageLoader', 'i
                 var id = focused.getAttribute('data-id');
                 var item = items[id];
 
-                var backdropItems = [];
                 if (item) {
-                    backdropItems.push(item);
+                    events.trigger(self, 'focus', [
+                    {
+                        item: item
+                    }]);
                 }
-                Emby.Backdrop.setBackdrops(backdropItems);
             }
         }
 

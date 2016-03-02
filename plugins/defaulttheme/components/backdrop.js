@@ -16,7 +16,7 @@ define(['./../themeinfo'], function (themeInfo) {
         }, 1000);
     }
 
-    function setBackdrops(items, isFocused) {
+    function setBackdrops(items) {
 
         //var themeContainer = document.querySelector('.themeContainer');
 
@@ -33,11 +33,7 @@ define(['./../themeinfo'], function (themeInfo) {
         //}
         //document.querySelector('.themeContainer').classList.remove('staticBackdrop');
 
-        if (isFocused) {
-            Emby.Backdrop.setBackdrops(items);
-        } else {
-            Emby.Backdrop.setBackdrops(items);
-        }
+        Emby.Backdrop.setBackdrops(items);
     }
 
     function subdued(isSubdued) {
