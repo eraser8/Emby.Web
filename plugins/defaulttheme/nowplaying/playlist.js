@@ -1,4 +1,4 @@
-define(['playbackManager', 'slyScroller', 'loading', 'imageLoader', './../components/backdrop', './../components/listview', 'focusManager', 'itemShortcuts'], function (playbackManager, slyScroller, loading, imageLoader, themeBackdrop, listview, focusManager, itemShortcuts) {
+define(['playbackManager', 'slyScroller', 'loading', 'imageLoader', 'backdrop', './../components/listview', 'focusManager', 'itemShortcuts'], function (playbackManager, slyScroller, loading, imageLoader, backdrop, listview, focusManager, itemShortcuts) {
 
     function createVerticalScroller(view, pageInstance) {
 
@@ -50,10 +50,10 @@ define(['playbackManager', 'slyScroller', 'loading', 'imageLoader', './../compon
         function setCurrentItem(item) {
 
             if (item) {
-                themeBackdrop.setBackdrops([item]);
+                backdrop.setBackdrops([item]);
 
             } else {
-                themeBackdrop.setBackdrops([]);
+                backdrop.setBackdrops([]);
             }
             updateCurrentPlaylistItem();
         }

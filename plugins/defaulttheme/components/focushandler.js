@@ -1,4 +1,4 @@
-define(['imageLoader', 'itemHelper', './backdrop', 'mediaInfo', 'focusManager', 'scrollHelper'], function (imageLoader, itemHelper, themeBackdrop, mediaInfo, focusManager, scrollHelper) {
+define(['imageLoader', 'itemHelper', 'backdrop', 'mediaInfo', 'focusManager', 'scrollHelper'], function (imageLoader, itemHelper, backdrop, mediaInfo, focusManager, scrollHelper) {
 
     function focusHandler(options) {
 
@@ -155,7 +155,7 @@ define(['imageLoader', 'itemHelper', './backdrop', 'mediaInfo', 'focusManager', 
                 Emby.Models.item(id).then(function (item) {
 
                     if (options.enableBackdrops) {
-                        themeBackdrop.setBackdrops([item], true);
+                        backdrop.setBackdrops([item]);
                     }
                     setSelectedInfo(card, item);
                 });

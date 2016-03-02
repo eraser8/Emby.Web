@@ -1,5 +1,5 @@
-define(['loading', './../themeinfo', 'datetime', 'playbackManager', 'imageLoader', 'userdataButtons', 'itemHelper', './../components/focushandler', './../components/backdrop', './../components/listview', 'mediaInfo', 'itemShortcuts', 'focusManager', './../themesettings', './../cards/cardbuilder', 'indicators'],
-    function (loading, themeInfo, datetime, playbackManager, imageLoader, userdataButtons, itemHelper, focusHandler, themeBackdrop, listview, mediaInfo, itemShortcuts, focusManager, themeSettings, cardBuilder, indicators) {
+define(['loading', './../themeinfo', 'datetime', 'playbackManager', 'imageLoader', 'userdataButtons', 'itemHelper', './../components/focushandler', 'backdrop', './../components/listview', 'mediaInfo', 'itemShortcuts', 'focusManager', './../themesettings', './../cards/cardbuilder', 'indicators'],
+    function (loading, themeInfo, datetime, playbackManager, imageLoader, userdataButtons, itemHelper, focusHandler, backdrop, listview, mediaInfo, itemShortcuts, focusManager, themeSettings, cardBuilder, indicators) {
 
 		function focusMainSection() {
 
@@ -1029,7 +1029,7 @@ define(['loading', './../themeinfo', 'datetime', 'playbackManager', 'imageLoader
 
                     // If it's a person, leave the backdrop image from wherever we came from
                     if (item.Type != 'Person') {
-                        themeBackdrop.setBackdrops([item]);
+                        backdrop.setBackdrops([item]);
                         setTitle(item);
                     }
 

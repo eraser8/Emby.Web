@@ -1,12 +1,10 @@
-define(['loading', './../themeinfo', 'alphapicker', './../cards/cardbuilder', './../components/horizontallist', './../components/focushandler', './../components/tabbedpage', './../components/backdrop', 'focusManager'], function (loading, themeInfo, alphaPicker, cardBuilder, horizontalList, focusHandler, tabbedPage, themeBackdrop, focusManager) {
+define(['loading', './../themeinfo', 'alphapicker', './../cards/cardbuilder', './../components/horizontallist', './../components/focushandler', './../components/tabbedpage', 'backdrop', 'focusManager'], function (loading, themeInfo, alphaPicker, cardBuilder, horizontalList, focusHandler, tabbedPage, backdrop, focusManager) {
 
     return function (view, params) {
 
         var self = this;
 
         view.addEventListener('viewshow', function (e) {
-
-            themeBackdrop.setStaticBackdrop();
 
             if (!self.tabbedPage) {
                 loading.show();

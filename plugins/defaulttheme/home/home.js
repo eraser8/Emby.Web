@@ -1,4 +1,4 @@
-define(['loading', './../components/tabbedpage', './../components/backdrop', 'focusManager', 'playbackManager', './../themeinfo'], function (loading, tabbedPage, themeBackdrop, focusManager, playbackManager, themeInfo) {
+define(['loading', './../components/tabbedpage', 'backdrop', 'focusManager', 'playbackManager', './../themeinfo'], function (loading, tabbedPage, backdrop, focusManager, playbackManager, themeInfo) {
 
     function loadViewHtml(page, parentId, html, viewName, autoFocus, self) {
 
@@ -85,8 +85,6 @@ define(['loading', './../components/tabbedpage', './../components/backdrop', 'fo
             var isRestored = e.detail.isRestored;
 
             Emby.Page.setTitle('');
-
-            themeBackdrop.setStaticBackdrop();
 
             if (isRestored) {
                 if (self.tabView) {

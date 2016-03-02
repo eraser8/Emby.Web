@@ -1,4 +1,4 @@
-define(['playbackManager', 'datetime', './../components/backdrop', 'userdataButtons', './../cards/cardbuilder', 'pluginManager', './../themeinfo'], function (playbackManager, datetime, themeBackdrop, userdataButtons, cardBuilder, pluginManager, themeInfo) {
+define(['playbackManager', 'datetime', 'backdrop', 'userdataButtons', './../cards/cardbuilder', 'pluginManager', './../themeinfo'], function (playbackManager, datetime, backdrop, userdataButtons, cardBuilder, pluginManager, themeInfo) {
 
 	return function (view, params) {
 
@@ -18,7 +18,7 @@ define(['playbackManager', 'datetime', './../components/backdrop', 'userdataButt
             if (item) {
                 setTitle(item);
 
-                themeBackdrop.setBackdrops([item]);
+                backdrop.setBackdrops([item]);
 
                 cardBuilder.buildCards([item], {
                     shape: 'squareCard',
@@ -61,7 +61,7 @@ define(['playbackManager', 'datetime', './../components/backdrop', 'userdataButt
                 nowPlayingVolumeSlider.disabled = true;
                 nowPlayingPositionSlider.disabled = true;
 
-                themeBackdrop.setBackdrops([]);
+                backdrop.setBackdrops([]);
             }
 
             updatePlaylist();

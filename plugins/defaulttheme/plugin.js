@@ -397,9 +397,18 @@ define(['playbackManager', 'pluginManager', './themeinfo.js'], function (playbac
             var path = e.detail.state.path;
 
             var enableSubduedBackdrop = path.indexOf('item.html') == -1 && path.indexOf('guide.html') == -1 && path.indexOf('nowplaying') == -1;
-            require([self.id + '/components/backdrop'], function (themeBackdrop) {
-                themeBackdrop.subdued(enableSubduedBackdrop);
-            });
+            setSubduedBackdrop(enableSubduedBackdrop);
+        }
+
+        function setSubduedBackdrop(isSubdued) {
+            var elem = document.querySelector('.themeContainer');
+            if (isSubdued) {
+
+                elem.classList.remove('detailBackdrop');
+
+            } else {
+                elem.classList.add('detailBackdrop');
+            }
         }
     }
 });
