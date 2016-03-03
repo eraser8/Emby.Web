@@ -477,11 +477,11 @@ define(['loading', 'viewManager', 'themeManager', 'pluginManager', 'backdrop'], 
 
     function setTransparency(level) {
 
-        if (level == Emby.TransparencyLevel.Full) {
+        if (level == 'full' || level == Emby.TransparencyLevel.Full) {
             backdrop.clear(true);
             document.documentElement.classList.add('transparentDocument');
         }
-        else if (level == Emby.TransparencyLevel.Backdrop) {
+        else if (level == 'backdrop' || level == Emby.TransparencyLevel.Backdrop) {
             backdrop.externalBackdrop(true);
             document.documentElement.classList.add('transparentDocument');
         } else {

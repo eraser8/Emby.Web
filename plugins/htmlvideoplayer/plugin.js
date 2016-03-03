@@ -43,12 +43,9 @@ define(['browser', 'pluginManager'], function (browser, pluginManager) {
 
             started = false;
 
-            return new Promise(function (resolve, reject) {
+            return createMediaElement(options).then(function (elem) {
 
-                createMediaElement(options).then(function (elem) {
-
-                    setCurrentSrc(elem, options).then(resolve, reject);
-                });
+                return setCurrentSrc(elem, options);
             });
         };
 
@@ -222,7 +219,7 @@ define(['browser', 'pluginManager'], function (browser, pluginManager) {
         self.destroy = function () {
 
             destroyHlsPlayer();
-            Emby.Page.setTransparency(Emby.TransparencyLevel.None);
+            Emby.Page.setTransparency('none');
 
             var videoElement = mediaElement;
 
@@ -367,7 +364,7 @@ define(['browser', 'pluginManager'], function (browser, pluginManager) {
                     });
 
                 } else {
-                    Emby.Page.setTransparency(Emby.TransparencyLevel.Backdrop);
+                    Emby.Page.setTransparency('backdrop');
                     videoDialog.classList.remove('onTop');
                 }
 

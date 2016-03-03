@@ -291,7 +291,7 @@ define(['playbackManager', 'inputmanager', 'datetime', 'itemHelper', 'mediaInfo'
 
             getHeaderElement().classList.add('osdHeader');
             // Make sure the UI is completely transparent
-            Emby.Page.setTransparency(Emby.TransparencyLevel.Full);
+            Emby.Page.setTransparency('full');
         });
 
         view.addEventListener('viewshow', function (e) {
